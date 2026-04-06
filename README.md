@@ -1,11 +1,11 @@
-[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-i]][🖼️galtzo-discord] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang] [![kettle-rb Logo by Aboling0, CC BY-SA 4.0][🖼️kettle-rb-i]][🖼️kettle-rb]
+[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-i]][🖼️galtzo-discord] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang] [![ruby-oauth Logo by Aboling0, CC BY-SA 4.0][🖼️ruby-oauth-i]][🖼️ruby-oauth]
 
 [🖼️galtzo-i]: https://logos.galtzo.com/assets/images/galtzo-floss/avatar-192px.svg
 [🖼️galtzo-discord]: https://discord.gg/3qme4XHNKN
 [🖼️ruby-lang-i]: https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg
 [🖼️ruby-lang]: https://www.ruby-lang.org/
-[🖼️kettle-rb-i]: https://logos.galtzo.com/assets/images/kettle-rb/avatar-192px.svg
-[🖼️kettle-rb]: https://github.com/kettle-rb
+[🖼️ruby-oauth-i]: https://logos.galtzo.com/assets/images/ruby-oauth/avatar-192px.svg
+[🖼️ruby-oauth]: https://github.com/ruby-oauth
 
 # 🍲 Auth::Sanitizer
 
@@ -60,14 +60,14 @@ Compatible with MRI Ruby 2.2.0+, and concordant releases of JRuby, and TruffleRu
 
 | Federated [DVCS][💎d-in-dvcs] Repository        | Status                                                                | Issues                    | PRs                      | Wiki                      | CI                       | Discussions                  |
 |-------------------------------------------------|-----------------------------------------------------------------------|---------------------------|--------------------------|---------------------------|--------------------------|------------------------------|
-| 🧪 [kettle-rb/auth-sanitizer on GitLab][📜src-gl]   | The Truth                                                             | [💚][🤝gl-issues]         | [💚][🤝gl-pulls]         | [💚][📜gl-wiki]           | 🐭 Tiny Matrix           | ➖                            |
-| 🧊 [kettle-rb/auth-sanitizer on CodeBerg][📜src-cb] | An Ethical Mirror ([Donate][🤝cb-donate])                             | [💚][🤝cb-issues]         | [💚][🤝cb-pulls]         | ➖                         | ⭕️ No Matrix             | ➖                            |
-| 🐙 [kettle-rb/auth-sanitizer on GitHub][📜src-gh]   | Another Mirror                                                        | [💚][🤝gh-issues]         | [💚][🤝gh-pulls]         | [💚][📜gh-wiki]           | 💯 Full Matrix           | [💚][gh-discussions]         |
+| 🧪 [ruby-oauth/auth-sanitizer on GitLab][📜src-gl]   | The Truth                                                             | [💚][🤝gl-issues]         | [💚][🤝gl-pulls]         | [💚][📜gl-wiki]           | 🐭 Tiny Matrix           | ➖                            |
+| 🧊 [ruby-oauth/auth-sanitizer on CodeBerg][📜src-cb] | An Ethical Mirror ([Donate][🤝cb-donate])                             | [💚][🤝cb-issues]         | [💚][🤝cb-pulls]         | ➖                         | ⭕️ No Matrix             | ➖                            |
+| 🐙 [ruby-oauth/auth-sanitizer on GitHub][📜src-gh]   | Another Mirror                                                        | [💚][🤝gh-issues]         | [💚][🤝gh-pulls]         | [💚][📜gh-wiki]           | 💯 Full Matrix           | [💚][gh-discussions]         |
 | 🎮️ [Discord Server][✉️discord-invite]          | [![Live Chat on Discord][✉️discord-invite-img-ftb]][✉️discord-invite] | [Let's][✉️discord-invite] | [talk][✉️discord-invite] | [about][✉️discord-invite] | [this][✉️discord-invite] | [library!][✉️discord-invite] |
 
 </details>
 
-[gh-discussions]: https://github.com/kettle-rb/auth-sanitizer/discussions
+[gh-discussions]: https://github.com/ruby-oauth/auth-sanitizer/discussions
 
 ### Enterprise Support [![Tidelift](https://tidelift.com/badges/package/rubygems/auth-sanitizer)](https://tidelift.com/subscription/pkg/rubygems-auth-sanitizer?utm_source=rubygems-auth-sanitizer&utm_medium=referral&utm_campaign=readme)
 
@@ -147,17 +147,17 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 ## 🦷 FLOSS Funding
 
-While kettle-rb tools are free software and will always be, the project would benefit immensely from some funding.
+While ruby-oauth tools are free software and will always be, the project would benefit immensely from some funding.
 Raising a monthly budget of... "dollars" would make the project more sustainable.
 
 We welcome both individual and corporate sponsors! We also offer a
 wide array of funding channels to account for your preferences
 (although currently [Open Collective][🖇osc] is our preferred funding platform).
 
-**If you're working in a company that's making significant use of kettle-rb tools we'd
-appreciate it if you suggest to your company to become a kettle-rb sponsor.**
+**If you're working in a company that's making significant use of ruby-oauth tools we'd
+appreciate it if you suggest to your company to become a ruby-oauth sponsor.**
 
-You can support the development of kettle-rb tools via
+You can support the development of ruby-oauth tools via
 [GitHub Sponsors][🖇sponsor],
 [Liberapay][⛳liberapay],
 [PayPal][🖇paypal],
@@ -170,7 +170,7 @@ and [Tidelift][🏙️entsup-tidelift].
 
 ### Open Collective for Individuals
 
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/kettle-rb#backer)]
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/ruby-oauth#backer)]
 
 NOTE: [kettle-readme-backers][kettle-readme-backers] updates this list every day, automatically.
 
@@ -180,7 +180,7 @@ No backers yet. Be the first!
 
 ### Open Collective for Organizations
 
-Become a sponsor and get your logo on our README on GitHub with a link to your site. [[Become a sponsor](https://opencollective.com/kettle-rb#sponsor)]
+Become a sponsor and get your logo on our README on GitHub with a link to your site. [[Become a sponsor](https://opencollective.com/ruby-oauth#sponsor)]
 
 NOTE: [kettle-readme-backers][kettle-readme-backers] updates this list every day, automatically.
 
@@ -188,7 +188,7 @@ NOTE: [kettle-readme-backers][kettle-readme-backers] updates this list every day
 No sponsors yet. Be the first!
 <!-- OPENCOLLECTIVE-ORGANIZATIONS:END -->
 
-[kettle-readme-backers]: https://github.com/kettle-rb/auth-sanitizer/blob/main/exe/kettle-readme-backers
+[kettle-readme-backers]: https://github.com/ruby-oauth/auth-sanitizer/blob/main/exe/kettle-readme-backers
 
 ### Another way to support open-source
 
@@ -239,16 +239,16 @@ chat rooms and mailing lists agrees to follow the [![Contributor Covenant 2.1][�
 
 Made with [contributors-img][🖐contrib-rocks].
 
-Also see GitLab Contributors: [https://gitlab.com/kettle-rb/auth-sanitizer/-/graphs/main][🚎contributors-gl]
+Also see GitLab Contributors: [https://gitlab.com/ruby-oauth/auth-sanitizer/-/graphs/main][🚎contributors-gl]
 
 <details>
     <summary>⭐️ Star History</summary>
 
-<a href="https://star-history.com/#kettle-rb/auth-sanitizer&Date">
+<a href="https://star-history.com/#ruby-oauth/auth-sanitizer&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=kettle-rb/auth-sanitizer&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=kettle-rb/auth-sanitizer&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=kettle-rb/auth-sanitizer&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ruby-oauth/auth-sanitizer&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ruby-oauth/auth-sanitizer&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ruby-oauth/auth-sanitizer&type=Date" />
  </picture>
 </a>
 
@@ -315,7 +315,7 @@ To join the community or get help 👇️ Join the Discord.
 
 To say "thanks!" ☝️ Join the Discord or 👇️ send money.
 
-[![Sponsor kettle-rb/auth-sanitizer on Open Source Collective][🖇osc-all-bottom-img]][🖇osc] 💌 [![Sponsor me on GitHub Sponsors][🖇sponsor-bottom-img]][🖇sponsor] 💌 [![Sponsor me on Liberapay][⛳liberapay-bottom-img]][⛳liberapay] 💌 [![Donate on PayPal][🖇paypal-bottom-img]][🖇paypal]
+[![Sponsor ruby-oauth/auth-sanitizer on Open Source Collective][🖇osc-all-bottom-img]][🖇osc] 💌 [![Sponsor me on GitHub Sponsors][🖇sponsor-bottom-img]][🖇sponsor] 💌 [![Sponsor me on Liberapay][⛳liberapay-bottom-img]][⛳liberapay] 💌 [![Donate on PayPal][🖇paypal-bottom-img]][🖇paypal]
 
 ### Please give the project a star ⭐ ♥.
 
@@ -324,17 +324,17 @@ Thanks for RTFM. ☺️
 [⛳liberapay-img]: https://img.shields.io/liberapay/goal/pboling.svg?logo=liberapay&color=a51611&style=flat
 [⛳liberapay-bottom-img]: https://img.shields.io/liberapay/goal/pboling.svg?style=for-the-badge&logo=liberapay&color=a51611
 [⛳liberapay]: https://liberapay.com/pboling/donate
-[🖇osc-all-img]: https://img.shields.io/opencollective/all/kettle-rb
-[🖇osc-sponsors-img]: https://img.shields.io/opencollective/sponsors/kettle-rb
-[🖇osc-backers-img]: https://img.shields.io/opencollective/backers/kettle-rb
-[🖇osc-backers]: https://opencollective.com/kettle-rb#backer
-[🖇osc-backers-i]: https://opencollective.com/kettle-rb/backers/badge.svg?style=flat
-[🖇osc-sponsors]: https://opencollective.com/kettle-rb#sponsor
-[🖇osc-sponsors-i]: https://opencollective.com/kettle-rb/sponsors/badge.svg?style=flat
-[🖇osc-all-bottom-img]: https://img.shields.io/opencollective/all/kettle-rb?style=for-the-badge
-[🖇osc-sponsors-bottom-img]: https://img.shields.io/opencollective/sponsors/kettle-rb?style=for-the-badge
-[🖇osc-backers-bottom-img]: https://img.shields.io/opencollective/backers/kettle-rb?style=for-the-badge
-[🖇osc]: https://opencollective.com/kettle-rb
+[🖇osc-all-img]: https://img.shields.io/opencollective/all/ruby-oauth
+[🖇osc-sponsors-img]: https://img.shields.io/opencollective/sponsors/ruby-oauth
+[🖇osc-backers-img]: https://img.shields.io/opencollective/backers/ruby-oauth
+[🖇osc-backers]: https://opencollective.com/ruby-oauth#backer
+[🖇osc-backers-i]: https://opencollective.com/ruby-oauth/backers/badge.svg?style=flat
+[🖇osc-sponsors]: https://opencollective.com/ruby-oauth#sponsor
+[🖇osc-sponsors-i]: https://opencollective.com/ruby-oauth/sponsors/badge.svg?style=flat
+[🖇osc-all-bottom-img]: https://img.shields.io/opencollective/all/ruby-oauth?style=for-the-badge
+[🖇osc-sponsors-bottom-img]: https://img.shields.io/opencollective/sponsors/ruby-oauth?style=for-the-badge
+[🖇osc-backers-bottom-img]: https://img.shields.io/opencollective/backers/ruby-oauth?style=for-the-badge
+[🖇osc]: https://opencollective.com/ruby-oauth
 [🖇sponsor-img]: https://img.shields.io/badge/Sponsor_Me!-pboling.svg?style=social&logo=github
 [🖇sponsor-bottom-img]: https://img.shields.io/badge/Sponsor_Me!-pboling-blue?style=for-the-badge&logo=github
 [🖇sponsor]: https://github.com/sponsors/pboling
@@ -358,12 +358,12 @@ Thanks for RTFM. ☺️
 [✉️ruby-friends]: https://app.daily.dev/squads/rubyfriends
 
 [✇bundle-group-pattern]: https://gist.github.com/pboling/4564780
-[⛳️gem-namespace]: https://github.com/kettle-rb/auth-sanitizer
+[⛳️gem-namespace]: https://github.com/ruby-oauth/auth-sanitizer
 [⛳️namespace-img]: https://img.shields.io/badge/namespace-Auth::Sanitizer-3C2D2D.svg?style=square&logo=ruby&logoColor=white
 [⛳️gem-name]: https://bestgems.org/gems/auth-sanitizer
 [⛳️name-img]: https://img.shields.io/badge/name-auth--sanitizer-3C2D2D.svg?style=square&logo=rubygems&logoColor=red
-[⛳️tag-img]: https://img.shields.io/github/tag/kettle-rb/auth-sanitizer.svg
-[⛳️tag]: http://github.com/kettle-rb/auth-sanitizer/releases
+[⛳️tag-img]: https://img.shields.io/github/tag/ruby-oauth/auth-sanitizer.svg
+[⛳️tag]: http://github.com/ruby-oauth/auth-sanitizer/releases
 [🚂maint-blog]: http://www.railsbling.com/tags/auth-sanitizer
 [🚂maint-blog-img]: https://img.shields.io/badge/blog-railsbling-0093D0.svg?style=for-the-badge&logo=rubyonrails&logoColor=orange
 [🚂maint-contact]: http://www.railsbling.com/contact
@@ -398,73 +398,73 @@ Thanks for RTFM. ☺️
 [💁🏼‍♂️peterboling]: http://www.peterboling.com
 [🚂railsbling]: http://www.railsbling.com
 [📜src-gl-img]: https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&logo=Gitlab&logoColor=orange
-[📜src-gl]: https://gitlab.com/kettle-rb/auth-sanitizer/
+[📜src-gl]: https://gitlab.com/ruby-oauth/auth-sanitizer/
 [📜src-cb-img]: https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&logo=CodeBerg&logoColor=blue
-[📜src-cb]: https://codeberg.org/kettle-rb/auth-sanitizer
+[📜src-cb]: https://codeberg.org/ruby-oauth/auth-sanitizer
 [📜src-gh-img]: https://img.shields.io/badge/GitHub-238636?style=for-the-badge&logo=Github&logoColor=green
-[📜src-gh]: https://github.com/kettle-rb/auth-sanitizer
+[📜src-gh]: https://github.com/ruby-oauth/auth-sanitizer
 [📜docs-cr-rd-img]: https://img.shields.io/badge/RubyDoc-Current_Release-943CD2?style=for-the-badge&logo=readthedocs&logoColor=white
 [📜docs-head-rd-img]: https://img.shields.io/badge/YARD_on_Galtzo.com-HEAD-943CD2?style=for-the-badge&logo=readthedocs&logoColor=white
-[📜gl-wiki]: https://gitlab.com/kettle-rb/auth-sanitizer/-/wikis/home
-[📜gh-wiki]: https://github.com/kettle-rb/auth-sanitizer/wiki
+[📜gl-wiki]: https://gitlab.com/ruby-oauth/auth-sanitizer/-/wikis/home
+[📜gh-wiki]: https://github.com/ruby-oauth/auth-sanitizer/wiki
 [📜gl-wiki-img]: https://img.shields.io/badge/wiki-examples-943CD2.svg?style=for-the-badge&logo=gitlab&logoColor=white
 [📜gh-wiki-img]: https://img.shields.io/badge/wiki-examples-943CD2.svg?style=for-the-badge&logo=github&logoColor=white
 [👽dl-rank]: https://bestgems.org/gems/auth-sanitizer
 [👽dl-ranki]: https://img.shields.io/gem/rd/auth-sanitizer.svg
-[👽oss-help]: https://www.codetriage.com/kettle-rb/auth-sanitizer
-[👽oss-helpi]: https://www.codetriage.com/kettle-rb/auth-sanitizer/badges/users.svg
+[👽oss-help]: https://www.codetriage.com/ruby-oauth/auth-sanitizer
+[👽oss-helpi]: https://www.codetriage.com/ruby-oauth/auth-sanitizer/badges/users.svg
 [👽version]: https://bestgems.org/gems/auth-sanitizer
 [👽versioni]: https://img.shields.io/gem/v/auth-sanitizer.svg
-[🏀qlty-mnt]: https://qlty.sh/gh/kettle-rb/projects/auth-sanitizer
-[🏀qlty-mnti]: https://qlty.sh/gh/kettle-rb/projects/auth-sanitizer/maintainability.svg
-[🏀qlty-cov]: https://qlty.sh/gh/kettle-rb/projects/auth-sanitizer/metrics/code?sort=coverageRating
-[🏀qlty-covi]: https://qlty.sh/gh/kettle-rb/projects/auth-sanitizer/coverage.svg
-[🏀codecov]: https://codecov.io/gh/kettle-rb/auth-sanitizer
-[🏀codecovi]: https://codecov.io/gh/kettle-rb/auth-sanitizer/graph/badge.svg
-[🏀coveralls]: https://coveralls.io/github/kettle-rb/auth-sanitizer?branch=main
-[🏀coveralls-img]: https://coveralls.io/repos/github/kettle-rb/auth-sanitizer/badge.svg?branch=main
-[🖐codeQL]: https://github.com/kettle-rb/auth-sanitizer/security/code-scanning
-[🖐codeQL-img]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/codeql-analysis.yml/badge.svg
-[🚎ruby-2.3-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-2.3.yml
-[🚎ruby-2.4-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-2.4.yml
-[🚎ruby-2.5-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-2.5.yml
-[🚎ruby-2.6-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-2.6.yml
-[🚎ruby-2.7-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-2.7.yml
-[🚎ruby-3.0-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-3.0.yml
-[🚎ruby-3.1-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-3.1.yml
-[🚎ruby-3.2-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-3.2.yml
-[🚎ruby-3.3-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-3.3.yml
-[🚎ruby-3.4-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/ruby-3.4.yml
-[🚎jruby-9.1-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/jruby-9.1.yml
-[🚎jruby-9.2-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/jruby-9.2.yml
-[🚎jruby-9.3-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/jruby-9.3.yml
-[🚎jruby-9.4-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/jruby-9.4.yml
-[🚎truby-22.3-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/truffleruby-22.3.yml
-[🚎truby-23.0-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/truffleruby-23.0.yml
-[🚎truby-23.1-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/truffleruby-23.1.yml
-[🚎truby-23.2-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/truffleruby-23.2.yml
-[🚎truby-24.2-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/truffleruby-24.2.yml
-[🚎truby-25.0-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/truffleruby-25.0.yml
-[🚎2-cov-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/coverage.yml
-[🚎2-cov-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/coverage.yml/badge.svg
-[🚎3-hd-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/heads.yml
-[🚎3-hd-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/heads.yml/badge.svg
-[🚎5-st-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/style.yml
-[🚎5-st-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/style.yml/badge.svg
-[🚎9-t-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/truffle.yml
-[🚎9-t-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/truffle.yml/badge.svg
-[🚎10-j-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/jruby.yml
-[🚎10-j-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/jruby.yml/badge.svg
-[🚎11-c-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/current.yml
-[🚎11-c-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/current.yml/badge.svg
-[🚎12-crh-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/dep-heads.yml
-[🚎12-crh-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/dep-heads.yml/badge.svg
-[🚎13-🔒️-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/locked_deps.yml
-[🚎13-🔒️-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/locked_deps.yml/badge.svg
-[🚎14-🔓️-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/unlocked_deps.yml
-[🚎14-🔓️-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/unlocked_deps.yml/badge.svg
-[🚎15-🪪-wf]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/license-eye.yml
-[🚎15-🪪-wfi]: https://github.com/kettle-rb/auth-sanitizer/actions/workflows/license-eye.yml/badge.svg
+[🏀qlty-mnt]: https://qlty.sh/gh/ruby-oauth/projects/auth-sanitizer
+[🏀qlty-mnti]: https://qlty.sh/gh/ruby-oauth/projects/auth-sanitizer/maintainability.svg
+[🏀qlty-cov]: https://qlty.sh/gh/ruby-oauth/projects/auth-sanitizer/metrics/code?sort=coverageRating
+[🏀qlty-covi]: https://qlty.sh/gh/ruby-oauth/projects/auth-sanitizer/coverage.svg
+[🏀codecov]: https://codecov.io/gh/ruby-oauth/auth-sanitizer
+[🏀codecovi]: https://codecov.io/gh/ruby-oauth/auth-sanitizer/graph/badge.svg
+[🏀coveralls]: https://coveralls.io/github/ruby-oauth/auth-sanitizer?branch=main
+[🏀coveralls-img]: https://coveralls.io/repos/github/ruby-oauth/auth-sanitizer/badge.svg?branch=main
+[🖐codeQL]: https://github.com/ruby-oauth/auth-sanitizer/security/code-scanning
+[🖐codeQL-img]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/codeql-analysis.yml/badge.svg
+[🚎ruby-2.3-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-2.3.yml
+[🚎ruby-2.4-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-2.4.yml
+[🚎ruby-2.5-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-2.5.yml
+[🚎ruby-2.6-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-2.6.yml
+[🚎ruby-2.7-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-2.7.yml
+[🚎ruby-3.0-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-3.0.yml
+[🚎ruby-3.1-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-3.1.yml
+[🚎ruby-3.2-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-3.2.yml
+[🚎ruby-3.3-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-3.3.yml
+[🚎ruby-3.4-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-3.4.yml
+[🚎jruby-9.1-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby-9.1.yml
+[🚎jruby-9.2-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby-9.2.yml
+[🚎jruby-9.3-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby-9.3.yml
+[🚎jruby-9.4-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby-9.4.yml
+[🚎truby-22.3-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-22.3.yml
+[🚎truby-23.0-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-23.0.yml
+[🚎truby-23.1-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-23.1.yml
+[🚎truby-23.2-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-23.2.yml
+[🚎truby-24.2-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-24.2.yml
+[🚎truby-25.0-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-25.0.yml
+[🚎2-cov-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/coverage.yml
+[🚎2-cov-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/coverage.yml/badge.svg
+[🚎3-hd-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/heads.yml
+[🚎3-hd-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/heads.yml/badge.svg
+[🚎5-st-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/style.yml
+[🚎5-st-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/style.yml/badge.svg
+[🚎9-t-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffle.yml
+[🚎9-t-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffle.yml/badge.svg
+[🚎10-j-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby.yml
+[🚎10-j-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby.yml/badge.svg
+[🚎11-c-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/current.yml
+[🚎11-c-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/current.yml/badge.svg
+[🚎12-crh-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/dep-heads.yml
+[🚎12-crh-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/dep-heads.yml/badge.svg
+[🚎13-🔒️-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/locked_deps.yml
+[🚎13-🔒️-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/locked_deps.yml/badge.svg
+[🚎14-🔓️-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/unlocked_deps.yml
+[🚎14-🔓️-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/unlocked_deps.yml/badge.svg
+[🚎15-🪪-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/license-eye.yml
+[🚎15-🪪-wfi]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/license-eye.yml/badge.svg
 [💎ruby-2.2i]: https://img.shields.io/badge/Ruby-2.2_(%F0%9F%9A%ABCI)-AABBCC?style=for-the-badge&logo=ruby&logoColor=white
 [💎ruby-2.3i]: https://img.shields.io/badge/Ruby-2.3-DF00CA?style=for-the-badge&logo=ruby&logoColor=white
 [💎ruby-2.4i]: https://img.shields.io/badge/Ruby-2.4-DF00CA?style=for-the-badge&logo=ruby&logoColor=white
@@ -492,19 +492,19 @@ Thanks for RTFM. ☺️
 [💎jruby-9.4i]: https://img.shields.io/badge/JRuby-9.4-FBE742?style=for-the-badge&logo=ruby&logoColor=red
 [💎jruby-c-i]: https://img.shields.io/badge/JRuby-current-FBE742?style=for-the-badge&logo=ruby&logoColor=green
 [💎jruby-headi]: https://img.shields.io/badge/JRuby-HEAD-FBE742?style=for-the-badge&logo=ruby&logoColor=blue
-[🤝gh-issues]: https://github.com/kettle-rb/auth-sanitizer/issues
-[🤝gh-pulls]: https://github.com/kettle-rb/auth-sanitizer/pulls
-[🤝gl-issues]: https://gitlab.com/kettle-rb/auth-sanitizer/-/issues
-[🤝gl-pulls]: https://gitlab.com/kettle-rb/auth-sanitizer/-/merge_requests
-[🤝cb-issues]: https://codeberg.org/kettle-rb/auth-sanitizer/issues
-[🤝cb-pulls]: https://codeberg.org/kettle-rb/auth-sanitizer/pulls
+[🤝gh-issues]: https://github.com/ruby-oauth/auth-sanitizer/issues
+[🤝gh-pulls]: https://github.com/ruby-oauth/auth-sanitizer/pulls
+[🤝gl-issues]: https://gitlab.com/ruby-oauth/auth-sanitizer/-/issues
+[🤝gl-pulls]: https://gitlab.com/ruby-oauth/auth-sanitizer/-/merge_requests
+[🤝cb-issues]: https://codeberg.org/ruby-oauth/auth-sanitizer/issues
+[🤝cb-pulls]: https://codeberg.org/ruby-oauth/auth-sanitizer/pulls
 [🤝cb-donate]: https://donate.codeberg.org/
 [🤝contributing]: CONTRIBUTING.md
-[🏀codecov-g]: https://codecov.io/gh/kettle-rb/auth-sanitizer/graphs/tree.svg
+[🏀codecov-g]: https://codecov.io/gh/ruby-oauth/auth-sanitizer/graphs/tree.svg
 [🖐contrib-rocks]: https://contrib.rocks
-[🖐contributors]: https://github.com/kettle-rb/auth-sanitizer/graphs/contributors
-[🖐contributors-img]: https://contrib.rocks/image?repo=kettle-rb/auth-sanitizer
-[🚎contributors-gl]: https://gitlab.com/kettle-rb/auth-sanitizer/-/graphs/main
+[🖐contributors]: https://github.com/ruby-oauth/auth-sanitizer/graphs/contributors
+[🖐contributors-img]: https://contrib.rocks/image?repo=ruby-oauth/auth-sanitizer
+[🚎contributors-gl]: https://gitlab.com/ruby-oauth/auth-sanitizer/-/graphs/main
 [🪇conduct]: CODE_OF_CONDUCT.md
 [🪇conduct-img]: https://img.shields.io/badge/Contributor_Covenant-2.1-259D6C.svg
 [📌pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
@@ -532,7 +532,7 @@ Thanks for RTFM. ☺️
 [🚎yard-current]: http://rubydoc.info/gems/auth-sanitizer
 [🚎yard-head]: https://auth-sanitizer.galtzo.com
 [💎stone_checksums]: https://github.com/galtzo-floss/stone_checksums
-[💎SHA_checksums]: https://gitlab.com/kettle-rb/auth-sanitizer/-/tree/main/checksums
+[💎SHA_checksums]: https://gitlab.com/ruby-oauth/auth-sanitizer/-/tree/main/checksums
 [💎rlts]: https://github.com/rubocop-lts/rubocop-lts
 [💎rlts-img]: https://img.shields.io/badge/code_style_&_linting-rubocop--lts-34495e.svg?plastic&logo=ruby&logoColor=white
 [💎appraisal2]: https://github.com/appraisal-rb/appraisal2

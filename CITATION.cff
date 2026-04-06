@@ -12,9 +12,9 @@ authors:
     orcid: 'https://orcid.org/0009-0008-8519-441X'
 identifiers:
   - type: url
-    value: 'https://github.com/kettle-rb/auth-sanitizer'
+    value: 'https://github.com/ruby-oauth/auth-sanitizer'
     description: "auth-sanitizer"
-repository-code: 'https://github.com/kettle-rb/auth-sanitizer'
+repository-code: 'https://github.com/ruby-oauth/auth-sanitizer'
 abstract: >-
   auth-sanitizer
 license: See license file

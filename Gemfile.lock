@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     auth-sanitizer (0.1.0)
+      version_gem (~> 1.1, >= 1.1.9)
 
 GEM
   remote: https://gem.coop/
