@@ -62,16 +62,6 @@ task :default do
   puts "Default task complete."
 end
 
-require "bundler/gem_tasks"
-require "rspec/core/rake_task"
-
-RSpec::Core::RakeTask.new(:spec)
-
-require "rubocop/rake_task"
-
-RuboCop::RakeTask.new
-
-
 # External gems that define tasks - add here!
 require "kettle/dev"
 

@@ -32,8 +32,8 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 
 | Tokens to Remember      | [![Gem name][⛳️name-img]][⛳️gem-name] [![Gem namespace][⛳️namespace-img]][⛳️gem-namespace]                                                                                                                                                                                                                                                                          |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Works with JRuby        | [![JRuby 9.1 Compat][💎jruby-9.1i]][🚎jruby-9.1-wf] [![JRuby 9.2 Compat][💎jruby-9.2i]][🚎jruby-9.2-wf] [![JRuby 9.3 Compat][💎jruby-9.3i]][🚎jruby-9.3-wf] <br/> [![JRuby 9.4 Compat][💎jruby-9.4i]][🚎jruby-9.4-wf] [![JRuby current Compat][💎jruby-c-i]][🚎10-j-wf] [![JRuby HEAD Compat][💎jruby-headi]][🚎3-hd-wf]|
-| Works with Truffle Ruby | [![Truffle Ruby 22.3 Compat][💎truby-22.3i]][🚎truby-22.3-wf] [![Truffle Ruby 23.0 Compat][💎truby-23.0i]][🚎truby-23.0-wf] [![Truffle Ruby 23.1 Compat][💎truby-23.1i]][🚎truby-23.1-wf] <br/> [![Truffle Ruby 23.2 Compat][💎truby-23.2i]][🚎truby-23.2-wf] [![Truffle Ruby 24.2 Compat][💎truby-24.2i]][🚎truby-24.2-wf] [![Truffle Ruby 25.0 Compat][💎truby-25.0i]][🚎truby-25.0-wf] [![Truffle Ruby current Compat][💎truby-c-i]][🚎9-t-wf]|
+| Works with JRuby        | [![JRuby 9.3 Compat][💎jruby-9.3i]][🚎jruby-9.3-wf] <br/> [![JRuby 9.4 Compat][💎jruby-9.4i]][🚎jruby-9.4-wf] [![JRuby current Compat][💎jruby-c-i]][🚎10-j-wf] [![JRuby HEAD Compat][💎jruby-headi]][🚎3-hd-wf]|
+| Works with Truffle Ruby | [![Truffle Ruby 22.3 Compat][💎truby-22.3i]][🚎truby-22.3-wf] [![Truffle Ruby 23.0 Compat][💎truby-23.0i]][🚎truby-23.0-wf] [![Truffle Ruby 23.1 Compat][💎truby-23.1i]][🚎truby-23.1-wf] <br/> [![Truffle Ruby 24.2 Compat][💎truby-24.2i]][🚎truby-24.2-wf] [![Truffle Ruby 25.0 Compat][💎truby-25.0i]][🚎truby-25.0-wf] [![Truffle Ruby current Compat][💎truby-c-i]][🚎9-t-wf]|
 | Works with MRI Ruby 4   | [![Ruby 4.0 Compat][💎ruby-4.0i]][🚎11-c-wf] [![Ruby current Compat][💎ruby-c-i]][🚎11-c-wf] [![Ruby HEAD Compat][💎ruby-headi]][🚎3-hd-wf]|
 | Works with MRI Ruby 3   | [![Ruby 3.0 Compat][💎ruby-3.0i]][🚎ruby-3.0-wf] [![Ruby 3.1 Compat][💎ruby-3.1i]][🚎ruby-3.1-wf] [![Ruby 3.2 Compat][💎ruby-3.2i]][🚎ruby-3.2-wf] [![Ruby 3.3 Compat][💎ruby-3.3i]][🚎ruby-3.3-wf] [![Ruby 3.4 Compat][💎ruby-3.4i]][🚎ruby-3.4-wf]|
 | Works with MRI Ruby 2   | ![Ruby 2.2 Compat][💎ruby-2.2i] <br/> [![Ruby 2.3 Compat][💎ruby-2.3i]][🚎ruby-2.3-wf] [![Ruby 2.4 Compat][💎ruby-2.4i]][🚎ruby-2.4-wf] [![Ruby 2.5 Compat][💎ruby-2.5i]][🚎ruby-2.5-wf] [![Ruby 2.6 Compat][💎ruby-2.6i]][🚎ruby-2.6-wf] [![Ruby 2.7 Compat][💎ruby-2.7i]][🚎ruby-2.7-wf]|
@@ -435,14 +435,11 @@ Thanks for RTFM. ☺️
 [🚎ruby-3.2-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-3.2.yml
 [🚎ruby-3.3-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-3.3.yml
 [🚎ruby-3.4-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/ruby-3.4.yml
-[🚎jruby-9.1-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby-9.1.yml
-[🚎jruby-9.2-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby-9.2.yml
 [🚎jruby-9.3-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby-9.3.yml
 [🚎jruby-9.4-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/jruby-9.4.yml
 [🚎truby-22.3-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-22.3.yml
 [🚎truby-23.0-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-23.0.yml
 [🚎truby-23.1-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-23.1.yml
-[🚎truby-23.2-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-23.2.yml
 [🚎truby-24.2-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-24.2.yml
 [🚎truby-25.0-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/truffleruby-25.0.yml
 [🚎2-cov-wf]: https://github.com/ruby-oauth/auth-sanitizer/actions/workflows/coverage.yml
@@ -482,12 +479,9 @@ Thanks for RTFM. ☺️
 [💎truby-22.3i]: https://img.shields.io/badge/Truffle_Ruby-22.3-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-23.0i]: https://img.shields.io/badge/Truffle_Ruby-23.0-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-23.1i]: https://img.shields.io/badge/Truffle_Ruby-23.1-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
-[💎truby-23.2i]: https://img.shields.io/badge/Truffle_Ruby-23.2-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-24.2i]: https://img.shields.io/badge/Truffle_Ruby-24.2-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-25.0i]: https://img.shields.io/badge/Truffle_Ruby-25.0-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-c-i]: https://img.shields.io/badge/Truffle_Ruby-current-34BCB1?style=for-the-badge&logo=ruby&logoColor=green
-[💎jruby-9.1i]: https://img.shields.io/badge/JRuby-9.1-FBE742?style=for-the-badge&logo=ruby&logoColor=red
-[💎jruby-9.2i]: https://img.shields.io/badge/JRuby-9.2-FBE742?style=for-the-badge&logo=ruby&logoColor=red
 [💎jruby-9.3i]: https://img.shields.io/badge/JRuby-9.3-FBE742?style=for-the-badge&logo=ruby&logoColor=red
 [💎jruby-9.4i]: https://img.shields.io/badge/JRuby-9.4-FBE742?style=for-the-badge&logo=ruby&logoColor=red
 [💎jruby-c-i]: https://img.shields.io/badge/JRuby-current-FBE742?style=for-the-badge&logo=ruby&logoColor=green

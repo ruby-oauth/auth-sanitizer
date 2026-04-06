@@ -64,7 +64,6 @@ Gem::Specification.new do |spec|
   spec.metadata["discord_uri"] = "https://discord.gg/3qme4XHNKN"
   spec.metadata["rubygems_mfa_required"] = "true"
 
-
   # Specify which files are part of the released package.
   spec.files = Dir[
     # Code / tasks / data (NOTE: exe/ is specified via spec.bindir and spec.executables below)

@@ -18,14 +18,16 @@ git_source(:gitlab) { |repo_name| "https://gitlab.com/#{repo_name}" }
 # Include dependencies from auth-sanitizer.gemspec
 gemspec
 
-
 # See unlocked_deps appraisal for more details on irb inclusion
 gem "irb", "~> 1.17" # ruby >= 2.7
 
+# Sibling Gems In a Not-a-Monorepo!
+gem "nomono", "~> 1.0"
 
+gem "logger"
 
 # Templating (env-switched: KETTLE_RB_DEV=true for local paths)
-eval_gemfile "gemfiles/modular/templating.gemfile"
+eval_gemfile "gemfiles/modular/templating.gemfile" if ENV.fetch("K_JEM_TEMPLATING", "true").casecmp("true").zero?
 
 # Debugging
 eval_gemfile "gemfiles/modular/debug.gemfile"
@@ -44,4 +46,3 @@ eval_gemfile "gemfiles/modular/optional.gemfile"
 
 ### Std Lib Extracted Gems
 eval_gemfile "gemfiles/modular/x_std_libs.gemfile"
-

@@ -2,10 +2,31 @@
 
 RSpec.describe Auth::Sanitizer do
   it "has a version number" do
-    expect(Auth::Sanitizer::VERSION).not_to be nil
+    expect(Auth::Sanitizer::VERSION).not_to be_nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  describe ".filtered_label" do
+    it "returns the default label when no provider is installed" do
+      expect(described_class.filtered_label).to eq("[FILTERED]")
+    end
+  end
+
+  describe ".filtered_label_provider=" do
+    around do |example|
+      original = described_class.instance_variable_get(:@filtered_label_provider)
+      example.run
+      described_class.filtered_label_provider = original
+    end
+
+    it "allows replacing the label with a custom provider" do
+      described_class.filtered_label_provider = -> { "[REDACTED]" }
+      expect(described_class.filtered_label).to eq("[REDACTED]")
+    end
+  end
+
+  describe ".default_filtered_keys" do
+    it "returns an array of default key names" do
+      expect(described_class.default_filtered_keys).to include("access_token", "client_secret", "token")
+    end
   end
 end

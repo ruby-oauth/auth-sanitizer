@@ -1,15 +1,26 @@
 # frozen_string_literal: true
 
-require "auth/sanitizer"
+# External gem dependencies
+require "logger"
 
-RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
+# Family libraries
+require "kettle/test/rspec"
 
-  # Disable RSpec exposing methods globally on `Module` and `main`
-  config.disable_monkey_patching!
+# Library configs
+require_relative "config/byebug"
 
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
+# RSpec Configs
+require_relative "config/rspec/rspec_core"
+
+# NOTE: Gemfiles for older rubies won't have kettle-soup-cover.
+#       The rescue LoadError handles that scenario.
+begin
+  require "kettle-soup-cover"
+  require "simplecov" if Kettle::Soup::Cover::DO_COV # `.simplecov` is run here!
+rescue LoadError => error
+  # check the error message, and re-raise if not what is expected
+  raise error unless error.message.include?("kettle")
 end
+
+# This gem
+require "auth/sanitizer"

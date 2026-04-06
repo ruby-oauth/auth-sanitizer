@@ -12,6 +12,7 @@ TREE_SITTER_RBS_PATH = "/home/pboling/.local/lib/tree-sitter/libtree-sitter-rbs.
 TREE_SITTER_RUBY_PATH = "/home/pboling/.local/lib/tree-sitter/libtree-sitter-ruby.so"
 TREE_SITTER_TOML_PATH = "/home/pboling/.local/lib/tree-sitter/libtree-sitter-toml.so"
 TREE_SITTER_YAML_PATH = "/home/pboling/.local/lib/tree-sitter/libtree-sitter-yaml.so"
+K_JEM_TEMPLATING = "false"
 K_SOUP_COV_DO = "true"
 K_SOUP_COV_COMMAND_NAME = "Test Coverage"
 K_SOUP_COV_FORMATTERS = "html,xml,rcov,lcov,json,tty"
@@ -32,3 +33,6 @@ FUNDING_ORG = "ruby-oauth"
 _.path = ["exe", "bin"]
 _.file = { path = ".env.local", redact = true }
 _.source = ".config/mise/env.sh"
+
+[tools]
+ruby = "4.0.3"
