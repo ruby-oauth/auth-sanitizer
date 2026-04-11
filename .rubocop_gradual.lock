@@ -1,6 +1,0 @@
-{
-  "lib/auth/sanitizer.rb:4062610633": [
-    [41, 9, 24, "ThreadSafety/ClassInstanceVariable: Avoid class instance variables.", 1746319651],
-    [56, 7, 36, "ThreadSafety/ClassAndModuleAttributes: Avoid mutating class and module attributes.", 1227990202]
-  ]
-}
