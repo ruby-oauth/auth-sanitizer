@@ -269,7 +269,7 @@ Declared names are matched against instance variable names. For example, `filter
 Calling `filtered_attributes` again replaces the class-level list:
 
 ```ruby
-OAuthCredential.filtered_attributes :access_token, :refresh_token
+OAuthCredential.filtered_attributes(:access_token, :refresh_token)
 OAuthCredential.filtered_attribute_names
 # => [:access_token, :refresh_token]
 ```
