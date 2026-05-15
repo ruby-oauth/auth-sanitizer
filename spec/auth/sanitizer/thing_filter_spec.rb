@@ -3,8 +3,8 @@
 RSpec.describe Auth::Sanitizer::ThingFilter do
   describe "#initialize" do
     it "does not freeze caller-owned string inputs" do
-      things = [String.new("secret")]
-      label = String.new("[FILTERED]")
+      things = [+"secret"]
+      label = +"[FILTERED]"
 
       described_class.new(things, label: label)
 
@@ -13,8 +13,8 @@ RSpec.describe Auth::Sanitizer::ThingFilter do
     end
 
     it "does not track later in-place mutation of original string inputs" do
-      original_thing = String.new("secret")
-      original_label = String.new("[FILTERED]")
+      original_thing = +"secret"
+      original_label = +"[FILTERED]"
 
       filter = described_class.new([original_thing], label: original_label)
 

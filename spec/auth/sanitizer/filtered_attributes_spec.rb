@@ -72,13 +72,12 @@ RSpec.describe Auth::Sanitizer::FilteredAttributes do
 
     context "when filtered_label_provider changes after initialization" do
       before do
-        @original_provider = Auth::Sanitizer.instance_variable_get(:@filtered_label_provider)
         instance # initialize with current label
         Auth::Sanitizer.filtered_label_provider = -> { "[REDACTED]" }
       end
 
       after do
-        Auth::Sanitizer.filtered_label_provider = @original_provider
+        Auth::Sanitizer.filtered_label_provider = Auth::Sanitizer::DEFAULT_FILTERED_LABEL_PROVIDER
       end
 
       it "keeps using the label captured at initialization" do

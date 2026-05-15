@@ -13,9 +13,8 @@ RSpec.describe Auth::Sanitizer do
 
   describe ".filtered_label_provider=" do
     around do |example|
-      original = described_class.instance_variable_get(:@filtered_label_provider)
       example.run
-      described_class.filtered_label_provider = original
+      described_class.filtered_label_provider = described_class::DEFAULT_FILTERED_LABEL_PROVIDER
     end
 
     it "allows replacing the label with a custom provider" do
