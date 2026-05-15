@@ -28,6 +28,36 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 
 ## 🌻 Synopsis
 
+`auth-sanitizer` provides small, dependency-light helpers for keeping OAuth and authentication secrets out of object
+inspection and log output.
+
+The gem is intentionally narrow in scope. It does not change HTTP requests, token objects, persistence, or application
+configuration for you. Instead, it gives host gems and applications two reusable redaction surfaces:
+
+- `Auth::Sanitizer::FilteredAttributes` redacts selected instance variables from `#inspect`.
+- `Auth::Sanitizer::SanitizedLogger` wraps an existing logger and redacts sensitive values from string log messages.
+
+Out of the box, logger sanitization filters the key names most commonly found in OAuth and OpenID Connect debug output:
+
+```ruby
+Auth::Sanitizer.default_filtered_keys
+# => [
+#      "access_token",
+#      "refresh_token",
+#      "id_token",
+#      "client_secret",
+#      "assertion",
+#      "code_verifier",
+#      "token",
+#    ]
+```
+
+Redacted values are replaced with `"[FILTERED]"` by default. The replacement label can be changed globally by installing
+a provider, or per logger by passing `label:` to `Auth::Sanitizer::SanitizedLogger.new`.
+
+The library snapshots filter configuration when a redacting object is initialized. That keeps already-created objects
+and logger wrappers stable even if a host application changes its configuration later.
+
 ## 💡 Info you can shake a stick at
 
 | Tokens to Remember      | [![Gem name][⛳️name-img]][⛳️gem-name] [![Gem namespace][⛳️namespace-img]][⛳️gem-namespace]                                                                                                                                                                                                                                                                          |
@@ -143,7 +173,234 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 ## ⚙️ Configuration
 
+Most applications can use the defaults. Configuration is available when a host gem or application wants to align
+redaction with its own logging conventions.
+
+### Filtered Label
+
+The default replacement label is:
+
+```ruby
+Auth::Sanitizer.filtered_label
+# => "[FILTERED]"
+```
+
+To use a different label globally, install a callable provider:
+
+```ruby
+Auth::Sanitizer.filtered_label_provider = -> { "[REDACTED]" }
+```
+
+The provider is called when a `FilteredAttributes` object or `SanitizedLogger` wrapper is initialized. Existing
+instances keep the label they captured at initialization time:
+
+```ruby
+Auth::Sanitizer.filtered_label_provider = -> { "[FILTERED]" }
+logger = Auth::Sanitizer::SanitizedLogger.new(Logger.new($stdout))
+
+Auth::Sanitizer.filtered_label_provider = -> { "[REDACTED]" }
+
+# `logger` still uses "[FILTERED]"; new wrappers use "[REDACTED]".
+```
+
+This makes it safe for libraries to delegate the label to host configuration:
+
+```ruby
+Auth::Sanitizer.filtered_label_provider = -> { MyGem.config.filtered_label }
+```
+
+### Logger Keys
+
+`Auth::Sanitizer::SanitizedLogger` defaults to `Auth::Sanitizer.default_filtered_keys`. Pass `filtered_keys:` when your
+application logs additional sensitive fields:
+
+```ruby
+logger = Auth::Sanitizer::SanitizedLogger.new(
+  Logger.new($stdout),
+  filtered_keys: Auth::Sanitizer.default_filtered_keys + %w[
+    api_key
+    private_key
+    session_secret
+  ],
+)
+```
+
+You can also replace the list entirely:
+
+```ruby
+logger = Auth::Sanitizer::SanitizedLogger.new(
+  Logger.new($stdout),
+  filtered_keys: %w[my_secret],
+  label: "[GONE]",
+)
+```
+
+Logger key matching is case-insensitive for supported string formats. The keys are used to redact:
+
+- JSON-style pairs, such as `"access_token": "abc123"` and `'client_secret': 'abc123'`
+- query-string and form-encoded pairs, such as `access_token=abc123&scope=read`
+- `Authorization:` header values, regardless of `filtered_keys`
+
+Only string payloads are sanitized. Non-string log payloads are delegated unchanged to the wrapped logger.
+
+### Inspect Attributes
+
+Classes opt in to inspect redaction by including `Auth::Sanitizer::FilteredAttributes` and declaring the attribute names
+that should be hidden:
+
+```ruby
+class OAuthCredential
+  include Auth::Sanitizer::FilteredAttributes
+
+  attr_reader :access_token, :expires_at
+
+  filtered_attributes :access_token
+
+  def initialize(access_token, expires_at)
+    @access_token = access_token
+    @expires_at = expires_at
+  end
+end
+```
+
+Declared names are matched against instance variable names. For example, `filtered_attributes :access_token` redacts
+`@access_token` in `#inspect`.
+
+Calling `filtered_attributes` again replaces the class-level list:
+
+```ruby
+OAuthCredential.filtered_attributes :access_token, :refresh_token
+OAuthCredential.filtered_attribute_names
+# => [:access_token, :refresh_token]
+```
+
+Passing no attributes clears the class-level list for subsequently initialized objects:
+
+```ruby
+OAuthCredential.filtered_attributes
+OAuthCredential.filtered_attribute_names
+# => []
+```
+
+As with logger wrappers, the per-object filter is captured during initialization. Objects that already exist keep their
+original inspect behavior.
+
 ## 🔧 Basic Usage
+
+Require the gem:
+
+```ruby
+require "auth/sanitizer"
+```
+
+### Redact `#inspect`
+
+Use `Auth::Sanitizer::FilteredAttributes` for objects that may appear in exception messages, console sessions, or debug
+output through `#inspect`:
+
+```ruby
+class TokenResponse
+  include Auth::Sanitizer::FilteredAttributes
+
+  attr_reader :access_token, :refresh_token, :scope
+
+  filtered_attributes :access_token, :refresh_token
+
+  def initialize(access_token:, refresh_token:, scope:)
+    @access_token = access_token
+    @refresh_token = refresh_token
+    @scope = scope
+  end
+end
+
+response = TokenResponse.new(
+  access_token: "access-token-value",
+  refresh_token: "refresh-token-value",
+  scope: "profile email",
+)
+
+response.inspect
+# => #<TokenResponse:123456 @access_token=[FILTERED], @refresh_token=[FILTERED], @scope="profile email">
+```
+
+Only the configured attributes are redacted. Other instance variables remain visible so inspected objects are still
+useful while debugging.
+
+### Redact Logger Output
+
+Wrap an existing logger with `Auth::Sanitizer::SanitizedLogger`:
+
+```ruby
+require "logger"
+require "auth/sanitizer"
+
+logger = Auth::Sanitizer::SanitizedLogger.new(Logger.new($stdout))
+
+logger.debug("access_token=abc123&scope=profile")
+# Logs: access_token=[FILTERED]&scope=profile
+
+logger.debug('{"client_secret": "super-secret", "grant_type": "client_credentials"}')
+# Logs: {"client_secret": "[FILTERED]", "grant_type": "client_credentials"}
+
+logger.debug("Authorization: Bearer abc123")
+# Logs: Authorization: "[FILTERED]"
+```
+
+The wrapper implements the common Ruby logger methods and sanitizes string values passed through them:
+
+```ruby
+logger.add(Logger::DEBUG, "refresh_token=abc123", "oauth")
+logger << "id_token=abc123"
+
+logger.debug { "code_verifier=abc123" }
+logger.info("token=abc123")
+logger.warn("client_secret=abc123")
+logger.error("assertion=abc123")
+logger.fatal("Authorization: Bearer abc123")
+logger.unknown("access_token=abc123")
+```
+
+The wrapper also delegates common logger configuration to the wrapped logger when supported:
+
+```ruby
+logger.level = Logger::WARN
+logger.progname = "my-app"
+logger.formatter = proc { |_severity, _time, _progname, message| "#{message}\n" }
+logger.close
+```
+
+Methods not implemented by the wrapper are delegated to the underlying logger when that logger responds to them.
+
+### Custom Logger Keys
+
+Use `filtered_keys:` for application-specific secrets:
+
+```ruby
+logger = Auth::Sanitizer::SanitizedLogger.new(
+  Logger.new($stdout),
+  filtered_keys: %w[access_token api_key signing_secret],
+  label: "[SECRET]",
+)
+
+logger.debug("api_key=12345&access_token=abc123")
+# Logs: api_key=[SECRET]&access_token=[SECRET]
+```
+
+`filtered_keys:` applies to JSON-style, query-string, and form-encoded key/value pairs. `Authorization:` headers are
+always redacted by `SanitizedLogger`, even if `Authorization` is not listed as a filtered key.
+
+### Important Limits
+
+`auth-sanitizer` is a logging and inspection helper, not a complete secret-management system.
+
+- It redacts supported string patterns before delegating to a logger.
+- It does not mutate source hashes, token objects, HTTP requests, or HTTP responses.
+- It does not recursively sanitize arbitrary Ruby objects passed to a logger as non-string payloads.
+- It cannot protect secrets that are logged through a different logger, printed directly, or interpolated into an
+  unsupported format.
+
+For best results, wrap the logger as close as possible to the code that emits authentication debug output, and avoid
+logging raw token structures unless they pass through the sanitizer first.
 
 ## 🦷 FLOSS Funding
 
