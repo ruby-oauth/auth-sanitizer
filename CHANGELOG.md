@@ -33,3 +33,7 @@ Please file a bug if you notice a violation of semantic versioning.
 ## [0.1.0] - 2026-04-06
 
 - Initial release
+
+[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/ruby-oauth/auth-sanitizer/compare/21d6165dca7eef8e7b9bb01fdfc4cc8bab4e5b96...v0.1.0
+[0.1.0t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.1.0
