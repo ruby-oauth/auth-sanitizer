@@ -1,11 +1,11 @@
-[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-i]][🖼️galtzo-discord] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang] [![ruby-oauth Logo by Aboling0, CC BY-SA 4.0][🖼️ruby-oauth-i]][🖼️ruby-oauth]
+[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-i]][🖼️galtzo-discord] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang] [![oauth2 Logo by Chris Messina, CC BY-SA 3.0][🖼️oauth2-i]][🖼️oauth2]
 
 [🖼️galtzo-i]: https://logos.galtzo.com/assets/images/galtzo-floss/avatar-192px.svg
 [🖼️galtzo-discord]: https://discord.gg/3qme4XHNKN
 [🖼️ruby-lang-i]: https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg
 [🖼️ruby-lang]: https://www.ruby-lang.org/
-[🖼️ruby-oauth-i]: https://logos.galtzo.com/assets/images/ruby-oauth/avatar-192px.svg
-[🖼️ruby-oauth]: https://github.com/ruby-oauth
+[🖼️oauth2-i]: https://logos.galtzo.com/assets/images/oauth/oauth2/avatar-192px.svg
+[🖼️oauth2]: https://github.com/ruby-oauth/oauth2
 
 # 🍲 Auth::Sanitizer
 
@@ -510,7 +510,7 @@ Thanks for RTFM. ☺️
 [📌gitmoji]: https://gitmoji.dev
 [📌gitmoji-img]: https://img.shields.io/badge/gitmoji_commits-%20%F0%9F%98%9C%20%F0%9F%98%8D-34495e.svg?style=flat-square
 [🧮kloc]: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-[🧮kloc-img]: https://img.shields.io/badge/KLOC-5.053-FFDD67.svg?style=for-the-badge&logo=YouTube&logoColor=blue
+[🧮kloc-img]: https://img.shields.io/badge/KLOC-0.134-FFDD67.svg?style=for-the-badge&logo=YouTube&logoColor=blue
 [🔐security]: SECURITY.md
 [🔐security-img]: https://img.shields.io/badge/security-policy-259D6C.svg?style=flat
 [📄copyright-notice-explainer]: https://opensource.stackexchange.com/questions/5778/why-do-licenses-such-as-the-mit-license-specify-a-single-year
