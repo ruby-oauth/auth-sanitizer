@@ -20,7 +20,11 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- gemspec description, summary
+
 ### Changed
+
+- gemspec contact email
 
 ### Deprecated
 

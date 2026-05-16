@@ -26,10 +26,10 @@ Gem::Specification.new do |spec|
   spec.name = "auth-sanitizer"
   spec.version = gem_version
   spec.authors = ["Peter H. Boling"]
-  spec.email = ["peter.boling@gmail.com"]
+  spec.email = ["floss@galtzo.com"]
 
-  spec.summary = "🍲 TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "🍲 TODO: Write a longer description or delete this line."
+  spec.summary = "🟥 Configurable KV output redaction "
+  spec.description = "🟥 Configurable KV output redaction. Sanitize/filter your secrets."
   spec.homepage = "https://github.com/ruby-oauth/auth-sanitizer"
   spec.licenses = ["MIT"]
   spec.required_ruby_version = ">= 2.2.0"
