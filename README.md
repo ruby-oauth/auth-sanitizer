@@ -58,6 +58,12 @@ a provider, or per logger by passing `label:` to `Auth::Sanitizer::SanitizedLogg
 The library snapshots filter configuration when a redacting object is initialized. That keeps already-created objects
 and logger wrappers stable even if a host application changes its configuration later.
 
+This gem is used by the following libraries to ensure clean output:
+
+- oauth
+- oauth-tty
+- oauth2
+
 ## 💡 Info you can shake a stick at
 
 | Tokens to Remember      | [![Gem name][⛳️name-img]][⛳️gem-name] [![Gem namespace][⛳️namespace-img]][⛳️gem-namespace]                                                                                                                                                                                                                                                                          |
