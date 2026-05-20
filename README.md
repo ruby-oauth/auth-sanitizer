@@ -413,7 +413,8 @@ Require the gem:
 require "auth/sanitizer"
 ```
 
-Or load it without defining top-level `Auth`:
+Or load it without defining top-level `Auth`. This still defines top-level `AuthSanitizer`; see
+[Zero Top-Level Namespace Additions](#zero-top-level-namespace-additions) for the stricter loading pattern.
 
 ```ruby
 require "auth_sanitizer/loader"
