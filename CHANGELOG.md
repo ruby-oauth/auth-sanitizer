@@ -20,7 +20,7 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Add `AuthSanitizer::Loader.load` for isolated loading without defining top-level `Auth`
+- Add `AuthSanitizer::Loader.load_isolated` for isolated loading without defining top-level `Auth`
 
 ### Changed
 

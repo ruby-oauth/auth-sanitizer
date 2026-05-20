@@ -35,7 +35,7 @@ RSpec.describe Auth::Sanitizer do
     it "loads Auth::Sanitizer without defining a top-level Auth constant" do
       script = <<~RUBY
         require "auth_sanitizer/loader"
-        isolated = AuthSanitizer::Loader.load
+        isolated = AuthSanitizer::Loader.load_isolated
         raise "Auth was defined" if Object.const_defined?(:Auth, false)
         raise "wrong module" unless isolated.name.end_with?("::Auth::Sanitizer")
 

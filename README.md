@@ -63,16 +63,19 @@ Consumers that need to avoid defining the generic top-level `Auth` namespace can
 ```ruby
 require "auth_sanitizer/loader"
 
-AUTH_SANITIZER = AuthSanitizer::Loader.load
+AUTH_SANITIZER = AuthSanitizer::Loader.load_isolated
 ```
 
 The returned module is an anonymously namespaced `Auth::Sanitizer`, suitable for internal assignment in host gems.
+Use `require: false` in gems that want to avoid every new top-level namespace, including `AuthSanitizer`; see
+[Zero Top-Level Namespace Additions](#zero-top-level-namespace-additions).
 
 This gem is used by the following libraries to ensure clean output:
 
 - oauth
 - oauth-tty
 - oauth2
+- omniauth-ldap
 
 ## 💡 Info you can shake a stick at
 
@@ -191,6 +194,104 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 Most applications can use the defaults. Configuration is available when a host gem or application wants to align
 redaction with its own logging conventions.
+
+### Loading Mode
+
+This gem has two supported loading modes.
+
+The direct API defines the top-level `Auth` namespace:
+
+```ruby
+require "auth/sanitizer"
+
+class TokenResponse
+  include Auth::Sanitizer::FilteredAttributes
+end
+```
+
+This is convenient for applications that already own or intentionally use `Auth`.
+
+Libraries and applications that need to avoid the generic top-level `Auth` namespace should use the isolated loader:
+
+```ruby
+require "auth_sanitizer/loader"
+
+AUTH_SANITIZER = AuthSanitizer::Loader.load_isolated
+
+class TokenResponse
+  include AUTH_SANITIZER::FilteredAttributes
+end
+```
+
+`AuthSanitizer::Loader.load_isolated` evaluates the sanitizer implementation inside an anonymous module and returns that
+module's `Auth::Sanitizer` constant. Assign the returned module to a constant owned by your library or application, then
+include from that constant.
+
+When declaring the dependency in a Gemfile, prefer one of these explicit forms:
+
+```ruby
+gem "auth-sanitizer", require: false
+```
+
+or:
+
+```ruby
+gem "auth-sanitizer", require: "auth_sanitizer/loader"
+```
+
+Use `require: false` when the consuming library will decide which loading mode to use internally. Use
+`require: "auth_sanitizer/loader"` when Bundler should make the isolated loader available during `Bundler.require`.
+
+#### Zero Top-Level Namespace Additions
+
+A gem that needs zero new top-level namespaces from this dependency can load the loader itself inside an anonymous
+namespace. On Ruby 3.1+, use `Kernel.load(path, module)`:
+
+```ruby
+auth_sanitizer_loader_path = File.join(
+  Gem::Specification.find_by_name("auth-sanitizer").full_gem_path,
+  "lib/auth_sanitizer/loader.rb",
+)
+
+auth_sanitizer_loader_namespace = Module.new
+Kernel.load(auth_sanitizer_loader_path, auth_sanitizer_loader_namespace)
+
+AUTH_SANITIZER = auth_sanitizer_loader_namespace
+  .const_get(:AuthSanitizer)
+  .const_get(:Loader)
+  .load_isolated
+```
+
+That pattern leaves both `Auth` and `AuthSanitizer` undefined at top level. The consuming gem should assign the returned
+module under its own namespace and use that internal constant.
+
+<details markdown="1">
+  <summary>Ruby 2.2-compatible zero-top-level loading</summary>
+
+Ruby 2.2 through Ruby 3.0 do not support `Kernel.load(path, module)`. For those versions, evaluate the loader source
+inside an anonymous namespace with `Module#module_eval`:
+
+```ruby
+auth_sanitizer_loader_path = $LOAD_PATH
+  .map { |load_path| File.join(load_path, "auth_sanitizer/loader.rb") }
+  .find { |path| File.file?(path) }
+
+raise LoadError, "cannot load such file -- auth_sanitizer/loader" unless auth_sanitizer_loader_path
+
+auth_sanitizer_loader_namespace = Module.new
+auth_sanitizer_loader_namespace.module_eval(
+  File.read(auth_sanitizer_loader_path),
+  auth_sanitizer_loader_path,
+  1,
+)
+
+AUTH_SANITIZER = auth_sanitizer_loader_namespace
+  .const_get(:AuthSanitizer)
+  .const_get(:Loader)
+  .load_isolated
+```
+
+</details>
 
 ### Filtered Label
 
@@ -314,7 +415,7 @@ Or load it without defining top-level `Auth`:
 ```ruby
 require "auth_sanitizer/loader"
 
-AUTH_SANITIZER = AuthSanitizer::Loader.load
+AUTH_SANITIZER = AuthSanitizer::Loader.load_isolated
 
 class TokenResponse
   include AUTH_SANITIZER::FilteredAttributes

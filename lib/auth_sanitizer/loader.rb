@@ -20,7 +20,7 @@ module AuthSanitizer
       # works on Ruby 2.2+, where Kernel.load(path, module) is unavailable.
       #
       # @return [Module] isolated Auth::Sanitizer module
-      def load
+      def load_isolated
         namespace = Module.new
         FILES.each do |relative_path|
           path = File.expand_path("../#{relative_path}", __dir__)

@@ -9,6 +9,6 @@ module AuthSanitizer
   module Loader
     FILES: Array[String]
 
-    def self.load: () -> Module
+    def self.load_isolated: () -> Module
   end
 end
