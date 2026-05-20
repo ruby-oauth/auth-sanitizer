@@ -58,6 +58,16 @@ a provider, or per logger by passing `label:` to `Auth::Sanitizer::SanitizedLogg
 The library snapshots filter configuration when a redacting object is initialized. That keeps already-created objects
 and logger wrappers stable even if a host application changes its configuration later.
 
+Consumers that need to avoid defining the generic top-level `Auth` namespace can use the isolated loader:
+
+```ruby
+require "auth_sanitizer/loader"
+
+AUTH_SANITIZER = AuthSanitizer::Loader.load
+```
+
+The returned module is an anonymously namespaced `Auth::Sanitizer`, suitable for internal assignment in host gems.
+
 This gem is used by the following libraries to ensure clean output:
 
 - oauth
@@ -297,6 +307,18 @@ Require the gem:
 
 ```ruby
 require "auth/sanitizer"
+```
+
+Or load it without defining top-level `Auth`:
+
+```ruby
+require "auth_sanitizer/loader"
+
+AUTH_SANITIZER = AuthSanitizer::Loader.load
+
+class TokenResponse
+  include AUTH_SANITIZER::FilteredAttributes
+end
 ```
 
 ### Redact `#inspect`

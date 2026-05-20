@@ -4,3 +4,11 @@ module Auth
     # See the writing guide of rbs: https://github.com/ruby/rbs#guides
   end
 end
+
+module AuthSanitizer
+  module Loader
+    FILES: Array[String]
+
+    def self.load: () -> Module
+  end
+end
