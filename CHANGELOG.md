@@ -20,9 +20,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Add `AuthSanitizer::Loader.load_isolated` for isolated loading without defining top-level `Auth`
-- Document zero-top-level-namespace loading for consumers that need to avoid defining `Auth` or `AuthSanitizer`
-
 ### Changed
 
 ### Deprecated
@@ -32,6 +29,18 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 ### Security
+
+## [0.1.3] - 2026-05-20
+
+- TAG: [v0.1.3][0.1.3t]
+- COVERAGE: 100.00% -- 135/135 lines in 6 files
+- BRANCH COVERAGE: 100.00% -- 28/28 branches in 6 files
+- 84.62% documented
+
+### Added
+
+- Add `AuthSanitizer::Loader.load_isolated` for isolated loading without defining top-level `Auth`
+- Document zero-top-level-namespace loading for consumers that need to avoid defining `Auth` or `AuthSanitizer`
 
 ## [0.1.2] - 2026-05-15
 
@@ -70,7 +79,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.2...v0.1.3
+[0.1.3t]: https://github.com//ruby-oauth/auth-sanitizer/releases/tag/v0.1.3
 [0.1.2]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.1...v0.1.2
 [0.1.2t]: https://github.com//ruby-oauth/auth-sanitizer/releases/tag/v0.1.2
 [0.1.1]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.0...v0.1.1
