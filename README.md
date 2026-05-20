@@ -248,12 +248,18 @@ A gem that needs zero new top-level namespaces from this dependency can load the
 namespace. On Ruby 3.1+, use `Kernel.load(path, module)`:
 
 ```ruby
-auth_sanitizer_spec = Gem.loaded_specs["auth-sanitizer"] ||
-  Gem::Specification.find_by_name("auth-sanitizer")
+auth_sanitizer_requirement = Gem::Requirement.new("~> 0.1", ">= 0.1.3")
+auth_sanitizer_spec = Gem.loaded_specs["auth-sanitizer"]
+unless auth_sanitizer_spec && auth_sanitizer_requirement.satisfied_by?(auth_sanitizer_spec.version)
+  auth_sanitizer_spec = Gem::Specification.find_by_name("auth-sanitizer", auth_sanitizer_requirement)
+end
 auth_sanitizer_loader_path = File.join(
   auth_sanitizer_spec.full_gem_path,
   "lib/auth_sanitizer/loader.rb",
 )
+unless File.file?(auth_sanitizer_loader_path)
+  raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found at #{auth_sanitizer_loader_path}"
+end
 
 auth_sanitizer_loader_namespace = Module.new
 Kernel.load(auth_sanitizer_loader_path, auth_sanitizer_loader_namespace)
@@ -274,12 +280,18 @@ Ruby 2.2 through Ruby 3.0 do not support `Kernel.load(path, module)`. For those 
 inside an anonymous namespace with `Module#module_eval`:
 
 ```ruby
-auth_sanitizer_spec = Gem.loaded_specs["auth-sanitizer"] ||
-  Gem::Specification.find_by_name("auth-sanitizer")
+auth_sanitizer_requirement = Gem::Requirement.new("~> 0.1", ">= 0.1.3")
+auth_sanitizer_spec = Gem.loaded_specs["auth-sanitizer"]
+unless auth_sanitizer_spec && auth_sanitizer_requirement.satisfied_by?(auth_sanitizer_spec.version)
+  auth_sanitizer_spec = Gem::Specification.find_by_name("auth-sanitizer", auth_sanitizer_requirement)
+end
 auth_sanitizer_loader_path = File.join(
   auth_sanitizer_spec.full_gem_path,
   "lib/auth_sanitizer/loader.rb",
 )
+unless File.file?(auth_sanitizer_loader_path)
+  raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found at #{auth_sanitizer_loader_path}"
+end
 
 auth_sanitizer_loader_namespace = Module.new
 auth_sanitizer_loader_namespace.module_eval(
