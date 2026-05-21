@@ -27,7 +27,7 @@ gem "nomono", "~> 1.0"
 gem "logger"
 
 # Templating (env-switched: KETTLE_RB_DEV=true for local paths)
-eval_gemfile "gemfiles/modular/templating.gemfile" if ENV.fetch("K_JEM_TEMPLATING", "true").casecmp("true").zero?
+eval_gemfile "gemfiles/modular/templating.gemfile" if ENV.fetch("K_JEM_TEMPLATING", "false").casecmp("true").zero?
 
 # Debugging
 eval_gemfile "gemfiles/modular/debug.gemfile"
