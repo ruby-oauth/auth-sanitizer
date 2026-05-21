@@ -94,7 +94,7 @@ jobs:
         uses: qltysh/qlty-action/coverage@main
         with:
           token: ${{secrets.QLTY_COVERAGE_TOKEN}}
-          files: coverage/.resultset.json
+          files: coverage/lcov.info,coverage/.resultset.json
         continue-on-error: ${{ matrix.experimental != 'false' }}
 
       # Build will fail here if coverage upload fails
