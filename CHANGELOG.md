@@ -22,18 +22,29 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- (docs) Document constrained `auth-sanitizer` version lookup for isolated loader examples
-- (dev) Make templating dependencies opt-in for the main `Gemfile`
-
 ### Deprecated
 
 ### Removed
 
 ### Fixed
 
-- (test) Stop running Appraisal install steps in the locked-deps workflow for the main `Gemfile`
-
 ### Security
+
+## [0.1.4] - 2026-05-21
+
+- TAG: [v0.1.4][0.1.4t]
+- COVERAGE: 100.00% -- 135/135 lines in 6 files
+- BRANCH COVERAGE: 100.00% -- 28/28 branches in 6 files
+- 84.62% documented
+
+### Changed
+
+- (docs) Document constrained `auth-sanitizer` version lookup for isolated loader examples
+- (dev) Make templating dependencies opt-in for the main `Gemfile`
+
+### Fixed
+
+- (test) Stop running Appraisal install steps in the locked-deps workflow for the main `Gemfile`
 
 ## [0.1.3] - 2026-05-20
 
@@ -84,7 +95,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.3...v0.1.4
+[0.1.4t]: https://github.com//ruby-oauth/auth-sanitizer/releases/tag/v0.1.4
 [0.1.3]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.2...v0.1.3
 [0.1.3t]: https://github.com//ruby-oauth/auth-sanitizer/releases/tag/v0.1.3
 [0.1.2]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.1...v0.1.2
