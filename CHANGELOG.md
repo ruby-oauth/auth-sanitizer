@@ -22,11 +22,16 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+- (docs) Document constrained `auth-sanitizer` version lookup for isolated loader examples
+- (dev) Make templating dependencies opt-in for the main `Gemfile`
+
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+- (test) Stop running Appraisal install steps in the locked-deps workflow for the main `Gemfile`
 
 ### Security
 
