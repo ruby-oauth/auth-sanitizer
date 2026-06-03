@@ -11,18 +11,22 @@ source "https://gem.coop"
 git_source(:codeberg) { |repo_name| "https://codeberg.org/#{repo_name}" }
 git_source(:gitlab) { |repo_name| "https://gitlab.com/#{repo_name}" }
 
+#### IMPORTANT #######################################################
+# Gemfile is for local development ONLY; Gemfile is NOT loaded in CI #
+####################################################### IMPORTANT ####
+
 # Include dependencies from auth-sanitizer.gemspec
 gemspec
 
 # See unlocked_deps appraisal for more details on irb inclusion
 gem "irb", "~> 1.17" # ruby >= 2.7
 
-# Sibling Gems In a Not-a-Monorepo!
-gem "nomono", "~> 1.0"
+# Local workspace dependency wiring for *_local.gemfile overrides
+gem "nomono", "~> 1.0", ">= 1.0.2", require: false # ruby >= 2.2
 
 gem "logger"
 
-# Templating (env-switched: KETTLE_RB_DEV=true for local paths)
+# Templating (env-switched: SMORG_RB_DEV=/path/to/structuredmerge/ruby/gems for local paths)
 eval_gemfile "gemfiles/modular/templating.gemfile" if ENV.fetch("K_JEM_TEMPLATING", "false").casecmp("true").zero?
 
 # Debugging

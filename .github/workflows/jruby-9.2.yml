@@ -1,7 +1,10 @@
-name: Ruby 2.3
+name: JRuby 9.2
 
 permissions:
   contents: read
+
+env:
+  K_SOUP_COV_DO: false
 
 on:
   push:
@@ -29,24 +32,27 @@ jobs:
     runs-on: ubuntu-22.04
     continue-on-error: ${{ matrix.experimental || endsWith(matrix.ruby, 'head') }}
     env: # $BUNDLE_GEMFILE must be set at job level, so it is set for all steps
-      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ matrix.gemfile }}.gemfile
+      BUNDLE_GEMFILE: ${{ github.workspace }}/Appraisal.root.gemfile
     strategy:
       matrix:
         include:
-          # Ruby 2.3
-          - ruby: "ruby-2.3"
-            appraisal: "ruby-2-3"
-            exec_cmd: "rake test"
-            gemfile: "Appraisal.root"
-            rubygems: "3.3.27"
-            bundler: "2.3.27"
+          # jruby-9.2 (targets Ruby 2.5 compatibility)
+          - ruby: "jruby-9.2"
+            appraisal: "ruby-2-5"
+            exec_cmd: "kettle-test"
+            rubygems: default
+            bundler: default
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        if: ${{ !env.ACT }}
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Setup Ruby & RubyGems
-        uses: ruby/setup-ruby@v1
+        if: ${{ !env.ACT }}
+        uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f # v1.310.0
         with:
           ruby-version: ${{ matrix.ruby }}
           rubygems: ${{ matrix.rubygems }}
@@ -55,13 +61,18 @@ jobs:
 
       - name: "[Attempt 1] Appraisal for ${{ matrix.ruby }}@${{ matrix.appraisal }}"
         id: bundleAppraisalAttempt1
+        if: ${{ !env.ACT }}
         run: bundle exec appraisal ${{ matrix.appraisal }} install
+        # Continue to the next step on failure
         continue-on-error: true
 
+      # Effectively an automatic retry of the previous step.
       - name: "[Attempt 2] Appraisal for ${{ matrix.ruby }}@${{ matrix.appraisal }}"
         id: bundleAppraisalAttempt2
-        if: ${{ steps.bundleAppraisalAttempt1.outcome == 'failure' }}
+        # If bundleAppraisalAttempt1 failed, try again here; Otherwise skip.
+        if: ${{ steps.bundleAppraisalAttempt1.outcome == 'failure' && !env.ACT }}
         run: bundle exec appraisal ${{ matrix.appraisal }} install
 
       - name: Tests for ${{ matrix.ruby }} via ${{ matrix.exec_cmd }}
+        if: ${{ !env.ACT }}
         run: bundle exec appraisal ${{ matrix.appraisal }} bundle exec ${{ matrix.exec_cmd }}

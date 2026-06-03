@@ -1,29 +1,22 @@
 # frozen_string_literal: true
 
-gem "toml"
-gem "parslet"
-gem "prism", "~> 1.6"
-gem "unparser", "~> 0.8", ">= 0.8.1"
+smorg_remote = ENV.fetch("SMORG_RB_DEV", "false").casecmp("false").zero?
+kettle_remote = ENV.fetch("KETTLE_RB_DEV", "false").casecmp("false").zero?
 
-platform :mri do
-  # MRI only Parsers:
-  # kettle-jem currently uses markly instead of commonmarker, but these can easily be swapped.
-  # gem "commonmarker"
-  gem "markly", "~> 0.15", ">= 0.15.2"
-  gem "rbs", ">= 3.10"   # ruby >= 3.1.0
-
-  # MRI Backend
-  gem "ruby_tree_sitter",
-    "~> 2.1",
-    require: false # DO NOT LOAD, because conflicts with FFI
-
-  # AST parsing for advanced templating.
-  # Set KETTLE_RB_DEV=true (or path) for local development with path-based dependencies.
-  # When false (default / CI), gemspec runtime dependencies are used (no extras needed here).
-  if ENV.fetch("KETTLE_RB_DEV", "false").casecmp("false").zero?
-    # AST parsing for advanced templating (remote/released)
-    gem "kettle-jem"      # Kettle-rb's Merge Recipes
-  else
-    eval_gemfile "templating_local.gemfile"
-  end
+if smorg_remote
+  # Merge recipes and parser dependencies for released installs.
+  gem "kettle-jem", ">= 7.0"
 end
+
+if kettle_remote
+  # Template/plugin checks for released installs.
+  gem "kettle-drift", "~> 1.0", ">= 1.0.1", require: false
+end
+
+# Set SMORG_RB_DEV=/path/to/structuredmerge/ruby/gems for local development with path-based dependencies.
+# When false (default / CI), released kettle-jem brings merge gems and parser dependencies.
+# Local path overrides bring the same dependencies from sibling gemspecs.
+#
+# Set KETTLE_RB_DEV=/path/to/kettle-rb for local development with Kettle plugin gems.
+# When false (default / CI), released Kettle plugin gems are used.
+eval_gemfile "templating_local.gemfile" unless smorg_remote && kettle_remote

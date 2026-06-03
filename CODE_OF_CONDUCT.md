@@ -71,11 +71,6 @@ reporter of any incident.
 Community leaders will follow these Community Impact Guidelines in determining
 the consequences for any action they deem in violation of this Code of Conduct:
 
-* Participants will be tolerant of opposing views.
-* Participants must ensure that their language and actions are free of personal attacks and disparaging personal remarks.
-* When interpreting the words and actions of others, participants should always assume good intentions.
-* Behaviour which can be reasonably considered harassment will not be tolerated.
-
 ### 1. Correction
 
 **Community Impact**: Use of inappropriate language or other behavior deemed
