@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Prevented isolated loader namespace leakage on Ruby 2.5 and older TruffleRuby runtimes.
+
 ### Security
 
 ## [0.1.4] - 2026-05-21
