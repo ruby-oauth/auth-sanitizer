@@ -13,13 +13,23 @@ gem_version =
     # See: https://github.com/panorama-ed/memo_wise/pull/397
     Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/auth/sanitizer/version.rb", mod) }::Auth::Sanitizer::Version::VERSION
   else
-    # NOTE: Use __FILE__ or __dir__ until removal of Ruby 1.x support
-    # __dir__ introduced in Ruby 1.9.1
-    # lib = File.expand_path("../lib", __FILE__)
-    lib = File.expand_path("lib", __dir__)
-    $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-    require "auth/sanitizer/version"
-    Auth::Sanitizer::Version::VERSION
+    version_file = File.expand_path("lib/auth/sanitizer/version.rb", __dir__)
+    version_namespace = Module.new
+    version_auth_namespace = Module.new
+    version_namespace.const_set(:Auth, version_auth_namespace)
+    lines = File.readlines(version_file)
+    wrapper_index = lines.index("module Auth\n")
+    if wrapper_index
+      lines.delete_at(wrapper_index)
+      closing_index = lines.rindex("end\n")
+      lines.delete_at(closing_index) if closing_index
+      wrapper_index.upto(lines.length - 1) do |index|
+        line = lines[index]
+        lines[index] = line.start_with?("  ") ? line[2..-1] : line
+      end
+    end
+    version_auth_namespace.module_eval(lines.join, version_file, 1)
+    version_auth_namespace::Sanitizer::Version::VERSION
   end
 
 Gem::Specification.new do |spec|
