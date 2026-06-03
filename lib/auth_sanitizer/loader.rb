@@ -24,7 +24,6 @@ module AuthSanitizer
         namespace = Module.new
         auth_namespace = Module.new
         namespace.const_set(:Auth, auth_namespace)
-        auth_namespace.const_set(:Auth, auth_namespace)
 
         FILES.each do |relative_path|
           path = File.expand_path("../#{relative_path}", __dir__)
@@ -43,16 +42,17 @@ module AuthSanitizer
       def isolated_source(path)
         lines = File.readlines(path)
         wrapper_index = lines.index("module Auth\n")
-        return lines.join unless wrapper_index
+        return lines.join.split("Auth::Sanitizer").join("Sanitizer") unless wrapper_index
 
         lines.delete_at(wrapper_index)
         closing_index = lines.rindex("end\n")
         lines.delete_at(closing_index) if closing_index
 
-        lines[(wrapper_index)..].map! do |line|
-          line.start_with?("  ") ? line[2..] : line
+        wrapper_index.upto(lines.length - 1) do |index|
+          line = lines[index]
+          lines[index] = line.start_with?("  ") ? line[2..-1] : line
         end
-        lines.join
+        lines.join.split("Auth::Sanitizer").join("Sanitizer")
       end
     end
   end
