@@ -37,7 +37,8 @@ RSpec.describe Auth::Sanitizer do
         require "auth_sanitizer/loader"
         isolated = AuthSanitizer::Loader.load_isolated
         raise "Auth was defined" if Object.const_defined?(:Auth, false)
-        raise "wrong module" unless isolated.name.end_with?("::Auth::Sanitizer")
+        raise "wrong module" unless isolated.const_defined?(:FilteredAttributes, false)
+        raise "wrong version" unless isolated.const_defined?(:VERSION, false)
 
         klass = Class.new do
           include isolated::FilteredAttributes

@@ -15,8 +15,8 @@
     [426, 25, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545],
     [489, 20, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545]
   ],
-  "auth-sanitizer.gemspec:4100760987": [
-    [35, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 4109332598]
+  "auth-sanitizer.gemspec:3105824834": [
+    [45, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 4109332598]
   ],
   "lib/auth/sanitizer/filtered_attributes.rb:2975278199": [
     [37, 11, 20, "Style/SuperArguments: Call `super` without arguments and parentheses when the signature is identical.", 368403147],
