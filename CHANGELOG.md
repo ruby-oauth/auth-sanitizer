@@ -20,7 +20,14 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- Added `VersionGem::Basic` helpers to `Auth::Sanitizer::Version`.
+
 ### Changed
+
+- Refreshed generated package metadata, support documentation, CI workflows,
+  and development dependency floors from the current kettle-jem template.
+- Documented that CI workflows and appraisals now target MRI Ruby 2.4+ while
+  runtime compatibility remains MRI Ruby 2.2+.
 
 ### Deprecated
 
@@ -29,6 +36,8 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 - Prevented isolated loader namespace leakage on Ruby 2.5 and older TruffleRuby runtimes.
+- Improved gemspec version loading for older Rubies and isolated load-path
+  contexts.
 
 ### Security
 
