@@ -96,29 +96,31 @@ module Auth
         inspected = super
         return inspected if thing_filter.things.empty?
 
-        thing_filter.things.each_with_object(inspected.dup) do |thing, memo|
-          redact_inspected_value!(memo, thing)
-        end
+        redact_inspected_values(inspected.dup)
       end
 
       private
 
       INSPECTED_STRING_VALUE = /"(?:(?:\\.)|[^"\\])*"/
-      private_constant :INSPECTED_STRING_VALUE
+      INSPECTED_REDACTABLE_VALUE = /
+        (?:
+          (@([A-Za-z_]\w*[!?=]?)=) |
+          ([,{]\s*([A-Za-z_]\w*[!?=]?):\s*) |
+          ([,{]\s*:([A-Za-z_]\w*[!?=]?)\s*=>\s*) |
+          ([,{]\s*"([A-Za-z_]\w*[!?=]?)"\s*=>\s*)
+        )
+        #{INSPECTED_STRING_VALUE}
+      /x
+      private_constant :INSPECTED_STRING_VALUE, :INSPECTED_REDACTABLE_VALUE
 
-      def redact_inspected_value!(inspected, thing)
-        escaped = Regexp.escape(thing)
-        patterns = [
-          /(@#{escaped}=)#{INSPECTED_STRING_VALUE}/,
-          /([,{]\s*#{escaped}:\s*)#{INSPECTED_STRING_VALUE}/,
-          /([,{]\s*:#{escaped}\s*=>\s*)#{INSPECTED_STRING_VALUE}/,
-          /([,{]\s*"#{escaped}"\s*=>\s*)#{INSPECTED_STRING_VALUE}/
-        ]
-
-        patterns.each do |pattern|
-          inspected.gsub!(pattern) { "#{$1}#{thing_filter.label}" }
+      def redact_inspected_values(inspected)
+        inspected.gsub(INSPECTED_REDACTABLE_VALUE) do |match|
+          captures = Regexp.last_match.captures
+          prefix, = captures.each_slice(2).detect do |(_candidate_prefix, candidate_key)|
+            thing_filter.things.include?(candidate_key)
+          end
+          prefix ? "#{prefix}#{thing_filter.label}" : match
         end
-        inspected
       end
     end
   end

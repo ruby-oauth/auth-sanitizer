@@ -333,9 +333,7 @@ class-level helpers and prepends the initializer hook.</p>
 97
 98
 99
-100
-101
-102</pre>
+100</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 95</span>
@@ -344,9 +342,7 @@ class-level helpers and prepends the initializer hook.</p>
   <span class='id identifier rubyid_inspected'>inspected</span> <span class='op'>=</span> <span class='kw'>super</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_inspected'>inspected</span> <span class='kw'>if</span> <span class='id identifier rubyid_thing_filter'>thing_filter</span><span class='period'>.</span><span class='id identifier rubyid_things'>things</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
-  <span class='id identifier rubyid_thing_filter'>thing_filter</span><span class='period'>.</span><span class='id identifier rubyid_things'>things</span><span class='period'>.</span><span class='id identifier rubyid_each_with_object'>each_with_object</span><span class='lparen'>(</span><span class='id identifier rubyid_inspected'>inspected</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_thing'>thing</span><span class='comma'>,</span> <span class='id identifier rubyid_memo'>memo</span><span class='op'>|</span>
-    <span class='id identifier rubyid_redact_inspected_value!'>redact_inspected_value!</span><span class='lparen'>(</span><span class='id identifier rubyid_memo'>memo</span><span class='comma'>,</span> <span class='id identifier rubyid_thing'>thing</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  <span class='id identifier rubyid_redact_inspected_values'>redact_inspected_values</span><span class='lparen'>(</span><span class='id identifier rubyid_inspected'>inspected</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -413,7 +409,7 @@ class-level helpers and prepends the initializer hook.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Jun  4 02:40:17 2026 by
+  Generated on Thu Jun  4 02:46:51 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>
