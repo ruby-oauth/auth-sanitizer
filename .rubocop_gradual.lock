@@ -2,36 +2,13 @@
   "Gemfile:2366041321": [
     [27, 1, 12, "Gemspec/DevelopmentDependencies: Specify development dependencies in gemspec.", 1685091358]
   ],
-  "README.md:3243539630": [
+  "README.md:3386886498": [
     [181, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900],
-    [220, 33, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545],
     [229, 1, 116, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 952987742],
-    [252, 33, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545],
-    [262, 4, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545],
     [265, 1, 116, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 952987742],
-    [318, 4, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545],
-    [328, 18, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545],
-    [396, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900],
-    [426, 25, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545],
-    [489, 20, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545]
+    [396, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900]
   ],
-  "auth-sanitizer.gemspec:3105824834": [
-    [45, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 4109332598]
-  ],
-  "lib/auth/sanitizer/filtered_attributes.rb:2975278199": [
-    [37, 11, 20, "Style/SuperArguments: Call `super` without arguments and parentheses when the signature is identical.", 368403147],
-    [40, 50, 1, "Style/TrailingCommaInArguments: Avoid comma after the last parameter of a method call.", 177545]
-  ],
-  "lib/auth/sanitizer/sanitized_logger.rb:3297541604": [
-    [222, 45, 2, "Style/RedundantRegexpEscape: Redundant escape inside regexp literal", 5862715],
-    [222, 49, 2, "Style/RedundantRegexpEscape: Redundant escape inside regexp literal", 5862715],
-    [222, 53, 2, "Style/RedundantRegexpEscape: Redundant escape inside regexp literal", 5862715],
-    [230, 25, 2, "Style/RedundantRegexpEscape: Redundant escape inside regexp literal", 5862715],
-    [230, 75, 2, "Style/RedundantRegexpEscape: Redundant escape inside regexp literal", 5862715],
-    [240, 68, 2, "Style/RedundantRegexpEscape: Redundant escape inside regexp literal", 5862715]
-  ],
-  "spec/auth/sanitizer/filtered_attributes_spec.rb:897163254": [
-    [64, 56, 6, "RSpec/Extra/BeEmpty: Use `be_empty` matchers for checking an empty array.", 1172408214],
-    [101, 56, 6, "RSpec/Extra/BeEmpty: Use `be_empty` matchers for checking an empty array.", 1172408214]
+  "spec/auth/sanitizer_spec.rb:984576941": [
+    [36, 16, 2, "Lint/Syntax: unexpected token tLSHFT\n(Using Ruby 2.2 parser; configure using `TargetRubyVersion` parameter, under `AllCops`)", 5859461]
   ]
 }

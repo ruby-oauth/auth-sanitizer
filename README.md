@@ -217,7 +217,7 @@ unless auth_sanitizer_spec && auth_sanitizer_requirement.satisfied_by?(auth_sani
 end
 auth_sanitizer_loader_path = File.join(
   auth_sanitizer_spec.full_gem_path,
-  "lib/auth_sanitizer/loader.rb",
+  "lib/auth_sanitizer/loader.rb"
 )
 unless File.file?(auth_sanitizer_loader_path)
   raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found at #{auth_sanitizer_loader_path}"
@@ -249,7 +249,7 @@ unless auth_sanitizer_spec && auth_sanitizer_requirement.satisfied_by?(auth_sani
 end
 auth_sanitizer_loader_path = File.join(
   auth_sanitizer_spec.full_gem_path,
-  "lib/auth_sanitizer/loader.rb",
+  "lib/auth_sanitizer/loader.rb"
 )
 unless File.file?(auth_sanitizer_loader_path)
   raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found at #{auth_sanitizer_loader_path}"
@@ -259,7 +259,7 @@ auth_sanitizer_loader_namespace = Module.new
 auth_sanitizer_loader_namespace.module_eval(
   File.read(auth_sanitizer_loader_path),
   auth_sanitizer_loader_path,
-  1,
+  1
 )
 
 AUTH_SANITIZER = auth_sanitizer_loader_namespace
@@ -315,7 +315,7 @@ logger = Auth::Sanitizer::SanitizedLogger.new(
     api_key
     private_key
     session_secret
-  ],
+  ]
 )
 ```
 
@@ -325,7 +325,7 @@ You can also replace the list entirely:
 logger = Auth::Sanitizer::SanitizedLogger.new(
   Logger.new($stdout),
   filtered_keys: %w[my_secret],
-  label: "[GONE]",
+  label: "[GONE]"
 )
 ```
 
@@ -423,7 +423,7 @@ end
 response = TokenResponse.new(
   access_token: "access-token-value",
   refresh_token: "refresh-token-value",
-  scope: "profile email",
+  scope: "profile email"
 )
 
 response.inspect
@@ -486,7 +486,7 @@ Use `filtered_keys:` for application-specific secrets:
 logger = Auth::Sanitizer::SanitizedLogger.new(
   Logger.new($stdout),
   filtered_keys: %w[access_token api_key signing_secret],
-  label: "[SECRET]",
+  label: "[SECRET]"
 )
 
 logger.debug("api_key=12345&access_token=abc123")
