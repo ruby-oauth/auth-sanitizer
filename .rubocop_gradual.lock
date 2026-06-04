@@ -8,7 +8,11 @@
     [265, 1, 116, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 952987742],
     [431, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900]
   ],
-  "auth-sanitizer.gemspec:3464506617": [
-    [47, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 4109332598]
+  "spec/auth/sanitizer/filtered_attributes_spec.rb:1944956979": [
+    [85, 7, 6, "Lint/Syntax: unexpected token kENSURE\n(Using Ruby 2.2 parser; configure using `TargetRubyVersion` parameter, under `AllCops`)", 1164465823]
+  ],
+  "spec/auth/sanitizer_spec.rb:1305714609": [
+    [36, 16, 2, "Lint/Syntax: unexpected token tLSHFT\n(Using Ruby 2.2 parser; configure using `TargetRubyVersion` parameter, under `AllCops`)", 5859461],
+    [66, 16, 2, "Lint/Syntax: unexpected token tLSHFT\n(Using Ruby 2.2 parser; configure using `TargetRubyVersion` parameter, under `AllCops`)", 5859461]
   ]
 }
