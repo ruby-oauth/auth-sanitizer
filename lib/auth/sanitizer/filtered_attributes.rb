@@ -93,16 +93,32 @@ module Auth
       #
       # @return [String]
       def inspect
-        return super if thing_filter.things.empty?
+        inspected = super
+        return inspected if thing_filter.things.empty?
 
-        inspected_vars = instance_variables.map do |var|
-          if thing_filter.filtered?(var)
-            "#{var}=#{thing_filter.label}"
-          else
-            "#{var}=#{instance_variable_get(var).inspect}"
-          end
+        thing_filter.things.each_with_object(inspected.dup) do |thing, memo|
+          redact_inspected_value!(memo, thing)
         end
-        "#<#{self.class}:#{object_id} #{inspected_vars.join(", ")}>"
+      end
+
+      private
+
+      INSPECTED_STRING_VALUE = /"(?:(?:\\.)|[^"\\])*"/
+      private_constant :INSPECTED_STRING_VALUE
+
+      def redact_inspected_value!(inspected, thing)
+        escaped = Regexp.escape(thing)
+        patterns = [
+          /(@#{escaped}=)#{INSPECTED_STRING_VALUE}/,
+          /([,{]\s*#{escaped}:\s*)#{INSPECTED_STRING_VALUE}/,
+          /([,{]\s*:#{escaped}\s*=>\s*)#{INSPECTED_STRING_VALUE}/,
+          /([,{]\s*"#{escaped}"\s*=>\s*)#{INSPECTED_STRING_VALUE}/
+        ]
+
+        patterns.each do |pattern|
+          inspected.gsub!(pattern) { "#{$1}#{thing_filter.label}" }
+        end
+        inspected
       end
     end
   end

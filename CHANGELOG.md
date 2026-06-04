@@ -22,11 +22,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+- Changed `FilteredAttributes#inspect` to redact narrow patterns from
+  `super.inspect` instead of rebuilding object inspect output, preserving host
+  inspect behavior.
+
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+- Redacted configured attributes inside standard Ruby hash inspect fragments,
+  including nested attribute hashes.
 
 ### Security
 

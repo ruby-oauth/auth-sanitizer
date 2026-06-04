@@ -30,6 +30,89 @@ RSpec.describe Auth::Sanitizer::FilteredAttributes do
       expect(instance.inspect).to include('@name="bolt"')
     end
 
+    it "keeps the inspect output shape provided by super" do
+      expect(instance.inspect).to start_with("#<#{poro_class}:0x")
+      expect(instance.inspect).to include("@secret=[FILTERED]")
+      expect(instance.inspect).to include('@name="bolt"')
+    end
+
+    context "when sensitive values are nested in hash inspect output" do
+      let(:data_class) do
+        Class.new do
+          include Auth::Sanitizer::FilteredAttributes
+
+          filtered_attributes :password_digest
+
+          def initialize(identity_data)
+            @identity_data = identity_data
+          end
+        end
+      end
+
+      it "filters symbol labels" do
+        inspected = data_class.new({id: 1, password_digest: "$2a$secret"}).inspect
+
+        expect(inspected).to include("password_digest")
+        expect(inspected).to include("password_digest: [FILTERED]").or(include(":password_digest => [FILTERED]"))
+        expect(inspected).not_to include("$2a$secret")
+      end
+
+      it "filters string hash keys" do
+        inspected = data_class.new({"password_digest" => "$2a$secret"}).inspect
+
+        expect(inspected).to include(%("password_digest" => [FILTERED]))
+        expect(inspected).not_to include("$2a$secret")
+      end
+
+      it "filters modern symbol key labels" do
+        inspected = data_class.new({password_digest: "$2a$secret"}).inspect
+
+        if inspected.include?("password_digest:")
+          expect(inspected).to include("password_digest: [FILTERED]")
+        else
+          expect(inspected).to include(":password_digest => [FILTERED]").or(include(":password_digest=>[FILTERED]"))
+        end
+        expect(inspected).not_to include("$2a$secret")
+      end
+
+      it "only filters exact configured names" do
+        data_class.filtered_attributes :password
+
+        inspected = data_class.new({password_digest: "$2a$secret", password: "plain"}).inspect
+
+        expect(inspected).to include("password: [FILTERED]").or(include(":password => [FILTERED]"))
+        expect(inspected).to include("$2a$secret")
+      ensure
+        data_class.filtered_attributes :password_digest
+      end
+    end
+
+    context "when super inspect uses an unsupported custom shape" do
+      let(:custom_base_class) do
+        Class.new do
+          def initialize(secret)
+            @secret = secret
+          end
+
+          def inspect
+            %(custom(secret -> "#{@secret}"))
+          end
+        end
+      end
+
+      let(:custom_class) do
+        Class.new(custom_base_class) do
+          include Auth::Sanitizer::FilteredAttributes
+
+          filtered_attributes :secret
+        end
+      end
+
+      it "leaves unsupported inspect output unchanged" do
+        expect(custom_class.new("super-secret").inspect).to eq(%(custom(secret -> "super-secret")))
+      end
+    end
+
     context "when filter is changed" do
       before do
         @original_filter = poro_class.filtered_attribute_names
