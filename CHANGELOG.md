@@ -36,8 +36,8 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 - Prevented isolated loader namespace leakage on Ruby 2.5 and older TruffleRuby runtimes.
-- Improved gemspec version loading for older Rubies and isolated load-path
-  contexts.
+- Protected the custom gemspec version loader from templating rewrites so
+  version detection does not define top-level `Auth` on older Rubies.
 
 ### Security
 

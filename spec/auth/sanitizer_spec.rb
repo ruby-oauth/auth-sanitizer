@@ -37,8 +37,39 @@ RSpec.describe Auth::Sanitizer do
         require "auth_sanitizer/loader"
         isolated = AuthSanitizer::Loader.load_isolated
         raise "Auth was defined" if Object.const_defined?(:Auth, false)
-        raise "wrong module" unless isolated.const_defined?(:FilteredAttributes, false)
+        raise "wrong module" unless isolated.name.end_with?("::Auth::Sanitizer")
+        raise "wrong module contents" unless isolated.const_defined?(:FilteredAttributes, false)
         raise "wrong version" unless isolated.const_defined?(:VERSION, false)
+
+        klass = Class.new do
+          include isolated::FilteredAttributes
+          filtered_attributes :secret
+
+          def initialize
+            @secret = "super-secret"
+          end
+        end
+
+        inspected = klass.new.inspect
+        raise inspected unless inspected.include?("@secret=[FILTERED]")
+        raise inspected if inspected.include?("super-secret")
+      RUBY
+
+      output, status = Open3.capture2e(RbConfig.ruby, "-Ilib", "-e", script)
+      expect(status).to be_success, output
+    end
+
+    it "supports anonymous loader evaluation without defining top-level namespaces" do
+      script = <<~RUBY
+        loader_path = File.expand_path("lib/auth_sanitizer/loader.rb", Dir.pwd)
+        loader_namespace = Module.new
+        loader_namespace.module_eval(File.read(loader_path), loader_path, 1)
+
+        isolated = loader_namespace.const_get(:AuthSanitizer).const_get(:Loader).load_isolated
+        raise "Auth was defined" if Object.const_defined?(:Auth, false)
+        raise "AuthSanitizer was defined" if Object.const_defined?(:AuthSanitizer, false)
+        raise "wrong module" unless isolated.name.end_with?("::Auth::Sanitizer")
+        raise "wrong module contents" unless isolated.const_defined?(:FilteredAttributes, false)
 
         klass = Class.new do
           include isolated::FilteredAttributes

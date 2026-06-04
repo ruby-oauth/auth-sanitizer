@@ -6,6 +6,7 @@
 # auth-sanitizer will then preserve content between those markers across template runs.
 # kettle-jem:unfreeze
 
+# kettle-jem:freeze
 gem_version =
   if Gem.ruby_version >= Gem::Version.new("3.1")
     # Loading Version into an anonymous module allows version.rb to get code coverage from SimpleCov!
@@ -31,6 +32,7 @@ gem_version =
     version_auth_namespace.module_eval(lines.join, version_file, 1)
     version_auth_namespace::Sanitizer::Version::VERSION
   end
+# kettle-jem:unfreeze
 
 Gem::Specification.new do |spec|
   spec.name = "auth-sanitizer"
