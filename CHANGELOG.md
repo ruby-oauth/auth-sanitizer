@@ -22,20 +22,31 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- Changed `FilteredAttributes#inspect` to redact narrow patterns from
-  `super.inspect` instead of rebuilding object inspect output, preserving host
-  inspect behavior.
-
 ### Deprecated
 
 ### Removed
 
 ### Fixed
 
+### Security
+
+## [0.2.0] - 2026-06-04
+
+- TAG: [v0.2.0][0.2.0t]
+- COVERAGE: 100.00% -- 145/145 lines in 6 files
+- BRANCH COVERAGE: 100.00% -- 28/28 branches in 6 files
+- 84.62% documented
+
+### Changed
+
+- Changed `FilteredAttributes#inspect` to redact narrow patterns from
+  `super.inspect` instead of rebuilding object inspect output, preserving host
+  inspect behavior.
+
+### Fixed
+
 - Redacted configured attributes inside standard Ruby hash inspect fragments,
   including nested attribute hashes.
-
-### Security
 
 ## [0.1.5] - 2026-06-03
 
@@ -126,7 +137,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.5...v0.2.0
+[0.2.0t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.0
 [0.1.5]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.4...v0.1.5
 [0.1.5t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.1.5
 [0.1.4]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.3...v0.1.4

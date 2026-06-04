@@ -91,7 +91,7 @@ configuration for you. Instead, it gives host gems and applications two reusable
 
 <ul>
   <li>
-<code>Auth::Sanitizer::FilteredAttributes</code> redacts selected instance variables from <code>#inspect</code>.</li>
+<code>Auth::Sanitizer::FilteredAttributes</code> redacts selected attributes from standard Ruby <code>#inspect</code> output.</li>
   <li>
 <code>Auth::Sanitizer::SanitizedLogger</code> wraps an existing logger and redacts sensitive values from string log messages.</li>
 </ul>
@@ -549,8 +549,43 @@ that should be hidden:</p>
 end
 </code></pre>
 
-<p>Declared names are matched against instance variable names. For example, <code>filtered_attributes :access_token</code> redacts<br>
-<code>@access_token</code> in <code>#inspect</code>.</p>
+<p><code>FilteredAttributes#inspect</code> delegates to <code>super.inspect</code> first, then redacts only narrow, standard Ruby inspect<br>
+fragments for configured names. This preserves host object inspect behavior instead of rebuilding the object’s output.</p>
+
+<p>For example, <code>filtered_attributes :access_token</code> redacts <code>@access_token="..."</code> in normal object inspect output:</p>
+
+<pre class="code language-ruby"><code class="language-ruby">OAuthCredential.new(&quot;secret&quot;, Time.now).inspect
+# =&gt; #&lt;OAuthCredential:0x... @access_token=[FILTERED], @expires_at=2026-06-04 08:00:00 -0600&gt;
+</code></pre>
+
+<p>Configured names are also redacted when they appear as string-valued keys inside standard Ruby hash inspect fragments,<br>
+which is useful for adapter models that store attributes in an internal hash:</p>
+
+<pre class="code language-ruby"><code class="language-ruby">class IdentityRecord
+  include Auth::Sanitizer::FilteredAttributes
+
+  filtered_attributes :password_digest
+
+  def initialize(identity_data)
+    @identity_data = identity_data
+  end
+end
+
+IdentityRecord.new({id: 1, password_digest: &quot;$2a$secret&quot;}).inspect
+# =&gt; #&lt;IdentityRecord:0x... @identity_data={id: 1, password_digest: [FILTERED]}&gt;
+</code></pre>
+
+<p>The inspect redactor intentionally leaves unsupported or highly customized inspect formats unchanged. It only replaces<br>
+quoted string values in these standard shapes:</p>
+
+<ul>
+  <li><code>@name="value"</code></li>
+  <li><code>{name: "value"}</code></li>
+  <li><code>{:name =&gt; "value"}</code></li>
+  <li><code>{"name" =&gt; "value"}</code></li>
+</ul>
+
+<p>This conservative behavior avoids breaking host models whose <code>inspect</code> output has application-specific formatting.</p>
 
 <p>Calling <code>filtered_attributes</code> again replaces the class-level list:</p>
 
@@ -615,11 +650,12 @@ response = TokenResponse.new(
 )
 
 response.inspect
-# =&gt; #&lt;TokenResponse:123456 @access_token=[FILTERED], @refresh_token=[FILTERED], @scope=&quot;profile email&quot;&gt;
+# =&gt; #&lt;TokenResponse:0x... @access_token=[FILTERED], @refresh_token=[FILTERED], @scope=&quot;profile email&quot;&gt;
 </code></pre>
 
 <p>Only the configured attributes are redacted. Other instance variables remain visible so inspected objects are still<br>
-useful while debugging.</p>
+useful while debugging. Inspect filtering is conservative: unsupported custom formats are left unchanged rather than<br>
+risking a malformed <code>inspect</code> result.</p>
 
 <h3 id="redact-logger-output">Redact Logger Output</h3>
 
@@ -887,7 +923,7 @@ Please consider sponsoring me or the project.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Wed Jun  3 22:59:06 2026 by
+  Generated on Thu Jun  4 02:54:01 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>

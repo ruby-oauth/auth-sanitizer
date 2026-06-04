@@ -27,7 +27,7 @@ inspection and log output.
 The gem is intentionally narrow in scope. It does not change HTTP requests, token objects, persistence, or application
 configuration for you. Instead, it gives host gems and applications two reusable redaction surfaces:
 
-- `Auth::Sanitizer::FilteredAttributes` redacts selected instance variables from `#inspect`.
+- `Auth::Sanitizer::FilteredAttributes` redacts selected attributes from standard Ruby `#inspect` output.
 - `Auth::Sanitizer::SanitizedLogger` wraps an existing logger and redacts sensitive values from string log messages.
 
 Out of the box, logger sanitization filters the key names most commonly found in OAuth and OpenID Connect debug output:
@@ -357,8 +357,43 @@ class OAuthCredential
 end
 ```
 
-Declared names are matched against instance variable names. For example, `filtered_attributes :access_token` redacts
-`@access_token` in `#inspect`.
+`FilteredAttributes#inspect` delegates to `super.inspect` first, then redacts only narrow, standard Ruby inspect
+fragments for configured names. This preserves host object inspect behavior instead of rebuilding the object's output.
+
+For example, `filtered_attributes :access_token` redacts `@access_token="..."` in normal object inspect output:
+
+```ruby
+OAuthCredential.new("secret", Time.now).inspect
+# => #<OAuthCredential:0x... @access_token=[FILTERED], @expires_at=2026-06-04 08:00:00 -0600>
+```
+
+Configured names are also redacted when they appear as string-valued keys inside standard Ruby hash inspect fragments,
+which is useful for adapter models that store attributes in an internal hash:
+
+```ruby
+class IdentityRecord
+  include Auth::Sanitizer::FilteredAttributes
+
+  filtered_attributes :password_digest
+
+  def initialize(identity_data)
+    @identity_data = identity_data
+  end
+end
+
+IdentityRecord.new({id: 1, password_digest: "$2a$secret"}).inspect
+# => #<IdentityRecord:0x... @identity_data={id: 1, password_digest: [FILTERED]}>
+```
+
+The inspect redactor intentionally leaves unsupported or highly customized inspect formats unchanged. It only replaces
+quoted string values in these standard shapes:
+
+- `@name="value"`
+- `{name: "value"}`
+- `{:name => "value"}`
+- `{"name" => "value"}`
+
+This conservative behavior avoids breaking host models whose `inspect` output has application-specific formatting.
 
 Calling `filtered_attributes` again replaces the class-level list:
 
@@ -427,11 +462,12 @@ response = TokenResponse.new(
 )
 
 response.inspect
-# => #<TokenResponse:123456 @access_token=[FILTERED], @refresh_token=[FILTERED], @scope="profile email">
+# => #<TokenResponse:0x... @access_token=[FILTERED], @refresh_token=[FILTERED], @scope="profile email">
 ```
 
 Only the configured attributes are redacted. Other instance variables remain visible so inspected objects are still
-useful while debugging.
+useful while debugging. Inspect filtering is conservative: unsupported custom formats are left unchanged rather than
+risking a malformed `inspect` result.
 
 ### Redact Logger Output
 

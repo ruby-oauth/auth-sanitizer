@@ -2,11 +2,11 @@
   "Gemfile:2366041321": [
     [27, 1, 12, "Gemspec/DevelopmentDependencies: Specify development dependencies in gemspec.", 1685091358]
   ],
-  "README.md:1137518895": [
+  "README.md:46920275": [
     [181, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900],
     [229, 1, 116, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 952987742],
     [265, 1, 116, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 952987742],
-    [396, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900]
+    [431, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900]
   ],
   "auth-sanitizer.gemspec:3464506617": [
     [47, 32, 10, "Gemspec/RequiredRubyVersion: `required_ruby_version` and `TargetRubyVersion` (3.2, which may be specified in .rubocop.yml) should be equal.", 4109332598]
