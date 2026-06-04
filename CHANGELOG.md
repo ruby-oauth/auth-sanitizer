@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.5] - 2026-06-03
+
+- TAG: [v0.1.5][0.1.5t]
+- COVERAGE: 100.00% -- 138/138 lines in 6 files
+- BRANCH COVERAGE: 100.00% -- 28/28 branches in 6 files
+- 84.62% documented
+
+### Added
+
 - Added `VersionGem::Basic` helpers to `Auth::Sanitizer::Version`.
 
 ### Changed
@@ -29,17 +48,11 @@ Please file a bug if you notice a violation of semantic versioning.
 - Documented that CI workflows and appraisals now target MRI Ruby 2.4+ while
   runtime compatibility remains MRI Ruby 2.2+.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 
 - Prevented isolated loader namespace leakage on Ruby 2.5 and older TruffleRuby runtimes.
 - Protected the custom gemspec version loader from templating rewrites so
   version detection does not define top-level `Auth` on older Rubies.
-
-### Security
 
 ## [0.1.4] - 2026-05-21
 
@@ -106,7 +119,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.4...v0.1.5
+[0.1.5t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.1.5
 [0.1.4]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.3...v0.1.4
 [0.1.4t]: https://github.com//ruby-oauth/auth-sanitizer/releases/tag/v0.1.4
 [0.1.3]: https://github.com//ruby-oauth/auth-sanitizer/compare/v0.1.2...v0.1.3
