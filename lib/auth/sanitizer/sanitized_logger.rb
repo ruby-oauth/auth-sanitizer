@@ -219,7 +219,7 @@ module Auth
       # @param [String] message Logger message
       # @return [String] Sanitized logger message
       def sanitize_authorization_header(message)
-        message.gsub(/(Authorization:\s*)(?:\"[^\"]*\"|[^\r\n]+)/i, "\\1\"#{thing_filter.label}\"")
+        message.gsub(/(Authorization:\s*)(?:"[^"]*"|[^\r\n]+)/i, "\\1\"#{thing_filter.label}\"")
       end
 
       # Redact JSON-style values for configured sensitive key names.
@@ -227,7 +227,7 @@ module Auth
       # @param [String] message Logger message
       # @return [String] Sanitized logger message
       def sanitize_json_pairs(message)
-        message.gsub(/([\"'])(#{thing_filter.pattern_source})\1(\s*:\s*)([\"'])(.*?)\4/i) do
+        message.gsub(/(["'])(#{thing_filter.pattern_source})\1(\s*:\s*)(["'])(.*?)\4/i) do
           %(#{$1}#{$2}#{$1}#{$3}#{$4}#{thing_filter.label}#{$4})
         end
       end
@@ -237,7 +237,7 @@ module Auth
       # @param [String] message Logger message
       # @return [String] Sanitized logger message
       def sanitize_form_and_query_pairs(message)
-        message.gsub(/(\b(?:#{thing_filter.pattern_source})=)([^&\s\"]+)/i, "\\1#{thing_filter.label}")
+        message.gsub(/(\b(?:#{thing_filter.pattern_source})=)([^&\s"]+)/i, "\\1#{thing_filter.label}")
       end
     end
   end

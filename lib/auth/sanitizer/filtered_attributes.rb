@@ -34,10 +34,10 @@ module Auth
       # the current {Auth::Sanitizer.filtered_label} value.
       module InitializerMethods
         def initialize(*args, &block)
-          super(*args, &block)
+          super
           @thing_filter = ThingFilter.new(
             self.class.filtered_attribute_names,
-            label: Auth::Sanitizer.filtered_label,
+            label: Auth::Sanitizer.filtered_label
           )
         end
       end

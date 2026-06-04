@@ -61,7 +61,7 @@ RSpec.describe Auth::Sanitizer::FilteredAttributes do
       end
 
       it "changes the filter" do
-        expect(poro_class.filtered_attribute_names).to eq([])
+        expect(poro_class.filtered_attribute_names).to be_empty
       end
 
       it "does not filter out the @secret value for new instances" do
@@ -98,7 +98,7 @@ RSpec.describe Auth::Sanitizer::FilteredAttributes do
       end
 
       it "returns an empty array from filtered_attribute_names" do
-        expect(bare_class.filtered_attribute_names).to eq([])
+        expect(bare_class.filtered_attribute_names).to be_empty
       end
 
       it "does not redact any attributes in inspect" do
