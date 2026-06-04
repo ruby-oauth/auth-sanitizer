@@ -76,14 +76,16 @@ RSpec.describe Auth::Sanitizer::FilteredAttributes do
       end
 
       it "only filters exact configured names" do
-        data_class.filtered_attributes :password
+        begin
+          data_class.filtered_attributes :password
 
-        inspected = data_class.new({password_digest: "$2a$secret", password: "plain"}).inspect
+          inspected = data_class.new({password_digest: "$2a$secret", password: "plain"}).inspect
 
-        expect(inspected).to match(/(?:password:|:password\s*=>)\s*\[FILTERED\]/)
-        expect(inspected).to include("$2a$secret")
-      ensure
-        data_class.filtered_attributes :password_digest
+          expect(inspected).to match(/(?:password:|:password\s*=>)\s*\[FILTERED\]/)
+          expect(inspected).to include("$2a$secret")
+        ensure
+          data_class.filtered_attributes :password_digest
+        end
       end
     end
 
