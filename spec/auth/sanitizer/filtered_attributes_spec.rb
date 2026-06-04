@@ -53,14 +53,14 @@ RSpec.describe Auth::Sanitizer::FilteredAttributes do
         inspected = data_class.new({id: 1, password_digest: "$2a$secret"}).inspect
 
         expect(inspected).to include("password_digest")
-        expect(inspected).to include("password_digest: [FILTERED]").or(include(":password_digest => [FILTERED]"))
+        expect(inspected).to match(/(?:password_digest:|:password_digest\s*=>)\s*\[FILTERED\]/)
         expect(inspected).not_to include("$2a$secret")
       end
 
       it "filters string hash keys" do
         inspected = data_class.new({"password_digest" => "$2a$secret"}).inspect
 
-        expect(inspected).to include(%("password_digest" => [FILTERED]))
+        expect(inspected).to match(/"password_digest"\s*=>\s*\[FILTERED\]/)
         expect(inspected).not_to include("$2a$secret")
       end
 
@@ -70,7 +70,7 @@ RSpec.describe Auth::Sanitizer::FilteredAttributes do
         if inspected.include?("password_digest:")
           expect(inspected).to include("password_digest: [FILTERED]")
         else
-          expect(inspected).to include(":password_digest => [FILTERED]").or(include(":password_digest=>[FILTERED]"))
+          expect(inspected).to match(/:password_digest\s*=>\s*\[FILTERED\]/)
         end
         expect(inspected).not_to include("$2a$secret")
       end
@@ -80,7 +80,7 @@ RSpec.describe Auth::Sanitizer::FilteredAttributes do
 
         inspected = data_class.new({password_digest: "$2a$secret", password: "plain"}).inspect
 
-        expect(inspected).to include("password: [FILTERED]").or(include(":password => [FILTERED]"))
+        expect(inspected).to match(/(?:password:|:password\s*=>)\s*\[FILTERED\]/)
         expect(inspected).to include("$2a$secret")
       ensure
         data_class.filtered_attributes :password_digest
