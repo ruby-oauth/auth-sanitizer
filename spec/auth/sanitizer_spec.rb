@@ -37,9 +37,11 @@ RSpec.describe Auth::Sanitizer do
         require "auth_sanitizer/loader"
         isolated = AuthSanitizer::Loader.load_isolated
         raise "Auth was defined" if Object.const_defined?(:Auth, false)
-        raise "wrong module" unless isolated.name.end_with?("::Auth::Sanitizer")
+        raise "wrong module" unless isolated.is_a?(Module)
         raise "wrong module contents" unless isolated.const_defined?(:FilteredAttributes, false)
+        raise "wrong module contents" unless isolated.const_defined?(:ThingFilter, false)
         raise "wrong version" unless isolated.const_defined?(:VERSION, false)
+        raise "wrong version" unless isolated.const_get(:Version).const_get(:VERSION) == isolated.const_get(:VERSION)
 
         klass = Class.new do
           include isolated::FilteredAttributes
@@ -53,6 +55,7 @@ RSpec.describe Auth::Sanitizer do
         inspected = klass.new.inspect
         raise inspected unless inspected.include?("@secret=[FILTERED]")
         raise inspected if inspected.include?("super-secret")
+        raise "Auth was defined after use" if Object.const_defined?(:Auth, false)
       RUBY
 
       output, status = Open3.capture2e(RbConfig.ruby, "-Ilib", "-e", script)
@@ -68,8 +71,10 @@ RSpec.describe Auth::Sanitizer do
         isolated = loader_namespace.const_get(:AuthSanitizer).const_get(:Loader).load_isolated
         raise "Auth was defined" if Object.const_defined?(:Auth, false)
         raise "AuthSanitizer was defined" if Object.const_defined?(:AuthSanitizer, false)
-        raise "wrong module" unless isolated.name.end_with?("::Auth::Sanitizer")
+        raise "wrong module" unless isolated.is_a?(Module)
         raise "wrong module contents" unless isolated.const_defined?(:FilteredAttributes, false)
+        raise "wrong module contents" unless isolated.const_defined?(:ThingFilter, false)
+        raise "wrong version" unless isolated.const_get(:Version).const_get(:VERSION) == isolated.const_get(:VERSION)
 
         klass = Class.new do
           include isolated::FilteredAttributes
@@ -83,6 +88,8 @@ RSpec.describe Auth::Sanitizer do
         inspected = klass.new.inspect
         raise inspected unless inspected.include?("@secret=[FILTERED]")
         raise inspected if inspected.include?("super-secret")
+        raise "Auth was defined after use" if Object.const_defined?(:Auth, false)
+        raise "AuthSanitizer was defined after use" if Object.const_defined?(:AuthSanitizer, false)
       RUBY
 
       output, status = Open3.capture2e(RbConfig.ruby, "-Ilib", "-e", script)
