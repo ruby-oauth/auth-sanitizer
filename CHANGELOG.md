@@ -28,6 +28,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Fixed the README support table to list Ruby 2.3 as supported but untested,
+  matching the current runtime support and CI policy.
+
 ### Security
 
 ## [0.2.0] - 2026-06-04
