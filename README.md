@@ -69,6 +69,7 @@ This gem is used by the following libraries to ensure clean output:
 - oauth-tty
 - oauth2
 - omniauth-ldap
+- omniauth-identity
 
 ## 💡 Info you can shake a stick at
 
