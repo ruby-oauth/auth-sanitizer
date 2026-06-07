@@ -28,12 +28,21 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [0.2.1] - 2026-06-06
+
+- TAG: [v0.2.1][0.2.1t]
+- COVERAGE: 100.00% -- 145/145 lines in 6 files
+- BRANCH COVERAGE: 100.00% -- 28/28 branches in 6 files
+- 84.62% documented
+
+### Fixed
+
 - Removed the duplicate RBS declaration for `Auth::Sanitizer::VERSION`, fixing
   `RBS::DuplicatedDeclarationError` in downstream projects.
 - Fixed the README support table to list Ruby 2.3 as supported but untested,
   matching the current runtime support and CI policy.
-
-### Security
 
 ## [0.2.0] - 2026-06-04
 
@@ -142,7 +151,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.0...v0.2.1
+[0.2.1t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.1
 [0.2.0]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.5...v0.2.0
 [0.2.0t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.0
 [0.1.5]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.4...v0.1.5
