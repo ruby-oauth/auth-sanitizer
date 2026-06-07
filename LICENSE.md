@@ -7,4 +7,4 @@ Choose the option that best fits your use case:
 
 ## Copyright Notice
 
-Copyright (c) 2026 Peter H. Boling
+- Copyright (c) 2026 Peter H. Boling

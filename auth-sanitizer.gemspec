@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # kettle-jem:freeze
-# To retain chunks of comments & code during auth-sanitizer templating:
+# To retain chunks of comments & code during kettle-jem templating:
 # Wrap custom sections with freeze markers (e.g., as above and below this comment chunk).
-# auth-sanitizer will then preserve content between those markers across template runs.
+# kettle-jem will then preserve content between those markers across template runs.
 # kettle-jem:unfreeze
 
 # kettle-jem:freeze
@@ -120,10 +120,11 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   # Listed files are the relative paths from bindir above.
   spec.executables = []
+
   spec.require_paths = ["lib"]
 
   # Utilities
-  spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.9")              # ruby >= 2.2.0
+  spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.10")              # ruby >= 2.2.0
 
   # NOTE: It is preferable to list development dependencies in the gemspec due to increased
   #       visibility and discoverability.
@@ -139,7 +140,7 @@ Gem::Specification.new do |spec|
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
 
   # Dev, Test, & Release Tasks
-  spec.add_development_dependency("kettle-dev", "~> 2.0", ">= 2.0.8")      # ruby >= 2.4
+  spec.add_development_dependency("kettle-dev", "~> 2.1", ">= 2.1.0")      # ruby >= 2.4
 
   # Security
   spec.add_development_dependency("bundler-audit", "~> 0.9.3")                      # ruby >= 2.0.0
@@ -151,7 +152,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("require_bench", "~> 1.0", ">= 1.0.4")            # ruby >= 2.2.0
 
   # Testing
-  spec.add_development_dependency("appraisal2", "~> 3.0", ">= 3.0.6")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
+  spec.add_development_dependency("appraisal2", "~> 3.1", ">= 3.1.1")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
   spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.3")             # ruby >= 2.4
   spec.add_development_dependency("turbo_tests2", "~> 3.1", ">= 3.1.1")            # ruby >= 2.4.0, default kettle-test runner
 

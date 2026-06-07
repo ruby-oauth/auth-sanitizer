@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Removed the duplicate RBS declaration for `Auth::Sanitizer::VERSION`, fixing
+  `RBS::DuplicatedDeclarationError` in downstream projects.
 - Fixed the README support table to list Ruby 2.3 as supported but untested,
   matching the current runtime support and CI policy.
 
