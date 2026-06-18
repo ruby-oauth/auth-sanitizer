@@ -205,23 +205,40 @@ gem "auth-sanitizer", require: "auth_sanitizer/loader"
 Use `require: false` when the consuming library will decide which loading mode to use internally. Use
 `require: "auth_sanitizer/loader"` when Bundler should make the isolated loader available during `Bundler.require`.
 
+When Bundler standalone setup is loaded directly, a dependency can be present on `$LOAD_PATH` without a matching
+`Gem.loaded_specs` entry or `GEM_PATH` entry. Consumers that locate the isolated loader themselves should therefore
+fall back to `Gem.find_files("auth_sanitizer/loader.rb")` before failing.
+
 #### Zero Top-Level Namespace Additions
 
 A gem that needs zero new top-level namespaces from this dependency can load the loader itself inside an anonymous
 namespace. On Ruby 3.1+, use `Kernel.load(path, module)`:
 
 ```ruby
-auth_sanitizer_requirement = Gem::Requirement.new("~> 0.1", ">= 0.1.3")
+auth_sanitizer_requirement = Gem::Requirement.new("~> 0.2", ">= 0.2.1")
 auth_sanitizer_spec = Gem.loaded_specs["auth-sanitizer"]
 unless auth_sanitizer_spec && auth_sanitizer_requirement.satisfied_by?(auth_sanitizer_spec.version)
-  auth_sanitizer_spec = Gem::Specification.find_by_name("auth-sanitizer", auth_sanitizer_requirement)
+  begin
+    auth_sanitizer_spec = Gem::Specification.find_by_name("auth-sanitizer", auth_sanitizer_requirement)
+  rescue Gem::MissingSpecError
+    auth_sanitizer_spec = nil
+  end
 end
-auth_sanitizer_loader_path = File.join(
-  auth_sanitizer_spec.full_gem_path,
-  "lib/auth_sanitizer/loader.rb"
-)
-unless File.file?(auth_sanitizer_loader_path)
-  raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found at #{auth_sanitizer_loader_path}"
+auth_sanitizer_loader_path = if auth_sanitizer_spec
+  File.join(auth_sanitizer_spec.full_gem_path, "lib/auth_sanitizer/loader.rb")
+end
+unless auth_sanitizer_loader_path && File.file?(auth_sanitizer_loader_path)
+  auth_sanitizer_loader_path = Gem.find_files("auth_sanitizer/loader.rb").find do |path|
+    version_path = File.expand_path("../auth/sanitizer/version.rb", File.dirname(path))
+    next false unless File.file?(version_path)
+
+    version_source = File.read(version_path)
+    version_match = version_source.match(/VERSION\s*=\s*(["'])([^"']+)\1/)
+    version_match && auth_sanitizer_requirement.satisfied_by?(Gem::Version.new(version_match[2]))
+  end
+end
+unless auth_sanitizer_loader_path && File.file?(auth_sanitizer_loader_path)
+  raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found"
 end
 
 auth_sanitizer_loader_namespace = Module.new
@@ -243,17 +260,30 @@ Ruby 2.2 through Ruby 3.0 do not support `Kernel.load(path, module)`. For those 
 inside an anonymous namespace with `Module#module_eval`:
 
 ```ruby
-auth_sanitizer_requirement = Gem::Requirement.new("~> 0.1", ">= 0.1.3")
+auth_sanitizer_requirement = Gem::Requirement.new("~> 0.2", ">= 0.2.1")
 auth_sanitizer_spec = Gem.loaded_specs["auth-sanitizer"]
 unless auth_sanitizer_spec && auth_sanitizer_requirement.satisfied_by?(auth_sanitizer_spec.version)
-  auth_sanitizer_spec = Gem::Specification.find_by_name("auth-sanitizer", auth_sanitizer_requirement)
+  begin
+    auth_sanitizer_spec = Gem::Specification.find_by_name("auth-sanitizer", auth_sanitizer_requirement)
+  rescue Gem::MissingSpecError
+    auth_sanitizer_spec = nil
+  end
 end
-auth_sanitizer_loader_path = File.join(
-  auth_sanitizer_spec.full_gem_path,
-  "lib/auth_sanitizer/loader.rb"
-)
-unless File.file?(auth_sanitizer_loader_path)
-  raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found at #{auth_sanitizer_loader_path}"
+auth_sanitizer_loader_path = if auth_sanitizer_spec
+  File.join(auth_sanitizer_spec.full_gem_path, "lib/auth_sanitizer/loader.rb")
+end
+unless auth_sanitizer_loader_path && File.file?(auth_sanitizer_loader_path)
+  auth_sanitizer_loader_path = Gem.find_files("auth_sanitizer/loader.rb").find do |path|
+    version_path = File.expand_path("../auth/sanitizer/version.rb", File.dirname(path))
+    next false unless File.file?(version_path)
+
+    version_source = File.read(version_path)
+    version_match = version_source.match(/VERSION\s*=\s*(["'])([^"']+)\1/)
+    version_match && auth_sanitizer_requirement.satisfied_by?(Gem::Version.new(version_match[2]))
+  end
+end
+unless auth_sanitizer_loader_path && File.file?(auth_sanitizer_loader_path)
+  raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found"
 end
 
 auth_sanitizer_loader_namespace = Module.new

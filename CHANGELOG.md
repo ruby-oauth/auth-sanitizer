@@ -28,6 +28,10 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Documented the `$LOAD_PATH` fallback needed by isolated loader consumers when
+  Bundler standalone setup provides `auth_sanitizer/loader.rb` without a
+  matching `Gem.loaded_specs` or `GEM_PATH` entry.
+
 ### Security
 
 ## [0.2.1] - 2026-06-06
