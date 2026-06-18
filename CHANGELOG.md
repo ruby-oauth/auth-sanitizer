@@ -22,20 +22,31 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- Documented the released `anonymous_loader` gem as the preferred reusable
-  helper for zero-`auth-sanitizer`-namespace loading.
-
 ### Deprecated
 
 ### Removed
 
 ### Fixed
 
+### Security
+
+## [0.2.2] - 2026-06-18
+
+- TAG: [v0.2.2][0.2.2t]
+- COVERAGE: 100.00% -- 145/145 lines in 6 files
+- BRANCH COVERAGE: 100.00% -- 28/28 branches in 6 files
+- 84.62% documented
+
+### Changed
+
+- Documented the released `anonymous_loader` gem as the preferred reusable
+  helper for zero-`auth-sanitizer`-namespace loading.
+
+### Fixed
+
 - Documented the `$LOAD_PATH` fallback needed by isolated loader consumers when
   Bundler standalone setup provides `auth_sanitizer/loader.rb` without a
   matching `Gem.loaded_specs` or `GEM_PATH` entry.
-
-### Security
 
 ## [0.2.1] - 2026-06-06
 
@@ -158,7 +169,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.1...v0.2.2
+[0.2.2t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.2
 [0.2.1]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.0...v0.2.1
 [0.2.1t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.1
 [0.2.0]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.1.5...v0.2.0
