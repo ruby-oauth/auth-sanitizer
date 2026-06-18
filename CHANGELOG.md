@@ -22,6 +22,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+- Documented the released `anonymous_loader` gem as the preferred reusable
+  helper for zero-`auth-sanitizer`-namespace loading.
+
 ### Deprecated
 
 ### Removed

@@ -63,6 +63,11 @@ The returned module is an anonymously namespaced `Auth::Sanitizer`, suitable for
 Use `require: false` in gems that want to avoid every new top-level namespace, including `AuthSanitizer`; see
 [Zero Top-Level Namespace Additions](#zero-top-level-namespace-additions).
 
+Consumers that want a reusable resolver for that stricter loading mode can use
+[`anonymous_loader`](https://github.com/ruby-oauth/anonymous_loader). It handles
+explicit paths, RubyGems metadata, and `$LOAD_PATH` fallback resolution while evaluating
+the loader under an anonymous namespace.
+
 This gem is used by the following libraries to ensure clean output:
 
 - oauth
@@ -207,90 +212,23 @@ Use `require: false` when the consuming library will decide which loading mode t
 
 When Bundler standalone setup is loaded directly, a dependency can be present on `$LOAD_PATH` without a matching
 `Gem.loaded_specs` entry or `GEM_PATH` entry. Consumers that locate the isolated loader themselves should therefore
-fall back to `Gem.find_files("auth_sanitizer/loader.rb")` before failing.
+use `AnonymousLoader.load_path`, or otherwise fall back to `Gem.find_files("auth_sanitizer/loader.rb")`, before failing.
 
 #### Zero Top-Level Namespace Additions
 
-A gem that needs zero new top-level namespaces from this dependency can load the loader itself inside an anonymous
-namespace. On Ruby 3.1+, use `Kernel.load(path, module)`:
+For a gem that needs zero new top-level namespaces from `auth-sanitizer`, use `anonymous_loader` to evaluate
+`auth_sanitizer/loader.rb` inside an anonymous namespace, then call `AuthSanitizer::Loader.load_isolated` from that
+anonymous namespace:
 
 ```ruby
+require "anonymous_loader"
+
 auth_sanitizer_requirement = Gem::Requirement.new("~> 0.2", ">= 0.2.1")
-auth_sanitizer_spec = Gem.loaded_specs["auth-sanitizer"]
-unless auth_sanitizer_spec && auth_sanitizer_requirement.satisfied_by?(auth_sanitizer_spec.version)
-  begin
-    auth_sanitizer_spec = Gem::Specification.find_by_name("auth-sanitizer", auth_sanitizer_requirement)
-  rescue Gem::MissingSpecError
-    auth_sanitizer_spec = nil
-  end
-end
-auth_sanitizer_loader_path = if auth_sanitizer_spec
-  File.join(auth_sanitizer_spec.full_gem_path, "lib/auth_sanitizer/loader.rb")
-end
-unless auth_sanitizer_loader_path && File.file?(auth_sanitizer_loader_path)
-  auth_sanitizer_loader_path = Gem.find_files("auth_sanitizer/loader.rb").find do |path|
-    version_path = File.expand_path("../auth/sanitizer/version.rb", File.dirname(path))
-    next false unless File.file?(version_path)
-
-    version_source = File.read(version_path)
-    version_match = version_source.match(/VERSION\s*=\s*(["'])([^"']+)\1/)
-    version_match && auth_sanitizer_requirement.satisfied_by?(Gem::Version.new(version_match[2]))
-  end
-end
-unless auth_sanitizer_loader_path && File.file?(auth_sanitizer_loader_path)
-  raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found"
-end
-
-auth_sanitizer_loader_namespace = Module.new
-Kernel.load(auth_sanitizer_loader_path, auth_sanitizer_loader_namespace)
-
-AUTH_SANITIZER = auth_sanitizer_loader_namespace
-  .const_get(:AuthSanitizer)
-  .const_get(:Loader)
-  .load_isolated
-```
-
-That pattern leaves both `Auth` and `AuthSanitizer` undefined at top level. The consuming gem should assign the returned
-module under its own namespace and use that internal constant.
-
-<details markdown="1">
-  <summary>Ruby 2.2-compatible zero-top-level loading</summary>
-
-Ruby 2.2 through Ruby 3.0 do not support `Kernel.load(path, module)`. For those versions, evaluate the loader source
-inside an anonymous namespace with `Module#module_eval`:
-
-```ruby
-auth_sanitizer_requirement = Gem::Requirement.new("~> 0.2", ">= 0.2.1")
-auth_sanitizer_spec = Gem.loaded_specs["auth-sanitizer"]
-unless auth_sanitizer_spec && auth_sanitizer_requirement.satisfied_by?(auth_sanitizer_spec.version)
-  begin
-    auth_sanitizer_spec = Gem::Specification.find_by_name("auth-sanitizer", auth_sanitizer_requirement)
-  rescue Gem::MissingSpecError
-    auth_sanitizer_spec = nil
-  end
-end
-auth_sanitizer_loader_path = if auth_sanitizer_spec
-  File.join(auth_sanitizer_spec.full_gem_path, "lib/auth_sanitizer/loader.rb")
-end
-unless auth_sanitizer_loader_path && File.file?(auth_sanitizer_loader_path)
-  auth_sanitizer_loader_path = Gem.find_files("auth_sanitizer/loader.rb").find do |path|
-    version_path = File.expand_path("../auth/sanitizer/version.rb", File.dirname(path))
-    next false unless File.file?(version_path)
-
-    version_source = File.read(version_path)
-    version_match = version_source.match(/VERSION\s*=\s*(["'])([^"']+)\1/)
-    version_match && auth_sanitizer_requirement.satisfied_by?(Gem::Version.new(version_match[2]))
-  end
-end
-unless auth_sanitizer_loader_path && File.file?(auth_sanitizer_loader_path)
-  raise LoadError, "auth-sanitizer #{auth_sanitizer_requirement} loader not found"
-end
-
-auth_sanitizer_loader_namespace = Module.new
-auth_sanitizer_loader_namespace.module_eval(
-  File.read(auth_sanitizer_loader_path),
-  auth_sanitizer_loader_path,
-  1
+auth_sanitizer_loader_namespace = AnonymousLoader.load_path(
+  gem_name: "auth-sanitizer",
+  require_path: "auth_sanitizer/loader.rb",
+  version_requirement: auth_sanitizer_requirement,
+  version_file: "auth/sanitizer/version.rb"
 )
 
 AUTH_SANITIZER = auth_sanitizer_loader_namespace
@@ -299,7 +237,27 @@ AUTH_SANITIZER = auth_sanitizer_loader_namespace
   .load_isolated
 ```
 
-</details>
+That pattern leaves both `Auth` and `AuthSanitizer` undefined at top level. The consuming gem should assign the returned
+module under its own namespace and use that internal constant. It does define `AnonymousLoader`, whose namespace is
+specific to the resolver gem and intentionally much less collision-prone than `Auth`.
+
+Declare both dependencies with `require: false` when the consuming library owns its loading path:
+
+```ruby
+gem "anonymous_loader", "~> 0.1", ">= 0.1.0", require: false
+gem "auth-sanitizer", "~> 0.2", ">= 0.2.1", require: false
+```
+
+If the host application uses `Bundler.require`, use:
+
+```ruby
+gem "anonymous_loader", "~> 0.1", ">= 0.1.0"
+gem "auth-sanitizer", "~> 0.2", ">= 0.2.1", require: false
+```
+
+`AnonymousLoader.load_path` raises `AnonymousLoader::FileNotFoundError` when it cannot resolve the loader, and
+`AnonymousLoader::VersionMismatchError` when it finds a load-path candidate whose adjacent version file does not satisfy
+the requested range.
 
 ### Filtered Label
 
@@ -454,7 +412,7 @@ require "auth/sanitizer"
 ```
 
 Or load it without defining top-level `Auth`. This still defines top-level `AuthSanitizer`; see
-[Zero Top-Level Namespace Additions](#zero-top-level-namespace-additions) for the stricter loading pattern.
+[Zero Top-Level Namespace Additions](#zero-top-level-namespace-additions) for the stricter `anonymous_loader` pattern.
 
 ```ruby
 require "auth_sanitizer/loader"
