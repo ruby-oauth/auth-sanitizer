@@ -6,7 +6,6 @@
 # kettle-jem will then preserve content between those markers across template runs.
 # kettle-jem:unfreeze
 
-# kettle-jem:freeze
 gem_version =
   if Gem.ruby_version >= Gem::Version.new("3.1")
     # Loading Version into an anonymous module allows version.rb to get code coverage from SimpleCov!
@@ -14,25 +13,9 @@ gem_version =
     # See: https://github.com/panorama-ed/memo_wise/pull/397
     Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/auth/sanitizer/version.rb", mod) }::Auth::Sanitizer::Version::VERSION
   else
-    version_file = File.expand_path("lib/auth/sanitizer/version.rb", __dir__)
-    version_namespace = Module.new
-    version_auth_namespace = Module.new
-    version_namespace.const_set(:Auth, version_auth_namespace)
-    lines = File.readlines(version_file)
-    wrapper_index = lines.index("module Auth\n")
-    if wrapper_index
-      lines.delete_at(wrapper_index)
-      closing_index = lines.rindex("end\n")
-      lines.delete_at(closing_index) if closing_index
-      wrapper_index.upto(lines.length - 1) do |index|
-        line = lines[index]
-        lines[index] = line.start_with?("  ") ? line[2..-1] : line
-      end
-    end
-    version_auth_namespace.module_eval(lines.join, version_file, 1)
-    version_auth_namespace::Sanitizer::Version::VERSION
+    require_relative "lib/auth/sanitizer/version"
+    Auth::Sanitizer::Version::VERSION
   end
-# kettle-jem:unfreeze
 
 Gem::Specification.new do |spec|
   spec.name = "auth-sanitizer"
@@ -121,10 +104,38 @@ Gem::Specification.new do |spec|
   # Listed files are the relative paths from bindir above.
   spec.executables = []
 
+# kettle-jem:freeze
+gem_version =
+  if Gem.ruby_version >= Gem::Version.new("3.1")
+    # Loading Version into an anonymous module allows version.rb to get code coverage from SimpleCov!
+    # See: https://github.com/simplecov-ruby/simplecov/issues/557#issuecomment-2630782358
+    # See: https://github.com/panorama-ed/memo_wise/pull/397
+    Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/auth/sanitizer/version.rb", mod) }::Auth::Sanitizer::Version::VERSION
+  else
+    version_file = File.expand_path("lib/auth/sanitizer/version.rb", __dir__)
+    version_namespace = Module.new
+    version_auth_namespace = Module.new
+    version_namespace.const_set(:Auth, version_auth_namespace)
+    lines = File.readlines(version_file)
+    wrapper_index = lines.index("module Auth\n")
+    if wrapper_index
+      lines.delete_at(wrapper_index)
+      closing_index = lines.rindex("end\n")
+      lines.delete_at(closing_index) if closing_index
+      wrapper_index.upto(lines.length - 1) do |index|
+        line = lines[index]
+        lines[index] = line.start_with?("  ") ? line[2..-1] : line
+      end
+    end
+    version_auth_namespace.module_eval(lines.join, version_file, 1)
+    version_auth_namespace::Sanitizer::Version::VERSION
+  end
+# kettle-jem:unfreeze
+
   spec.require_paths = ["lib"]
 
   # Utilities
-  spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.10")              # ruby >= 2.2.0
+  spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.12")              # ruby >= 2.2.0
 
   # NOTE: It is preferable to list development dependencies in the gemspec due to increased
   #       visibility and discoverability.
@@ -140,7 +151,7 @@ Gem::Specification.new do |spec|
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
 
   # Dev, Test, & Release Tasks
-  spec.add_development_dependency("kettle-dev", "~> 2.1", ">= 2.1.0")      # ruby >= 2.4
+  spec.add_development_dependency("kettle-dev", "~> 2.2", ">= 2.2.13")     # ruby >= 2.4
 
   # Security
   spec.add_development_dependency("bundler-audit", "~> 0.9.3")                      # ruby >= 2.0.0
@@ -152,9 +163,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("require_bench", "~> 1.0", ">= 1.0.4")            # ruby >= 2.2.0
 
   # Testing
-  spec.add_development_dependency("appraisal2", "~> 3.1", ">= 3.1.1")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
-  spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.3")             # ruby >= 2.4
-  spec.add_development_dependency("turbo_tests2", "~> 3.1", ">= 3.1.1")            # ruby >= 2.4.0, default kettle-test runner
+  spec.add_development_dependency("appraisal2", "~> 3.1", ">= 3.1.2")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
+  spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.5")             # ruby >= 2.4
+  spec.add_development_dependency("turbo_tests2", "~> 3.1", ">= 3.1.4")            # ruby >= 2.4.0, default kettle-test runner
 
   # Releasing
   spec.add_development_dependency("ruby-progressbar", "~> 1.13")                    # ruby >= 0
@@ -170,7 +181,7 @@ Gem::Specification.new do |spec|
   # This means we have no choice but to use the erb that shipped with Ruby 2.3
   # /opt/hostedtoolcache/Ruby/2.3.8/x64/lib/ruby/gems/2.3.0/gems/erb-2.2.2/lib/erb.rb:670:in `prepare_trim_mode': undefined method `match?' for "-":String (NoMethodError)
   # spec.add_development_dependency("erb", ">= 2.2")                                  # ruby >= 2.3.0, not SemVer, old rubies get dropped in a patch.
-  spec.add_development_dependency("gitmoji-regex", "~> 2.0", ">= 2.0.1")            # ruby >= 2.4
+  spec.add_development_dependency("gitmoji-regex", "~> 2.0", ">= 2.0.2")            # ruby >= 2.4
 
   # HTTP recording for deterministic specs
   # In Ruby 3.5 (HEAD) the CGI library has been pared down, so we also need to depend on gem "cgi" for ruby@head
