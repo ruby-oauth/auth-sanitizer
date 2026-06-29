@@ -1,11 +1,11 @@
 {
-  "Gemfile:908603177": [
-    [27, 1, 12, "Gemspec/DevelopmentDependencies: Specify development dependencies in gemspec.", 1685091358]
+  "Gemfile:2223409004": [
+    [81, 1, 12, "Gemspec/DevelopmentDependencies: Specify development dependencies in gemspec.", 1685091358]
   ],
-  "README.md:4016223935": [
-    [187, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900],
-    [234, 1, 116, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 952987742],
-    [420, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900]
+  "README.md:2519600603": [
+    [203, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900],
+    [250, 1, 116, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 952987742],
+    [436, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900]
   ],
   "spec/auth/sanitizer_spec.rb:1305714609": [
     [36, 16, 2, "Lint/Syntax: unexpected token tLSHFT\n(Using Ruby 2.2 parser; configure using `TargetRubyVersion` parameter, under `AllCops`)", 5859461],
