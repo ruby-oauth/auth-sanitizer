@@ -1,7 +1,4 @@
 {
-  "Gemfile:2223409004": [
-    [81, 1, 12, "Gemspec/DevelopmentDependencies: Specify development dependencies in gemspec.", 1685091358]
-  ],
   "README.md:2519600603": [
     [203, 1, 52, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 1099181900],
     [250, 1, 116, "Lint/ConstantReassignment: Constant `AUTH_SANITIZER` is already assigned in this namespace.", 952987742],

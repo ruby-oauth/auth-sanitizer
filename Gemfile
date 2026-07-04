@@ -20,9 +20,6 @@ gemspec
 
 # Local workspace dependency wiring for *_local.gemfile overrides
 nomono_requirements = ["~> 1.0", ">= 1.0.7"]
-# See unlocked_deps appraisal for more details on irb inclusion
-gem "irb", "~> 1.17" # ruby >= 2.7
-
 gem "nomono", *nomono_requirements, require: false # ruby >= 2.2
 
 # Direct sibling dependencies (env-switched via RUBY_OAUTH_DEV)
@@ -78,8 +75,6 @@ if direct_sibling_gems.any? &&
   end
 end
 
-gem "logger"
-
 # Templating (env-switched: SMORG_RB_DEV=/path/to/structuredmerge/ruby/gems for local paths)
 eval_gemfile "gemfiles/modular/templating.gemfile" if ENV.fetch("K_JEM_TEMPLATING", "false").casecmp("true").zero?
 
@@ -100,3 +95,6 @@ eval_gemfile "gemfiles/modular/optional.gemfile"
 
 ### Std Lib Extracted Gems
 eval_gemfile "gemfiles/modular/x_std_libs.gemfile"
+
+# See unlocked_deps appraisal for more details on irb inclusion
+gem "irb", "~> 1.17" # ruby >= 2.7
