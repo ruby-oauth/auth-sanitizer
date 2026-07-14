@@ -28,6 +28,10 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Removed stale local-path `version_gem` state from the main lockfile.
+- Prevented gemspec version detection from defining top-level `Auth` on older
+  Rubies.
+
 ### Security
 
 ## [0.2.3] - 2026-07-13
