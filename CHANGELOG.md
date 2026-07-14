@@ -20,11 +20,7 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Added support for JRuby 10.1 and TruffleRuby 34.0.
-
 ### Changed
-
-- Retemplated project metadata and CI/development automation with `kettle-jem` v7.0.0.
 
 ### Deprecated
 
@@ -32,9 +28,26 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Package configured license files in gem release file lists.
-
 ### Security
+
+## [0.2.3] - 2026-07-13
+
+- TAG: [v0.2.3][0.2.3t]
+- COVERAGE: 85.80% -- 145/169 lines in 7 files
+- BRANCH COVERAGE: 82.35% -- 28/34 branches in 7 files
+- 84.62% documented
+
+### Added
+
+- Added support for JRuby 10.1 and TruffleRuby 34.0.
+
+### Changed
+
+- Retemplated project metadata and CI/development automation with `kettle-jem` v7.0.0.
+
+### Fixed
+
+- Package configured license files in gem release file lists.
 
 ## [0.2.2] - 2026-06-18
 
@@ -175,7 +188,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.2...v0.2.3
+[0.2.3t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.3
 [0.2.2]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.1...v0.2.2
 [0.2.2t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.2
 [0.2.1]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.0...v0.2.1
