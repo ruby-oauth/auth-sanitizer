@@ -4,11 +4,6 @@ PATH
     auth-sanitizer (0.2.3)
       version_gem (~> 1.1, >= 1.1.14)
 
-PATH
-  remote: /var/home/pboling/src/my/ruby-oauth/version_gem
-  specs:
-    version_gem (1.1.14)
-
 GEM
   remote: https://gem.coop/
   specs:
@@ -333,6 +328,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
+    version_gem (1.1.14)
     webrick (1.9.2)
     yaml-converter (0.2.3)
       hexapdf (>= 1.8, < 2)
@@ -401,7 +397,6 @@ DEPENDENCIES
   stone_checksums (~> 1.0, >= 1.0.6)
   stringio (>= 3.0)
   turbo_tests2 (~> 3.1, >= 3.1.8)
-  version_gem!
   webrick (~> 1.9)
   yaml-converter (~> 0.2, >= 0.2.3)
   yard (~> 0.9, >= 0.9.44)
