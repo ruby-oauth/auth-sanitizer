@@ -1,8 +1,0 @@
-module Auth
-  module Sanitizer
-    module Version
-      VERSION: String
-    end
-    VERSION: String
-  end
-end
