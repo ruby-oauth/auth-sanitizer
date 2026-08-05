@@ -2,7 +2,7 @@
 version: 1
 template_state:
   version: 7.1.0
-  applied_at: '2026-08-04'
+  applied_at: '2026-08-05'
   changelog_replay:
     last_entry_key: kettle-jem-template-20260802-001
     last_entry_date: '2026-08-02'
@@ -769,7 +769,7 @@ files:
     recipe: template_source_application_auth_sanitizer_gemspec
     action: write
     dest_sha256: bd3eb8d3753b3cbf644755fe271003f07486b9cbde508a7c1a83962ce1ab2559
-    input_fingerprint: d23aeb4613c9cdcaf0f867510328f0ed6d8475969f0d6db23df863d0f430fd2c
+    input_fingerprint: 81d2213cabd37e28dbf9d4d8bd6467d55b6997f2e11fe176520129f30a4dd475
     template_sources:
     - gem.gemspec.example
   bin/setup:
@@ -1105,7 +1105,7 @@ files:
     recipe: template_source_application_lib_auth_sanitizer_version_rb
     action: write
     dest_sha256: f1d4448fd4c417dc6d877f450b9978cf1bc9516f1729b34e76f43682483066ca
-    input_fingerprint: d2d591a703d4a856105b5ab05f1da25b4a72f4b4d969197327aa8bd8902117b1
+    input_fingerprint: 075545fa5cc12144ec944b95fbf34601f1376ee74e030ce24f1008da0b848f65
     template_sources:
     - lib/gem/version.rb.example
   mise.toml:
