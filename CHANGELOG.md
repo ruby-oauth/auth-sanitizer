@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.2.4] - 2026-10-23
+
+- TAG: [v0.2.4][0.2.4t]
+- COVERAGE: 100.00% -- 172/172 lines in 7 files
+- BRANCH COVERAGE: 100.00% -- 34/34 branches in 7 files
+- 98.08% documented
+
+### Added
+
 - kettle-jem-template-20260720-005 - README Support & Community links now
   include RubyForum.
 - kettle-jem-template-20260726-001 - Projects now include YARD lint
@@ -63,10 +82,6 @@ Please file a bug if you notice a violation of semantic versioning.
   - documentation (2)
   - other (5)
   - workflows (32)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 
@@ -278,7 +293,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.3...HEAD
+[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.4...HEAD
+[0.2.4]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.3...v0.2.4
+[0.2.4t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.4
 [0.2.3]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.2...v0.2.3
 [0.2.3t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.3
 [0.2.2]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.1...v0.2.2

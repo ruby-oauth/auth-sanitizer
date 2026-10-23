@@ -280,14 +280,14 @@
       <pre class="lines">
 
 
+59
 60
 61
 62
-63
-64</pre>
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filtered_attribute_names'>filtered_attribute_names</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='lbracket'>[</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='symbol'>:@filtered_attribute_names</span><span class='rparen'>)</span>
@@ -321,6 +321,21 @@
   
     <li>
       
+        <span class='name'>base</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The class the attributes are declared on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>attributes</span>
       
       
@@ -343,12 +358,12 @@
       <pre class="lines">
 
 
+51
 52
-53
-54</pre>
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filtered_attributes'>filtered_attributes</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_attributes'>attributes</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:@filtered_attribute_names</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_sym</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -402,12 +417,12 @@
       <pre class="lines">
 
 
+77
 78
-79
-80</pre>
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filtered_attribute_names'>filtered_attribute_names</span>
   <span class='const'><span class='object_link'><a href="" title="Auth::Sanitizer::FilteredAttributes::ClassMethods (module)">ClassMethods</a></span></span><span class='period'>.</span><span class='id identifier rubyid_filtered_attribute_names'><span class='object_link'><a href="#filtered_attribute_names-class_method" title="Auth::Sanitizer::FilteredAttributes::ClassMethods.filtered_attribute_names (method)">filtered_attribute_names</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
@@ -461,12 +476,12 @@
       <pre class="lines">
 
 
+70
 71
-72
-73</pre>
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/filtered_attributes.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filtered_attributes'>filtered_attributes</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_attributes'>attributes</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="" title="Auth::Sanitizer::FilteredAttributes::ClassMethods (module)">ClassMethods</a></span></span><span class='period'>.</span><span class='id identifier rubyid_filtered_attributes'><span class='object_link'><a href="#filtered_attributes-class_method" title="Auth::Sanitizer::FilteredAttributes::ClassMethods.filtered_attributes (method)">filtered_attributes</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_attributes'>attributes</span><span class='rparen'>)</span>

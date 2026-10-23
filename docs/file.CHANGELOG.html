@@ -70,7 +70,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 and <a href="https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html">yes</a>, platform and engine support are part of the <a href="https://github.com/semver/semver/issues/716#issuecomment-869336139">public API</a>.<br>
 Please file a bug if you notice a violation of semantic versioning.</p>
 
-<h2 id="unreleased"><a href="https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.3...HEAD">Unreleased</a></h2>
+<h2 id="unreleased"><a href="https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.4...HEAD">Unreleased</a></h2>
 
 <h3 id="added">Added</h3>
 
@@ -84,6 +84,130 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 
 <h3 id="security">Security</h3>
 
+<h2 id="024---2026-10-23">
+<a href="https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.3...v0.2.4">0.2.4</a> - 2026-10-23</h2>
+
+<ul>
+  <li>TAG: <a href="https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.4">v0.2.4</a>
+</li>
+  <li>COVERAGE: 100.00% – 172/172 lines in 7 files</li>
+  <li>BRANCH COVERAGE: 100.00% – 34/34 branches in 7 files</li>
+  <li>98.08% documented</li>
+</ul>
+
+<h3 id="added-1">Added</h3>
+
+<ul>
+  <li>kettle-jem-template-20260720-005 - README Support &amp; Community links now<br>
+include RubyForum.</li>
+  <li>kettle-jem-template-20260726-001 - Projects now include YARD lint<br>
+configuration and documentation dependencies so documentation issues fail<br>
+before generated docs are refreshed.</li>
+  <li>
+    <p>kettle-jem-template-20260727-001 - Spec harness documentation now lists the<br>
+RSpec helpers provided by <code>kettle-test</code>.</p>
+  </li>
+  <li>kettle-jem-template-20260913-001 - Templating now also surfaces a review<br>
+entry in <code>dependency_conflicts.resolve</code> when a direct development<br>
+dependency doesn’t support one or more of this project’s declared<br>
+<code>engines:</code> and has no template-managed modular home (e.g. <code>sqlite3</code> on<br>
+<code>jruby</code>). Review each entry and pick a resolution per the project’s own<br>
+engine support needs.</li>
+</ul>
+
+<h3 id="changed-1">Changed</h3>
+
+<ul>
+  <li>
+    <p>kettle-jem-template-20260716-002 - Generated gemspec manifests now ship fewer<br>
+repository-only files by default to reduce downstream distro packaging churn.</p>
+  </li>
+  <li>kettle-jem-template-20260720-002 - Development Gemfiles now use the released<br>
+<code>tree_sitter_language_pack</code> gem 1.13.3 or newer by default.</li>
+  <li>kettle-jem-template-20260725-002 - Version specs now use <code>anonymous_loader</code> to<br>
+cover <code>version.rb</code> without redefining constants, or are removed when version<br>
+specs are not managed for the project.</li>
+  <li>
+    <p>kettle-jem-template-20260728-001 - Generated Ruby workflows now use clearer<br>
+setup-ruby-flash planning and can prepare appraisal-only jobs without<br>
+installing the main Gemfile bundle.</p>
+  </li>
+  <li>
+    <p>kettle-jem-template-20260801-001 - Generated README gem dashboard links now<br>
+use ClickGems instead of BestGems.</p>
+  </li>
+  <li>[kc] kettle-jem/prepare: updated 17 project files:
+    <ul>
+      <li>configuration (1)</li>
+      <li>dependencies (16)</li>
+    </ul>
+  </li>
+  <li>[kc] kettle-jem/template: updated 52 project files:
+    <ul>
+      <li>code and tests (4)</li>
+      <li>configuration (1)</li>
+      <li>dependencies (8)</li>
+      <li>documentation (2)</li>
+      <li>other (5)</li>
+      <li>workflows (32)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="fixed-1">Fixed</h3>
+
+<ul>
+  <li>kettle-jem-template-20260720-003 - StructuredMerge Git diff driver config now<br>
+uses the installed <code>smorg-rb</code> driver command.</li>
+  <li>kettle-jem-template-20260725-001 - Release pull request branches beginning<br>
+with <code>feature/release</code> now run JRuby and TruffleRuby workflows.</li>
+  <li>kettle-jem-template-20260726-002 - Generated version files now document their<br>
+version namespace and constants, reducing warning-only YARD lint output.</li>
+  <li>kettle-jem-template-20260726-003 - Coverage upload steps now treat Coveralls,<br>
+QLTY, and Codecov as optional, so provider outages do not fail CI when local<br>
+coverage thresholds still pass.</li>
+  <li>kettle-jem-template-20260728-002 - Generated RuboCop configs now ignore the<br>
+same <code>gemfiles/vendor/bundle</code> tree as <code>.gitignore</code>, so vendored dependency<br>
+installs are not reported as project lint debt.</li>
+  <li>kettle-jem-template-20260728-003 - Generated dep-heads workflows now run<br>
+TruffleRuby jobs with current RubyGems and Bundler, avoiding setup failures<br>
+before the test suite starts.</li>
+  <li>kettle-jem-template-20260728-004 - Generated dep-heads workflows now use the<br>
+setup-ruby Bundler install path for direct appraisal Gemfiles, avoiding rv<br>
+lockfile parser failures on Git and path dependencies.</li>
+  <li>kettle-jem-template-20260728-005 - VersionGem bootstrap now creates the<br>
+missing canonical version spec when a project only has shim namespace version<br>
+specs.</li>
+  <li>kettle-jem-template-20260729-001 - Generated JRuby 9.4 workflows now use the<br>
+legacy manual bundle install path, avoiding setup-time Bundler full-index<br>
+failures against <code>gem.coop</code>.</li>
+  <li>
+    <p>kettle-jem-template-20260730-001 - Gemspec package file enumeration now runs<br>
+relative to the gemspec directory, so release package contents stay correct<br>
+even when the gemspec is loaded from another working directory.</p>
+  </li>
+  <li>kettle-jem-template-20260801-002 - Generated RSpec helpers now normalize<br>
+managed configuration block bindings structurally, preventing mixed block<br>
+parameter names from producing invalid configuration after a merge.</li>
+  <li>kettle-jem-template-20260801-003 - Generated project metadata and<br>
+documentation now normalize configured underscore hostnames to valid<br>
+hyphenated hostnames.</li>
+  <li>kettle-jem-template-20260801-004 - Generated organization README logos now<br>
+use GitHub’s stable organization avatar endpoint instead of assuming a<br>
+matching Galtzo-hosted asset exists.</li>
+  <li>
+    <p>kettle-jem-template-20260802-001 - Devcontainer JSON files now merge as JSONC,<br>
+preserving comments and trailing commas during template updates.</p>
+  </li>
+  <li>Fix load-order <code>NameError: uninitialized constant Auth::Sanitizer::Version</code> by removing a duplicate <code>VersionGem::Basic</code> class_eval from <code>auth/sanitizer/core</code> (the version constant is loaded after <code>core</code> in <code>auth/sanitizer.rb</code>).</li>
+</ul>
+
+<h3 id="security-1">Security</h3>
+
+<ul>
+  <li>SanitizedLogger now redacts configured keys in Ruby <code>Hash#inspect</code> output (both Ruby 3.4+ <code>{"key" =&gt; "value"}</code> / <code>{key: "value"}</code> and pre-3.4 hash-rocket formats), fixes a mangling bug where the form-pair pattern partially matched <code>:key=&gt;"value"</code> pairs, and no longer raises on invalid-encoded message bytes. This closes the OAUTH_DEBUG cleartext-logging bypass reported for oauth2 as GHSA-cmh8-5q25-68v6, where Faraday renders Hash request bodies with <code>pretty_inspect</code>. Reported by iamibi.</li>
+</ul>
+
 <h2 id="023---2026-07-14">
 <a href="https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.2...v0.2.3">0.2.3</a> - 2026-07-14</h2>
 
@@ -95,19 +219,19 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>84.62% documented</li>
 </ul>
 
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 
 <ul>
   <li>Added support for JRuby 10.1 and TruffleRuby 34.0.</li>
 </ul>
 
-<h3 id="changed-1">Changed</h3>
+<h3 id="changed-2">Changed</h3>
 
 <ul>
   <li>Retemplated project metadata and CI/development automation with <code>kettle-jem</code> v7.0.0.</li>
 </ul>
 
-<h3 id="fixed-1">Fixed</h3>
+<h3 id="fixed-2">Fixed</h3>
 
 <ul>
   <li>
@@ -129,14 +253,14 @@ Rubies.</li>
   <li>84.62% documented</li>
 </ul>
 
-<h3 id="changed-2">Changed</h3>
+<h3 id="changed-3">Changed</h3>
 
 <ul>
   <li>Documented the released <code>anonymous_loader</code> gem as the preferred reusable<br>
 helper for zero-<code>auth-sanitizer</code>-namespace loading.</li>
 </ul>
 
-<h3 id="fixed-2">Fixed</h3>
+<h3 id="fixed-3">Fixed</h3>
 
 <ul>
   <li>Documented the <code>$LOAD_PATH</code> fallback needed by isolated loader consumers when<br>
@@ -155,7 +279,7 @@ matching <code>Gem.loaded_specs</code> or <code>GEM_PATH</code> entry.</li>
   <li>84.62% documented</li>
 </ul>
 
-<h3 id="fixed-3">Fixed</h3>
+<h3 id="fixed-4">Fixed</h3>
 
 <ul>
   <li>Removed the duplicate RBS declaration for <code>Auth::Sanitizer::VERSION</code>, fixing<br>
@@ -175,7 +299,7 @@ matching the current runtime support and CI policy.</li>
   <li>84.62% documented</li>
 </ul>
 
-<h3 id="changed-3">Changed</h3>
+<h3 id="changed-4">Changed</h3>
 
 <ul>
   <li>Changed <code>FilteredAttributes#inspect</code> to redact narrow patterns from<br>
@@ -183,7 +307,7 @@ matching the current runtime support and CI policy.</li>
 inspect behavior.</li>
 </ul>
 
-<h3 id="fixed-4">Fixed</h3>
+<h3 id="fixed-5">Fixed</h3>
 
 <ul>
   <li>Redacted configured attributes inside standard Ruby hash inspect fragments,<br>
@@ -201,13 +325,13 @@ including nested attribute hashes.</li>
   <li>84.62% documented</li>
 </ul>
 
-<h3 id="added-2">Added</h3>
+<h3 id="added-3">Added</h3>
 
 <ul>
   <li>Added <code>VersionGem::Basic</code> helpers to <code>Auth::Sanitizer::Version</code>.</li>
 </ul>
 
-<h3 id="changed-4">Changed</h3>
+<h3 id="changed-5">Changed</h3>
 
 <ul>
   <li>Refreshed generated package metadata, support documentation, CI workflows,<br>
@@ -216,7 +340,7 @@ and development dependency floors from the current kettle-jem template.</li>
 runtime compatibility remains MRI Ruby 2.2+.</li>
 </ul>
 
-<h3 id="fixed-5">Fixed</h3>
+<h3 id="fixed-6">Fixed</h3>
 
 <ul>
   <li>Prevented isolated loader namespace leakage on Ruby 2.5 and older TruffleRuby runtimes.</li>
@@ -235,7 +359,7 @@ version detection does not define top-level <code>Auth</code> on older Rubies.</
   <li>84.62% documented</li>
 </ul>
 
-<h3 id="changed-5">Changed</h3>
+<h3 id="changed-6">Changed</h3>
 
 <ul>
   <li>(docs) Document constrained <code>auth-sanitizer</code> version lookup for isolated loader examples</li>
@@ -243,7 +367,7 @@ version detection does not define top-level <code>Auth</code> on older Rubies.</
 </li>
 </ul>
 
-<h3 id="fixed-6">Fixed</h3>
+<h3 id="fixed-7">Fixed</h3>
 
 <ul>
   <li>(test) Stop running Appraisal install steps in the locked-deps workflow for the main <code>Gemfile</code>
@@ -261,7 +385,7 @@ version detection does not define top-level <code>Auth</code> on older Rubies.</
   <li>84.62% documented</li>
 </ul>
 
-<h3 id="added-3">Added</h3>
+<h3 id="added-4">Added</h3>
 
 <ul>
   <li>Add <code>AuthSanitizer::Loader.load_isolated</code> for isolated loading without defining top-level <code>Auth</code>
@@ -281,13 +405,13 @@ version detection does not define top-level <code>Auth</code> on older Rubies.</
   <li>87.50% documented</li>
 </ul>
 
-<h3 id="added-4">Added</h3>
+<h3 id="added-5">Added</h3>
 
 <ul>
   <li>gemspec description, summary</li>
 </ul>
 
-<h3 id="changed-6">Changed</h3>
+<h3 id="changed-7">Changed</h3>
 
 <ul>
   <li>gemspec contact email</li>
@@ -304,7 +428,7 @@ version detection does not define top-level <code>Auth</code> on older Rubies.</
   <li>87.50% documented</li>
 </ul>
 
-<h3 id="added-5">Added</h3>
+<h3 id="added-6">Added</h3>
 
 <ul>
   <li>Usage documentation in README.md</li>
@@ -321,7 +445,7 @@ version detection does not define top-level <code>Auth</code> on older Rubies.</
   <li>87.50% documented</li>
 </ul>
 
-<h3 id="added-6">Added</h3>
+<h3 id="added-7">Added</h3>
 
 <ul>
   <li>Initial release</li>

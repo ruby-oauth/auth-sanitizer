@@ -251,7 +251,7 @@ module Auth
         message = message.gsub(/((?:"(?:#{key})"|:#{key})\s*=>\s*")[^"]*(")/i) { "#{$1}#{label}#{$2}" }
         # Symbol shorthand pairs: key: "value" (not preceded by a quote, so
         # already-sanitized JSON pairs are not reprocessed)
-        message.gsub(/(?<![\"'])((?:\b(?:#{key})):\s*")[^"]*(")/i) { "#{$1}#{label}#{$2}" }
+        message.gsub(/(?<!["'])((?:\b(?:#{key})):\s*")[^"]*(")/i) { "#{$1}#{label}#{$2}" }
       end
 
       # Redact form-encoded and query-string values for configured sensitive key names.

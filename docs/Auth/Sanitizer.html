@@ -88,7 +88,17 @@
   
 </div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Credential redaction for inspect output and debug logging.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
@@ -165,7 +175,7 @@
         <dt id="VERSION-constant" class="">VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>Traditional Constant Location</p>
+    <p>Current gem version exposed at the traditional constant location.</p>
 
 
   </div>
@@ -324,12 +334,12 @@
       <pre class="lines">
 
 
-68
-69
-70</pre>
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/core.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/core.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_default_filtered_keys'>default_filtered_keys</span>
   <span class='const'><span class='object_link'><a href="#DEFAULT_FILTERED_KEYS-constant" title="Auth::Sanitizer::DEFAULT_FILTERED_KEYS (constant)">DEFAULT_FILTERED_KEYS</a></span></span>
@@ -386,12 +396,12 @@ calling <span class='object_link'><a href="#filtered_label_provider=-instance_me
       <pre class="lines">
 
 
-39
-40
-41</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/core.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/core.rb', line 36</span>
 
 <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:filtered_label</span><span class='rparen'>)</span> <span class='kw'>do</span>
   <span class='id identifier rubyid_filtered_label_provider_mutex'>filtered_label_provider_mutex</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_filtered_label_provider'>filtered_label_provider</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span>
@@ -414,10 +424,9 @@ calling <span class='object_link'><a href="#filtered_label_provider=-instance_me
   <div class="discussion">
     <p class="note returns_void">This method returns an undefined value.</p><p>Install a custom provider for the filtered label.</p>
 
-<p>The provider is called each time a new {FilteredAttributes}- or<br />
-{SanitizedLogger}-bearing object is initialized, allowing the label to<br />
-track a host gem’s live configuration while still being snapshotted per<br />
-object instance.</p>
+<p>The provider callable is invoked each time a new {FilteredAttributes}- or<br />
+{SanitizedLogger}-bearing object is initialized, allowing the label to track a host gem’s<br />
+live configuration while still being snapshotted per object instance.</p>
 
 
   </div>
@@ -434,25 +443,6 @@ object instance.</p>
       <pre class="example code"><code><span class='const'><span class='object_link'><a href="../Auth.html" title="Auth (module)">Auth</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Auth::Sanitizer (module)">Sanitizer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_filtered_label_provider'>filtered_label_provider</span> <span class='op'>=</span> <span class='tlambda'>-&gt;</span> <span class='tlambeg'>{</span> <span class='const'>MyGem</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='lbracket'>[</span><span class='symbol'>:filtered_label</span><span class='rbracket'>]</span> <span class='rbrace'>}</span></code></pre>
     
   </div>
-<p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>provider</span>
-      
-      
-        <span class='type'>(<tt>#call</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>A callable that returns the label string</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 
 </div><table class="source_code">
@@ -461,14 +451,14 @@ object instance.</p>
       <pre class="lines">
 
 
-55
-56
-57
-58
-59</pre>
+49
+50
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/core.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/core.rb', line 49</span>
 
 <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:filtered_label_provider=</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_provider'>provider</span><span class='op'>|</span>
   <span class='id identifier rubyid_filtered_label_provider_mutex'>filtered_label_provider_mutex</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>

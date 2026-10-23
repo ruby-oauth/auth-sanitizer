@@ -107,7 +107,17 @@ Auth constant in the host application.</p>
     <dl class="constants">
       
         <dt id="FILES-constant" class="">FILES =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Gem source files evaluated into the anonymous namespace, in load order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
         </dt>
         <dd><pre class="code"><span class='qwords_beg'>%w[</span><span class='words_sep'>
 </span><span class='words_sep'>  </span><span class='tstring_content'>auth/sanitizer/version.rb</span><span class='words_sep'>
@@ -213,8 +223,6 @@ works on Ruby 2.2+, where Kernel.load(path, module) is unavailable.</p>
       <pre class="lines">
 
 
-23
-24
 25
 26
 27
@@ -224,10 +232,12 @@ works on Ruby 2.2+, where Kernel.load(path, module) is unavailable.</p>
 31
 32
 33
-34</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth_sanitizer/loader.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/auth_sanitizer/loader.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_load_isolated'>load_isolated</span>
   <span class='id identifier rubyid_namespace'>namespace</span> <span class='op'>=</span> <span class='const'>Module</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>

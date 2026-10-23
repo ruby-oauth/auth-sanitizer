@@ -104,12 +104,11 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Logger wrapper that redacts sensitive values from debug output before<br />
-delegating to the underlying logger instance.</p>
+    <p>Logger wrapper that redacts sensitive values from debug output before delegating to the<br />
+underlying logger instance.</p>
 
-<p>This class is intentionally narrow in scope: it only sanitizes string<br />
-messages emitted through the logging path and leaves request/response<br />
-behavior unchanged.</p>
+<p>This class is intentionally narrow in scope: it only sanitizes string messages emitted<br />
+through the logging path and leaves request/response behavior unchanged.</p>
 
 <p>The underlying {ThingFilter} is initialized once when the logger wrapper is<br />
 created, so later config changes do not alter the behavior of existing<br />
@@ -639,13 +638,13 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+25
 26
 27
-28
-29</pre>
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_logger'>logger</span><span class='comma'>,</span> <span class='label'>filtered_keys:</span> <span class='const'><span class='object_link'><a href="../../Auth.html" title="Auth (module)">Auth</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Sanitizer.html" title="Auth::Sanitizer (module)">Sanitizer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_filtered_keys'><span class='object_link'><a href="../Sanitizer.html#default_filtered_keys-class_method" title="Auth::Sanitizer.default_filtered_keys (method)">default_filtered_keys</a></span></span><span class='comma'>,</span> <span class='label'>label:</span> <span class='const'><span class='object_link'><a href="../../Auth.html" title="Auth (module)">Auth</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Sanitizer.html" title="Auth::Sanitizer (module)">Sanitizer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_filtered_label'><span class='object_link'><a href="../Sanitizer.html#filtered_label-instance_method" title="Auth::Sanitizer#filtered_label (method)">filtered_label</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span>
@@ -757,14 +756,14 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+174
 175
 176
 177
-178
-179</pre>
+178</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 175</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>super</span> <span class='kw'>unless</span> <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
@@ -844,12 +843,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+49
 50
-51
-52</pre>
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
   <span class='ivar'>@logger</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_sanitize'>sanitize</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
@@ -971,16 +970,16 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+37
 38
 39
 40
 41
 42
-43
-44</pre>
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -1019,12 +1018,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+110
 111
-112
-113</pre>
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
   <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span> <span class='kw'>if</span> <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:close</span><span class='rparen'>)</span>
@@ -1114,12 +1113,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+58
 59
-60
-61</pre>
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='symbol'>:debug</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1209,12 +1208,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+85
 86
-87
-88</pre>
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='symbol'>:error</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1304,12 +1303,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+94
 95
-96
-97</pre>
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fatal'>fatal</span><span class='lparen'>(</span><span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='symbol'>:fatal</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1357,12 +1356,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+117
 118
-119
-120</pre>
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 117</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_formatter'>formatter</span>
   <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_formatter'>formatter</span> <span class='kw'>if</span> <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:formatter</span><span class='rparen'>)</span>
@@ -1416,12 +1415,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+125
 126
-127
-128</pre>
+127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 125</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_formatter='>formatter=</span><span class='lparen'>(</span><span class='id identifier rubyid_formatter'>formatter</span><span class='rparen'>)</span>
   <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_formatter'>formatter</span> <span class='op'>=</span> <span class='id identifier rubyid_formatter'>formatter</span> <span class='kw'>if</span> <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:formatter=</span><span class='rparen'>)</span>
@@ -1511,12 +1510,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+67
 68
-69
-70</pre>
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_info'>info</span><span class='lparen'>(</span><span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='symbol'>:info</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1564,12 +1563,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+132
 133
-134
-135</pre>
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level'>level</span>
   <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='kw'>if</span> <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:level</span><span class='rparen'>)</span>
@@ -1623,12 +1622,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+140
 141
-142
-143</pre>
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level='>level=</span><span class='lparen'>(</span><span class='id identifier rubyid_level'>level</span><span class='rparen'>)</span>
   <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='id identifier rubyid_level'>level</span> <span class='kw'>if</span> <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:level=</span><span class='rparen'>)</span>
@@ -1676,12 +1675,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+147
 148
-149
-150</pre>
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_progname'>progname</span>
   <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_progname'>progname</span> <span class='kw'>if</span> <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:progname</span><span class='rparen'>)</span>
@@ -1735,12 +1734,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+155
 156
-157
-158</pre>
+157</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_progname='>progname=</span><span class='lparen'>(</span><span class='id identifier rubyid_progname'>progname</span><span class='rparen'>)</span>
   <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='id identifier rubyid_progname'>progname</span> <span class='kw'>if</span> <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:progname=</span><span class='rparen'>)</span>
@@ -1824,12 +1823,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+164
 165
-166
-167</pre>
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_respond_to_missing?'>respond_to_missing?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_include_private'>include_private</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='ivar'>@logger</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_include_private'>include_private</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='kw'>super</span>
@@ -1919,12 +1918,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+103
 104
-105
-106</pre>
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unknown'>unknown</span><span class='lparen'>(</span><span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='symbol'>:unknown</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2014,12 +2013,12 @@ Defaults to Auth::Sanitizer.filtered_label.</p>
       <pre class="lines">
 
 
+76
 77
-78
-79</pre>
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/sanitized_logger.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='symbol'>:warn</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
