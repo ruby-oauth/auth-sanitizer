@@ -201,9 +201,12 @@ module Auth
       def sanitize(message)
         return message unless message.is_a?(String)
 
-        sanitized = message.dup
+        # scrub replaces invalid byte sequences so the gsub calls below never
+        # raise on an invalid encoding while logging a request.
+        sanitized = message.dup.scrub
         sanitized = sanitize_authorization_header(sanitized)
         sanitized = sanitize_json_pairs(sanitized)
+        sanitized = sanitize_inspect_pairs(sanitized)
         sanitize_form_and_query_pairs(sanitized)
       end
 
@@ -232,12 +235,38 @@ module Auth
         end
       end
 
+      # Redact values in Ruby `Hash#inspect` output for configured sensitive
+      # key names.
+      #
+      # Faraday's debug logger renders non-String bodies (such as the params
+      # Hash an OAuth client builds for a token request) with `pretty_inspect`,
+      # so secrets reach the logger in Ruby inspect syntax rather than JSON or
+      # form encoding. Handles both Ruby 3.4+ formats (`{"key" => "value"}`,
+      # `{key: "value"}`) and the pre-3.4 formats (`{"key"=>"value"}`,
+      # `{:key=>"value"}`), case-insensitively.
+      #
+      # @param [String] message Logger message
+      # @return [String] Sanitized logger message
+      def sanitize_inspect_pairs(message)
+        key = thing_filter.pattern_source
+        label = thing_filter.label
+        # Hash-rocket pairs: "key" => "value" / "key"=>"value" / :key=>"value"
+        message = message.gsub(/((?:"(?:#{key})"|:#{key})\s*=>\s*")[^"]*(")/i) { "#{$1}#{label}#{$2}" }
+        # Symbol shorthand pairs: key: "value" (not preceded by a quote, so
+        # already-sanitized JSON pairs are not reprocessed)
+        message.gsub(/(?<![\"'])((?:\b(?:#{key})):\s*")[^"]*(")/i) { "#{$1}#{label}#{$2}" }
+      end
+
       # Redact form-encoded and query-string values for configured sensitive key names.
+      #
+      # The value class excludes `"` and `>` so the pattern neither crosses
+      # into quoted strings nor mangles `Hash#inspect` hash-rocket pairs
+      # (`:key=>"value"`), which {sanitize_inspect_pairs} handles instead.
       #
       # @param [String] message Logger message
       # @return [String] Sanitized logger message
       def sanitize_form_and_query_pairs(message)
-        message.gsub(/(\b(?:#{thing_filter.pattern_source})=)([^&\s"]+)/i, "\\1#{thing_filter.label}")
+        message.gsub(/(\b(?:#{thing_filter.pattern_source})=)([^&\s">]+)/i, "\\1#{thing_filter.label}")
       end
     end
   end

@@ -110,7 +110,11 @@ Please file a bug if you notice a violation of semantic versioning.
 - kettle-jem-template-20260802-001 - Devcontainer JSON files now merge as JSONC,
   preserving comments and trailing commas during template updates.
 
+- Fix load-order `NameError: uninitialized constant Auth::Sanitizer::Version` by removing a duplicate `VersionGem::Basic` class_eval from `auth/sanitizer/core` (the version constant is loaded after `core` in `auth/sanitizer.rb`).
+
 ### Security
+
+- SanitizedLogger now redacts configured keys in Ruby `Hash#inspect` output (both Ruby 3.4+ `{"key" => "value"}` / `{key: "value"}` and pre-3.4 hash-rocket formats), fixes a mangling bug where the form-pair pattern partially matched `:key=>"value"` pairs, and no longer raises on invalid-encoded message bytes. This closes the OAUTH_DEBUG cleartext-logging bypass reported for oauth2 as GHSA-cmh8-5q25-68v6, where Faraday renders Hash request bodies with `pretty_inspect`. Reported by iamibi.
 
 ## [0.2.3] - 2026-07-14
 

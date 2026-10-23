@@ -107,6 +107,48 @@ RSpec.describe Auth::Sanitizer::SanitizedLogger do
       expect(io.read).not_to include("abc123")
     end
 
+    it "redacts Ruby 3.4+ Hash#inspect rocket pairs with quoted keys" do
+      logger.debug('{"client_secret" => "abc123", "grant_type" => "refresh_token"}')
+      io.rewind
+      expect(io.read).to include('"client_secret" => "[FILTERED]"')
+      expect(io.read).not_to include("abc123")
+    end
+
+    it "redacts Ruby 3.4+ Hash#inspect symbol shorthand pairs" do
+      logger.debug('{refresh_token: "abc123", grant_type: "refresh_token"}')
+      io.rewind
+      expect(io.read).to include('refresh_token: "[FILTERED]"')
+      expect(io.read).not_to include("abc123")
+    end
+
+    it "redacts pre-3.4 Hash#inspect rocket pairs without spaces" do
+      logger.debug('{"client_secret"=>"abc123"}')
+      io.rewind
+      expect(io.read).to include("[FILTERED]")
+      expect(io.read).not_to include("abc123")
+    end
+
+    it "redacts pre-3.4 Hash#inspect symbol rocket pairs without mangling" do
+      logger.debug('{:refresh_token=>"abc123"}')
+      io.rewind
+      expect(io.read).to include(':refresh_token=>"[FILTERED]"')
+      expect(io.read).not_to include("abc123")
+    end
+
+    it "redacts case-insensitively in inspect pairs" do
+      logger.debug('{"Client_Secret" => "abc123"}')
+      io.rewind
+      expect(io.read).not_to include("abc123")
+    end
+
+    it "does not raise on invalid UTF-8 in a message" do
+      message = +"refresh_token=abc123\xFF\xFE"
+      message.force_encoding(Encoding::UTF_8)
+      expect { logger.debug(message) }.not_to raise_error
+      io.rewind
+      expect(io.read).not_to include("abc123")
+    end
+
     it "passes non-String messages through unchanged" do
       expect { logger.debug(42) }.not_to raise_error
     end
