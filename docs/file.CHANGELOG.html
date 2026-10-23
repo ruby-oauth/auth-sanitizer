@@ -199,7 +199,10 @@ matching Galtzo-hosted asset exists.</li>
     <p>kettle-jem-template-20260802-001 - Devcontainer JSON files now merge as JSONC,<br>
 preserving comments and trailing commas during template updates.</p>
   </li>
-  <li>Fix load-order <code>NameError: uninitialized constant Auth::Sanitizer::Version</code> by removing a duplicate <code>VersionGem::Basic</code> class_eval from <code>auth/sanitizer/core</code> (the version constant is loaded after <code>core</code> in <code>auth/sanitizer.rb</code>).</li>
+  <li>
+    <p>Fix load-order <code>NameError: uninitialized constant Auth::Sanitizer::Version</code> by removing a duplicate <code>VersionGem::Basic</code> class_eval from <code>auth/sanitizer/core</code> (the version constant is loaded after <code>core</code> in <code>auth/sanitizer.rb</code>).</p>
+  </li>
+  <li>Gemspec no longer defines a top-level <code>Auth</code> constant when evaluated on Ruby &lt; 3.1 (e.g. by <code>bundler/setup</code>); the version file now loads into an anonymous module via <code>Module#module_eval</code> on all supported Rubies. This un-breaks the isolated-loading specs and the ruby-2.4 CI workflow.</li>
 </ul>
 
 <h3 id="security-1">Security</h3>

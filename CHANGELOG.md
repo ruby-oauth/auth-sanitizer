@@ -28,8 +28,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Gemspec no longer defines a top-level `Auth` constant when evaluated on Ruby < 3.1 (e.g. by `bundler/setup`); the version file now loads into an anonymous module via `Module#module_eval` on all supported Rubies. This un-breaks the isolated-loading specs and the ruby-2.4 CI workflow.
-
 ### Security
 
 ## [0.2.4] - 2026-10-23
@@ -128,6 +126,8 @@ Please file a bug if you notice a violation of semantic versioning.
   preserving comments and trailing commas during template updates.
 
 - Fix load-order `NameError: uninitialized constant Auth::Sanitizer::Version` by removing a duplicate `VersionGem::Basic` class_eval from `auth/sanitizer/core` (the version constant is loaded after `core` in `auth/sanitizer.rb`).
+
+- Gemspec no longer defines a top-level `Auth` constant when evaluated on Ruby < 3.1 (e.g. by `bundler/setup`); the version file now loads into an anonymous module via `Module#module_eval` on all supported Rubies. This un-breaks the isolated-loading specs and the ruby-2.4 CI workflow.
 
 ### Security
 
