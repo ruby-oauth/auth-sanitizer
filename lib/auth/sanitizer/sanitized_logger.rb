@@ -2,12 +2,11 @@
 
 module Auth
   module Sanitizer
-    # Logger wrapper that redacts sensitive values from debug output before
-    # delegating to the underlying logger instance.
+    # Logger wrapper that redacts sensitive values from debug output before delegating to the
+    # underlying logger instance.
     #
-    # This class is intentionally narrow in scope: it only sanitizes string
-    # messages emitted through the logging path and leaves request/response
-    # behavior unchanged.
+    # This class is intentionally narrow in scope: it only sanitizes string messages emitted
+    # through the logging path and leaves request/response behavior unchanged.
     #
     # The underlying {ThingFilter} is initialized once when the logger wrapper is
     # created, so later config changes do not alter the behavior of existing
@@ -15,12 +14,12 @@ module Auth
     class SanitizedLogger
       # Create a new sanitized logger wrapper.
       #
-      # @param [#add, #debug, #info, #warn, #error, #fatal, #unknown] logger
+      # @param logger [#add, #debug, #info, #warn, #error, #fatal, #unknown]
       #   The underlying logger instance that will receive sanitized messages.
-      # @param [Array<String>] filtered_keys
+      # @param filtered_keys [Array<String>]
       #   Key names whose values should be redacted in debug output.
       #   Defaults to {Auth::Sanitizer.default_filtered_keys}.
-      # @param [String] label
+      # @param label [String]
       #   Replacement label for redacted values.
       #   Defaults to {Auth::Sanitizer.filtered_label}.
       def initialize(logger, filtered_keys: Auth::Sanitizer.default_filtered_keys, label: Auth::Sanitizer.filtered_label)
@@ -30,9 +29,9 @@ module Auth
 
       # Add a log entry after sanitizing any string payloads.
       #
-      # @param [Integer, Symbol, String, nil] severity Logger severity
-      # @param [Object, nil] message Optional log message
-      # @param [Object, nil] progname Optional program name
+      # @param severity [Integer, Symbol, String, nil] Logger severity
+      # @param message [Object, nil] Optional log message
+      # @param progname [Object, nil] Optional program name
       # @yieldreturn [Object] Deferred log message
       # @return [Object] The underlying logger result
       def add(severity, message = nil, progname = nil)
@@ -45,7 +44,7 @@ module Auth
 
       # Append a message to the underlying logger after sanitization.
       #
-      # @param [String] message Message to append
+      # @param message [String] Message to append
       # @return [Object] The underlying logger result
       def <<(message)
         @logger << sanitize(message)
@@ -53,7 +52,7 @@ module Auth
 
       # Log a debug message after sanitization.
       #
-      # @param [Object, nil] progname Optional program name
+      # @param progname [Object, nil] Optional program name
       # @yieldreturn [Object] Deferred log message
       # @return [Object] The underlying logger result
       def debug(progname = nil, &block)
@@ -62,7 +61,7 @@ module Auth
 
       # Log an info message after sanitization.
       #
-      # @param [Object, nil] progname Optional program name
+      # @param progname [Object, nil] Optional program name
       # @yieldreturn [Object] Deferred log message
       # @return [Object] The underlying logger result
       def info(progname = nil, &block)
@@ -71,7 +70,7 @@ module Auth
 
       # Log a warning message after sanitization.
       #
-      # @param [Object, nil] progname Optional program name
+      # @param progname [Object, nil] Optional program name
       # @yieldreturn [Object] Deferred log message
       # @return [Object] The underlying logger result
       def warn(progname = nil, &block)
@@ -80,7 +79,7 @@ module Auth
 
       # Log an error message after sanitization.
       #
-      # @param [Object, nil] progname Optional program name
+      # @param progname [Object, nil] Optional program name
       # @yieldreturn [Object] Deferred log message
       # @return [Object] The underlying logger result
       def error(progname = nil, &block)
@@ -89,7 +88,7 @@ module Auth
 
       # Log a fatal message after sanitization.
       #
-      # @param [Object, nil] progname Optional program name
+      # @param progname [Object, nil] Optional program name
       # @yieldreturn [Object] Deferred log message
       # @return [Object] The underlying logger result
       def fatal(progname = nil, &block)
@@ -98,7 +97,7 @@ module Auth
 
       # Log an unknown-severity message after sanitization.
       #
-      # @param [Object, nil] progname Optional program name
+      # @param progname [Object, nil] Optional program name
       # @yieldreturn [Object] Deferred log message
       # @return [Object] The underlying logger result
       def unknown(progname = nil, &block)
@@ -121,7 +120,7 @@ module Auth
 
       # Set the formatter of the underlying logger if supported.
       #
-      # @param [Object] formatter Formatter object
+      # @param formatter [Object] Formatter object
       # @return [void]
       def formatter=(formatter)
         @logger.formatter = formatter if @logger.respond_to?(:formatter=)
@@ -136,7 +135,7 @@ module Auth
 
       # Set the logger level if supported.
       #
-      # @param [Object] level Logger level
+      # @param level [Object] Logger level
       # @return [void]
       def level=(level)
         @logger.level = level if @logger.respond_to?(:level=)
@@ -151,7 +150,7 @@ module Auth
 
       # Set the logger progname if supported.
       #
-      # @param [Object] progname Logger progname
+      # @param progname [Object] Logger progname
       # @return [void]
       def progname=(progname)
         @logger.progname = progname if @logger.respond_to?(:progname=)
@@ -159,8 +158,8 @@ module Auth
 
       # Report support for methods provided by the wrapped logger.
       #
-      # @param [Symbol] method_name Method name to check
-      # @param [Boolean] include_private Whether private methods are considered
+      # @param method_name [Symbol] Method name to check
+      # @param include_private [Boolean] Whether private methods are considered
       # @return [Boolean]
       def respond_to_missing?(method_name, include_private = false)
         @logger.respond_to?(method_name, include_private) || super
@@ -168,8 +167,8 @@ module Auth
 
       # Delegate unsupported methods to the wrapped logger.
       #
-      # @param [Symbol] method_name Method to invoke
-      # @param [Array<Object>] args Method arguments
+      # @param method_name [Symbol] Method to invoke
+      # @param args [Array<Object>] Method arguments
       # @yield Deferred block forwarded to the wrapped logger
       # @return [Object] The delegated result
       def method_missing(method_name, *args, &block)
@@ -182,8 +181,8 @@ module Auth
 
       # Dispatch a severity-specific log call after sanitization.
       #
-      # @param [Symbol] level Logger method name
-      # @param [Object, nil] progname Optional program name
+      # @param level [Symbol] Logger method name
+      # @param progname [Object, nil] Optional program name
       # @yieldreturn [Object] Deferred log message
       # @return [Object] The underlying logger result
       def log(level, progname = nil)
@@ -196,7 +195,7 @@ module Auth
 
       # Sanitize a logger message when it is a String.
       #
-      # @param [Object] message Potential logger payload
+      # @param message [Object] Potential logger payload
       # @return [Object] Unchanged non-String payloads, sanitized String payloads
       def sanitize(message)
         return message unless message.is_a?(String)
@@ -219,7 +218,7 @@ module Auth
 
       # Redact Authorization header values.
       #
-      # @param [String] message Logger message
+      # @param message [String] Logger message
       # @return [String] Sanitized logger message
       def sanitize_authorization_header(message)
         message.gsub(/(Authorization:\s*)(?:"[^"]*"|[^\r\n]+)/i, "\\1\"#{thing_filter.label}\"")
@@ -227,7 +226,7 @@ module Auth
 
       # Redact JSON-style values for configured sensitive key names.
       #
-      # @param [String] message Logger message
+      # @param message [String] Logger message
       # @return [String] Sanitized logger message
       def sanitize_json_pairs(message)
         message.gsub(/(["'])(#{thing_filter.pattern_source})\1(\s*:\s*)(["'])(.*?)\4/i) do
@@ -235,17 +234,15 @@ module Auth
         end
       end
 
-      # Redact values in Ruby `Hash#inspect` output for configured sensitive
-      # key names.
+      # Redact values in Ruby `Hash#inspect` output for configured sensitive key names.
       #
-      # Faraday's debug logger renders non-String bodies (such as the params
-      # Hash an OAuth client builds for a token request) with `pretty_inspect`,
-      # so secrets reach the logger in Ruby inspect syntax rather than JSON or
-      # form encoding. Handles both Ruby 3.4+ formats (`{"key" => "value"}`,
-      # `{key: "value"}`) and the pre-3.4 formats (`{"key"=>"value"}`,
+      # Faraday's debug logger renders non-String bodies (such as the params Hash an OAuth client
+      # builds for a token request) with `pretty_inspect`, so secrets reach the logger in Ruby
+      # inspect syntax rather than JSON or form encoding. Handles both Ruby 3.4+ formats
+      # (`{"key" => "value"}`, `{key: "value"}`) and the pre-3.4 formats (`{"key"=>"value"}`,
       # `{:key=>"value"}`), case-insensitively.
       #
-      # @param [String] message Logger message
+      # @param message [String] Logger message
       # @return [String] Sanitized logger message
       def sanitize_inspect_pairs(message)
         key = thing_filter.pattern_source
@@ -263,7 +260,7 @@ module Auth
       # into quoted strings nor mangles `Hash#inspect` hash-rocket pairs
       # (`:key=>"value"`), which {sanitize_inspect_pairs} handles instead.
       #
-      # @param [String] message Logger message
+      # @param message [String] Logger message
       # @return [String] Sanitized logger message
       def sanitize_form_and_query_pairs(message)
         message.gsub(/(\b(?:#{thing_filter.pattern_source})=)([^&\s">]+)/i, "\\1#{thing_filter.label}")

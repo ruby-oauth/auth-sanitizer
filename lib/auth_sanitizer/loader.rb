@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+# Namespace for the isolated loader surface of the auth-sanitizer gem.
 module AuthSanitizer
   # Loader for consumers that need Auth::Sanitizer without defining a top-level
   # Auth constant in the host application.
   module Loader
+    # Gem source files evaluated into the anonymous namespace, in load order.
     FILES = %w[
       auth/sanitizer/version.rb
       auth/sanitizer/thing_filter.rb
@@ -39,6 +41,9 @@ module AuthSanitizer
       # the anonymous Auth namespace. This keeps the normal files unchanged while
       # avoiding Object::Auth leakage on runtimes where Module#module_eval still
       # resolves nested module declarations through Object.
+      #
+      # @param path [String] Absolute path to the gem source file
+      # @return [String] The source with the top-level wrapper removed
       def isolated_source(path)
         lines = File.readlines(path)
         wrapper_index = lines.index("module Auth\n")

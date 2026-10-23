@@ -4,13 +4,11 @@ module Auth
   module Sanitizer
     # Mixin that redacts sensitive instance variables in `#inspect` output.
     #
-    # Classes include this module and declare which attribute names should be
-    # filtered via {.filtered_attributes}. Matching and replacement behavior is
-    # delegated to {ThingFilter}, which is initialized once per object.
+    # Classes include this module and declare attribute names to filter via {.filtered_attributes}.
+    # Matching and replacement behavior is delegated to {ThingFilter}, initialized once per object.
     #
-    # This means existing objects keep the filter configuration that was present
-    # when they were initialized, even if global config or class-level filter
-    # declarations change later.
+    # This means existing objects keep the filter configuration that was present when they were
+    # initialized, even if global config or class-level filter declarations change later.
     #
     # The label used for redaction is resolved from {Auth::Sanitizer.filtered_label}
     # at object initialization time. Host gems may customize this by installing a
@@ -20,7 +18,7 @@ module Auth
         # Hook invoked when the module is included. Extends the including class with
         # class-level helpers and prepends the initializer hook.
         #
-        # @param [Class] base The including class
+        # @param base [Class] The including class
         # @return [void]
         def included(base)
           base.extend(ClassMethods)
@@ -47,7 +45,8 @@ module Auth
         class << self
           # Declare attributes that should be redacted in inspect output.
           #
-          # @param [Array<Symbol, String>] attributes One or more attribute names
+          # @param base [Class] The class the attributes are declared on
+          # @param attributes [Array<Symbol, String>] One or more attribute names
           # @return [void]
           def filtered_attributes(base, *attributes)
             base.instance_variable_set(:@filtered_attribute_names, attributes.map(&:to_sym))
@@ -55,7 +54,7 @@ module Auth
 
           # The configured attribute names to filter.
           #
-          # @param [Class] base The class to get filtered attributes for
+          # @param base [Class] The class to get filtered attributes for
           # @return [Array<Symbol>]
           def filtered_attribute_names(base)
             return [] unless base.instance_variable_defined?(:@filtered_attribute_names)
@@ -66,7 +65,7 @@ module Auth
 
         # Declare attributes that should be redacted in inspect output.
         #
-        # @param [Array<Symbol, String>] attributes One or more attribute names
+        # @param attributes [Array<Symbol, String>] One or more attribute names
         # @return [void]
         def filtered_attributes(*attributes)
           ClassMethods.filtered_attributes(self, *attributes)
@@ -101,7 +100,9 @@ module Auth
 
       private
 
+      # Matches a quoted string literal inside `#inspect` output.
       INSPECTED_STRING_VALUE = /"(?:(?:\\.)|[^"\\])*"/
+      # Matches redactable key/value pairs inside `#inspect` output.
       INSPECTED_REDACTABLE_VALUE = /
         (?:
           (@([A-Za-z_]\w*[!?=]?)=) |
@@ -113,6 +114,10 @@ module Auth
       /x
       private_constant :INSPECTED_STRING_VALUE, :INSPECTED_REDACTABLE_VALUE
 
+      # Redact filtered values from `#inspect` output text.
+      #
+      # @param inspected [String] The `#inspect` output to redact
+      # @return [String] The redacted inspect output
       def redact_inspected_values(inspected)
         inspected.gsub(INSPECTED_REDACTABLE_VALUE) do |match|
           captures = Regexp.last_match.captures

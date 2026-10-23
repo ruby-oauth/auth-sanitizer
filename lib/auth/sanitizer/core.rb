@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+# Top-level namespace for authentication-adjacent helpers.
 module Auth
+  # Credential redaction for inspect output and debug logging.
   module Sanitizer
+    # Error raised for auth-sanitizer failures.
     class Error < StandardError; end
 
     # Default keys filtered from debug log output.
@@ -36,16 +39,13 @@ module Auth
 
     # Install a custom provider for the filtered label.
     #
-    # The provider is called each time a new {FilteredAttributes}- or
-    # {SanitizedLogger}-bearing object is initialized, allowing the label to
-    # track a host gem's live configuration while still being snapshotted per
-    # object instance.
+    # The provider callable is invoked each time a new {FilteredAttributes}- or
+    # {SanitizedLogger}-bearing object is initialized, allowing the label to track a host gem's
+    # live configuration while still being snapshotted per object instance.
     #
+    # @return [void]
     # @example Delegate to a host gem's config
     #   Auth::Sanitizer.filtered_label_provider = -> { MyGem.config[:filtered_label] }
-    #
-    # @param [#call] provider A callable that returns the label string
-    # @return [void]
     define_singleton_method(:filtered_label_provider=) do |provider|
       filtered_label_provider_mutex.synchronize do
         filtered_label_provider = provider

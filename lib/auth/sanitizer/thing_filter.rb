@@ -13,8 +13,8 @@ module Auth
     class ThingFilter
       # Create a new filter.
       #
-      # @param [Enumerable<#to_s>] things Names that should be filtered
-      # @param [String] label Replacement label to use for filtered values
+      # @param things [Enumerable<#to_s>] Names that should be filtered
+      # @param label [String] Replacement label to use for filtered values
       #
       # The provided values are duplicated and frozen so the filter remains
       # stable for the lifetime of the object.
@@ -39,7 +39,7 @@ module Auth
       # Matching is substring-based so it works naturally with instance-variable
       # names used by `#inspect`, such as `@secret` matching `secret`.
       #
-      # @param [#to_s] thing_name Candidate thing name
+      # @param thing_name [#to_s] Candidate thing name
       # @return [Boolean]
       def filtered?(thing_name)
         thing_name_str = thing_name.to_s
