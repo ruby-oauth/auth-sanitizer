@@ -27,6 +27,7 @@ template_state:
     - gemfiles/modular/x_std_libs/r4/libs.gemfile
     kettle-jem/template:
     - ".git-hooks/prepare-commit-msg"
+    - ".github/workflows/auto-assign.yml"
     - ".github/workflows/coverage.yml"
     - ".github/workflows/current.yml"
     - ".github/workflows/dep-heads.yml"
@@ -59,6 +60,7 @@ template_state:
     - ".github/workflows/truffleruby-33.0.yml"
     - ".github/workflows/unlocked_deps.yml"
     - ".gitignore"
+    - ".licenserc.yaml"
     - ".rubocop.yml"
     - ".simplecov"
     - AGENTS.md
