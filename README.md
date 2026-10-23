@@ -947,7 +947,7 @@ Thanks for RTFM. ☺️
 | Field | Value |
 |---|---|
 | Package | auth-sanitizer |
-| Description | 💎 Configurable KV output redaction. Sanitize/filter your secrets. |
+| Description | 🧼 Configurable KV output redaction. Sanitize/filter your secrets. |
 | Homepage | https://github.com/ruby-oauth/auth-sanitizer |
 | Source | https://github.com/ruby-oauth/auth-sanitizer |
 | License | `MIT` |
