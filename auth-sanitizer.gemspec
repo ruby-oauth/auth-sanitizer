@@ -6,6 +6,7 @@
 # kettle-jem will then preserve content between those markers across template runs.
 # kettle-jem:unfreeze
 
+# kettle-jem:freeze
 gem_version =
   if Gem.ruby_version >= Gem::Version.new("3.1")
     # Loading Version into an anonymous module allows version.rb to get code coverage from SimpleCov!
@@ -13,9 +14,14 @@ gem_version =
     # See: https://github.com/panorama-ed/memo_wise/pull/397
     Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/auth/sanitizer/version.rb", mod) }::Auth::Sanitizer::Version::VERSION
   else
-    require_relative "lib/auth/sanitizer/version"
-    Auth::Sanitizer::Version::VERSION
+    # Ruby < 3.1: Kernel.load(path, module) is unavailable, but Module#module_eval with file
+    # metadata works on Ruby 2.2+. Loading anonymously here matters beyond coverage: evaluating
+    # this gemspec (e.g. by bundler/setup) must not define a top-level Auth constant, which the
+    # isolated-loading specs assert on.
+    version_path = "#{__dir__}/lib/auth/sanitizer/version.rb"
+    Module.new.tap { |mod| mod.module_eval(File.read(version_path), version_path, 1) }::Auth::Sanitizer::Version::VERSION
   end
+# kettle-jem:unfreeze
 
 Gem::Specification.new do |spec|
   spec.name = "auth-sanitizer"
