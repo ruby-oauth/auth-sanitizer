@@ -12,5 +12,8 @@ module Auth
       VERSION: String
     end
     VERSION: String
+    def self.default_filtered_keys: () -> Array[String]
+    def self.filtered_label: () -> String
+    def self.sanitize: (untyped value, ?filtered_keys: Array[String], ?label: String, **untyped options) -> untyped
   end
 end

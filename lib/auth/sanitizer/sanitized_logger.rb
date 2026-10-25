@@ -24,7 +24,7 @@ module Auth
       #   Defaults to {Auth::Sanitizer.filtered_label}.
       def initialize(logger, filtered_keys: Auth::Sanitizer.default_filtered_keys, label: Auth::Sanitizer.filtered_label)
         @logger = logger
-        @thing_filter = ThingFilter.new(filtered_keys, label: label)
+        @value_sanitizer = ValueSanitizer.new(filtered_keys: filtered_keys, label: label)
       end
 
       # Add a log entry after sanitizing any string payloads.
@@ -200,70 +200,7 @@ module Auth
       def sanitize(message)
         return message unless message.is_a?(String)
 
-        # scrub replaces invalid byte sequences so the gsub calls below never
-        # raise on an invalid encoding while logging a request.
-        sanitized = message.dup.scrub
-        sanitized = sanitize_authorization_header(sanitized)
-        sanitized = sanitize_json_pairs(sanitized)
-        sanitized = sanitize_inspect_pairs(sanitized)
-        sanitize_form_and_query_pairs(sanitized)
-      end
-
-      # The initialized thing filter used by this logger.
-      #
-      # This is a per-logger snapshot created during initialization.
-      #
-      # @return [ThingFilter]
-      attr_reader :thing_filter
-
-      # Redact Authorization header values.
-      #
-      # @param message [String] Logger message
-      # @return [String] Sanitized logger message
-      def sanitize_authorization_header(message)
-        message.gsub(/(Authorization:\s*)(?:"[^"]*"|[^\r\n]+)/i, "\\1\"#{thing_filter.label}\"")
-      end
-
-      # Redact JSON-style values for configured sensitive key names.
-      #
-      # @param message [String] Logger message
-      # @return [String] Sanitized logger message
-      def sanitize_json_pairs(message)
-        message.gsub(/(["'])(#{thing_filter.pattern_source})\1(\s*:\s*)(["'])(.*?)\4/i) do
-          %(#{$1}#{$2}#{$1}#{$3}#{$4}#{thing_filter.label}#{$4})
-        end
-      end
-
-      # Redact values in Ruby `Hash#inspect` output for configured sensitive key names.
-      #
-      # Faraday's debug logger renders non-String bodies (such as the params Hash an OAuth client
-      # builds for a token request) with `pretty_inspect`, so secrets reach the logger in Ruby
-      # inspect syntax rather than JSON or form encoding. Handles both Ruby 3.4+ formats
-      # (`{"key" => "value"}`, `{key: "value"}`) and the pre-3.4 formats (`{"key"=>"value"}`,
-      # `{:key=>"value"}`), case-insensitively.
-      #
-      # @param message [String] Logger message
-      # @return [String] Sanitized logger message
-      def sanitize_inspect_pairs(message)
-        key = thing_filter.pattern_source
-        label = thing_filter.label
-        # Hash-rocket pairs: "key" => "value" / "key"=>"value" / :key=>"value"
-        message = message.gsub(/((?:"(?:#{key})"|:#{key})\s*=>\s*")[^"]*(")/i) { "#{$1}#{label}#{$2}" }
-        # Symbol shorthand pairs: key: "value" (not preceded by a quote, so
-        # already-sanitized JSON pairs are not reprocessed)
-        message.gsub(/(?<!["'])((?:\b(?:#{key})):\s*")[^"]*(")/i) { "#{$1}#{label}#{$2}" }
-      end
-
-      # Redact form-encoded and query-string values for configured sensitive key names.
-      #
-      # The value class excludes `"` and `>` so the pattern neither crosses
-      # into quoted strings nor mangles `Hash#inspect` hash-rocket pairs
-      # (`:key=>"value"`), which {sanitize_inspect_pairs} handles instead.
-      #
-      # @param message [String] Logger message
-      # @return [String] Sanitized logger message
-      def sanitize_form_and_query_pairs(message)
-        message.gsub(/(\b(?:#{thing_filter.pattern_source})=)([^&\s">]+)/i, "\\1#{thing_filter.label}")
+        @value_sanitizer.sanitize(message)
       end
     end
   end

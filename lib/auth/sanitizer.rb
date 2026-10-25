@@ -4,6 +4,7 @@ require "version_gem"
 
 require_relative "sanitizer/thing_filter"
 require_relative "sanitizer/core"
+require_relative "sanitizer/value_sanitizer"
 require_relative "sanitizer/filtered_attributes"
 require_relative "sanitizer/sanitized_logger"
 require_relative "sanitizer/version"

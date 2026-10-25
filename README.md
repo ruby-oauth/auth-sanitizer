@@ -51,6 +51,15 @@ a provider, or per logger by passing `label:` to `Auth::Sanitizer::SanitizedLogg
 The library snapshots filter configuration when a redacting object is initialized. That keeps already-created objects
 and logger wrappers stable even if a host application changes its configuration later.
 
+Use `Auth::Sanitizer.sanitize` when a value needs to be redacted before it is returned or included in an exception
+message. It recursively copies hashes and arrays, redacts values under configured keys, and sanitizes strings using the
+same formats as `SanitizedLogger`:
+
+```ruby
+Auth::Sanitizer.sanitize(opts)
+Auth::Sanitizer.sanitize(opts, filtered_keys: MyClient.config.filtered_keys, label: MyClient.config.filtered_label)
+```
+
 Consumers that need to avoid defining the generic top-level `Auth` namespace can use the isolated loader:
 
 ```ruby
@@ -217,10 +226,10 @@ Libraries and applications that need to avoid the generic top-level `Auth` names
 ```ruby
 require "auth_sanitizer/loader"
 
-AUTH_SANITIZER = AuthSanitizer::Loader.load_isolated
+auth_sanitizer = AuthSanitizer::Loader.load_isolated
 
-class TokenResponse
-  include AUTH_SANITIZER::FilteredAttributes
+token_response = Class.new do
+  include auth_sanitizer.const_get(:FilteredAttributes)
 end
 ```
 
@@ -264,7 +273,7 @@ auth_sanitizer_loader_namespace = AnonymousLoader.load_path(
   version_file: "auth/sanitizer/version.rb"
 )
 
-AUTH_SANITIZER = auth_sanitizer_loader_namespace
+auth_sanitizer = auth_sanitizer_loader_namespace
   .const_get(:AuthSanitizer)
   .const_get(:Loader)
   .load_isolated
@@ -450,10 +459,10 @@ Or load it without defining top-level `Auth`. This still defines top-level `Auth
 ```ruby
 require "auth_sanitizer/loader"
 
-AUTH_SANITIZER = AuthSanitizer::Loader.load_isolated
+auth_sanitizer = AuthSanitizer::Loader.load_isolated
 
-class TokenResponse
-  include AUTH_SANITIZER::FilteredAttributes
+token_response = Class.new do
+  include auth_sanitizer.const_get(:FilteredAttributes)
 end
 ```
 

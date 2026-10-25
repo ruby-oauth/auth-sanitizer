@@ -10,6 +10,7 @@ module AuthSanitizer
       auth/sanitizer/version.rb
       auth/sanitizer/thing_filter.rb
       auth/sanitizer/core.rb
+      auth/sanitizer/value_sanitizer.rb
       auth/sanitizer/filtered_attributes.rb
       auth/sanitizer/sanitized_logger.rb
     ].freeze
