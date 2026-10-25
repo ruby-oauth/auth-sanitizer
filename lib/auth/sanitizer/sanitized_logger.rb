@@ -202,7 +202,6 @@ module Auth
 
         @value_sanitizer.sanitize(message)
       end
-
     end
   end
 end
