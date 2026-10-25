@@ -123,6 +123,7 @@ Auth constant in the host application.</p>
 </span><span class='words_sep'>  </span><span class='tstring_content'>auth/sanitizer/version.rb</span><span class='words_sep'>
 </span><span class='words_sep'>  </span><span class='tstring_content'>auth/sanitizer/thing_filter.rb</span><span class='words_sep'>
 </span><span class='words_sep'>  </span><span class='tstring_content'>auth/sanitizer/core.rb</span><span class='words_sep'>
+</span><span class='words_sep'>  </span><span class='tstring_content'>auth/sanitizer/value_sanitizer.rb</span><span class='words_sep'>
 </span><span class='words_sep'>  </span><span class='tstring_content'>auth/sanitizer/filtered_attributes.rb</span><span class='words_sep'>
 </span><span class='words_sep'>  </span><span class='tstring_content'>auth/sanitizer/sanitized_logger.rb</span><span class='words_sep'>
 </span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
@@ -223,7 +224,6 @@ works on Ruby 2.2+, where Kernel.load(path, module) is unavailable.</p>
       <pre class="lines">
 
 
-25
 26
 27
 28
@@ -234,10 +234,11 @@ works on Ruby 2.2+, where Kernel.load(path, module) is unavailable.</p>
 33
 34
 35
-36</pre>
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth_sanitizer/loader.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/auth_sanitizer/loader.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_load_isolated'>load_isolated</span>
   <span class='id identifier rubyid_namespace'>namespace</span> <span class='op'>=</span> <span class='const'>Module</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>

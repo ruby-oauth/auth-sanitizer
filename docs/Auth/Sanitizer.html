@@ -81,7 +81,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/auth/sanitizer/core.rb<span class="defines">,<br>
-  lib/auth/sanitizer/version.rb,<br> lib/auth/sanitizer/thing_filter.rb,<br> lib/auth/sanitizer/sanitized_logger.rb,<br> lib/auth/sanitizer/filtered_attributes.rb</span>
+  lib/auth/sanitizer/version.rb,<br> lib/auth/sanitizer/thing_filter.rb,<br> lib/auth/sanitizer/value_sanitizer.rb,<br> lib/auth/sanitizer/sanitized_logger.rb,<br> lib/auth/sanitizer/filtered_attributes.rb</span>
 
 </dd>
   </dl>
@@ -106,7 +106,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Sanitizer/Error.html" title="Auth::Sanitizer::Error (class)">Error</a></span>, <span class='object_link'><a href="Sanitizer/SanitizedLogger.html" title="Auth::Sanitizer::SanitizedLogger (class)">SanitizedLogger</a></span>, <span class='object_link'><a href="Sanitizer/ThingFilter.html" title="Auth::Sanitizer::ThingFilter (class)">ThingFilter</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Sanitizer/Error.html" title="Auth::Sanitizer::Error (class)">Error</a></span>, <span class='object_link'><a href="Sanitizer/SanitizedLogger.html" title="Auth::Sanitizer::SanitizedLogger (class)">SanitizedLogger</a></span>, <span class='object_link'><a href="Sanitizer/ThingFilter.html" title="Auth::Sanitizer::ThingFilter (class)">ThingFilter</a></span>, <span class='object_link'><a href="Sanitizer/ValueSanitizer.html" title="Auth::Sanitizer::ValueSanitizer (class)">ValueSanitizer</a></span>
     
   
 </p>
@@ -222,6 +222,29 @@
 
   
     <span class="summary_desc"><div class='inline'><p>Returns the default set of key names filtered from debug log output.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sanitize-class_method" title="sanitize (class method)">.<strong>sanitize</strong>(value, filtered_keys: default_filtered_keys, label: filtered_label, **options)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sanitize a value using the configured key names and replacement label.</p>
 </div></span>
   
 </li>
@@ -343,6 +366,118 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_default_filtered_keys'>default_filtered_keys</span>
   <span class='const'><span class='object_link'><a href="#DEFAULT_FILTERED_KEYS-constant" title="Auth::Sanitizer::DEFAULT_FILTERED_KEYS (constant)">DEFAULT_FILTERED_KEYS</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sanitize-class_method">
+  
+    .<strong>sanitize</strong>(value, filtered_keys: default_filtered_keys, label: filtered_label, **options)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sanitize a value using the configured key names and replacement label.<br />
+Hashes and arrays are traversed recursively; strings are filtered using<br />
+the same formats supported by {SanitizedLogger}.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Value to sanitize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>filtered_keys</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>default_filtered_keys</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Key names whose values should be redacted</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>filtered_label</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Replacement label for redacted values</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Sanitized copy of the value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth/sanitizer/core.rb', line 74</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sanitize'>sanitize</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='label'>filtered_keys:</span> <span class='id identifier rubyid_default_filtered_keys'>default_filtered_keys</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='id identifier rubyid_filtered_label'>filtered_label</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Sanitizer/ValueSanitizer.html" title="Auth::Sanitizer::ValueSanitizer (class)">ValueSanitizer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Sanitizer/ValueSanitizer.html#initialize-instance_method" title="Auth::Sanitizer::ValueSanitizer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>filtered_keys:</span> <span class='id identifier rubyid_filtered_keys'>filtered_keys</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_sanitize'><span class='object_link'><a href="Sanitizer/ValueSanitizer.html#sanitize-instance_method" title="Auth::Sanitizer::ValueSanitizer#sanitize (method)">sanitize</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

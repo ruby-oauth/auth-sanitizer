@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.2.5] - 2026-10-25
+
+- TAG: [v0.2.5][0.2.5t]
+- COVERAGE: 100.00% -- 184/184 lines in 8 files
+- BRANCH COVERAGE: 100.00% -- 40/40 branches in 8 files
+- 98.21% documented
+
+### Added
+
 - kettle-jem-template-20260720-001 - READMEs can now display configured
   corporate sponsor logos.
 
@@ -34,14 +53,6 @@ Please file a bug if you notice a violation of semantic versioning.
   - documentation (1)
   - other (2)
   - workflows (1)
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [0.2.4] - 2026-10-23
 
@@ -308,7 +319,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.4...HEAD
+[Unreleased]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.5...HEAD
+[0.2.5]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.4...v0.2.5
+[0.2.5t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.5
 [0.2.4]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.3...v0.2.4
 [0.2.4t]: https://github.com/ruby-oauth/auth-sanitizer/releases/tag/v0.2.4
 [0.2.3]: https://github.com/ruby-oauth/auth-sanitizer/compare/v0.2.2...v0.2.3
