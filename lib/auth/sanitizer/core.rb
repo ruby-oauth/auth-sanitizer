@@ -62,6 +62,18 @@ module Auth
       def default_filtered_keys
         DEFAULT_FILTERED_KEYS
       end
+
+      # Sanitize a value using the configured key names and replacement label.
+      # Hashes and arrays are traversed recursively; strings are filtered using
+      # the same formats supported by {SanitizedLogger}.
+      #
+      # @param value [Object] Value to sanitize
+      # @param filtered_keys [Array<String>] Key names whose values should be redacted
+      # @param label [String] Replacement label for redacted values
+      # @return [Object] Sanitized copy of the value
+      def sanitize(value, filtered_keys: default_filtered_keys, label: filtered_label, **options)
+        ValueSanitizer.new(filtered_keys: filtered_keys, label: label, **options).sanitize(value)
+      end
     end
   end
 end

@@ -51,6 +51,15 @@ a provider, or per logger by passing `label:` to `Auth::Sanitizer::SanitizedLogg
 The library snapshots filter configuration when a redacting object is initialized. That keeps already-created objects
 and logger wrappers stable even if a host application changes its configuration later.
 
+Use `Auth::Sanitizer.sanitize` when a value needs to be redacted before it is returned or included in an exception
+message. It recursively copies hashes and arrays, redacts values under configured keys, and sanitizes strings using the
+same formats as `SanitizedLogger`:
+
+```ruby
+Auth::Sanitizer.sanitize(opts)
+Auth::Sanitizer.sanitize(opts, filtered_keys: MyClient.config.filtered_keys, label: MyClient.config.filtered_label)
+```
+
 Consumers that need to avoid defining the generic top-level `Auth` namespace can use the isolated loader:
 
 ```ruby
