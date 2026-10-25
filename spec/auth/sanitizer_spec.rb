@@ -33,7 +33,7 @@ RSpec.describe Auth::Sanitizer do
 
   describe "isolated loading" do
     it "loads Auth::Sanitizer without defining a top-level Auth constant" do
-      script = <<~RUBY
+      script = <<-RUBY
         require "auth_sanitizer/loader"
         isolated = AuthSanitizer::Loader.load_isolated
         raise "Auth was defined" if Object.const_defined?(:Auth, false)
@@ -63,7 +63,7 @@ RSpec.describe Auth::Sanitizer do
     end
 
     it "supports anonymous loader evaluation without defining top-level namespaces" do
-      script = <<~RUBY
+      script = <<-RUBY
         loader_path = File.expand_path("lib/auth_sanitizer/loader.rb", Dir.pwd)
         loader_namespace = Module.new
         loader_namespace.module_eval(File.read(loader_path), loader_path, 1)

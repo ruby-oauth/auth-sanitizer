@@ -226,10 +226,10 @@ Libraries and applications that need to avoid the generic top-level `Auth` names
 ```ruby
 require "auth_sanitizer/loader"
 
-AUTH_SANITIZER = AuthSanitizer::Loader.load_isolated
+auth_sanitizer = AuthSanitizer::Loader.load_isolated
 
-class TokenResponse
-  include AUTH_SANITIZER::FilteredAttributes
+token_response = Class.new do
+  include auth_sanitizer.const_get(:FilteredAttributes)
 end
 ```
 
@@ -273,7 +273,7 @@ auth_sanitizer_loader_namespace = AnonymousLoader.load_path(
   version_file: "auth/sanitizer/version.rb"
 )
 
-AUTH_SANITIZER = auth_sanitizer_loader_namespace
+auth_sanitizer = auth_sanitizer_loader_namespace
   .const_get(:AuthSanitizer)
   .const_get(:Loader)
   .load_isolated
@@ -459,10 +459,10 @@ Or load it without defining top-level `Auth`. This still defines top-level `Auth
 ```ruby
 require "auth_sanitizer/loader"
 
-AUTH_SANITIZER = AuthSanitizer::Loader.load_isolated
+auth_sanitizer = AuthSanitizer::Loader.load_isolated
 
-class TokenResponse
-  include AUTH_SANITIZER::FilteredAttributes
+token_response = Class.new do
+  include auth_sanitizer.const_get(:FilteredAttributes)
 end
 ```
 
